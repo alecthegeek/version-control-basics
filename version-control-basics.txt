@@ -8,48 +8,60 @@
 # Able to describe the benefits of using version control
 # Can use Git for version control of new and existing projects, including working in a group
 ## Create a local repository (repo)
-## Commit a change
+## Commit a modification
+[[MJM: 'modification' is the more official word used in Git messages]]
 ## Create a branch
 ## Show the history
-## Show change differences
-## Perform a local merge
-## Push and pull changes to a remote repo
+## Show modification differences
+[[MJM: Same suggestion of 'modification' instead of 'change' and put '(diff)' in parenthesis like you did for repo]]
+## Perform a merge
+[[MJM: All merges really are local so I would remove the word 'merge']]
+## Push and pull changes to and from a remote repo
+[[MJM: 'to and from']]
 
 =Introduction=
 ==What is Version Control and how do Version Control Systems work?==
-Version Control (VC) is a common practice used to track all the changes that occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.
+Version Control (VC) is a common concept used to track changes that occur to the files in a project over time. A Version Control System is a tool that implements this Version Control concept.
 
-The way that a VCS works by recording a history of changes. What does that mean?
+Several videos that introduce the basic ideas of version control can be found at http://git-scm.com/videos or on YouTube at:
 
-Every time a change is completed (for example fixing a bug in a project) the developer decides a logical "save" point has been reached and will store all the file changes that make up the fix in the VCS database.
-The term often used for a group or changes that belong together like this is a '''changeset'''. As well as changing lines of code in source files there might be changes to configuration files, documentation, graphic files and so on.
-Along with the changes to the files the developer will be prompted by the VCS  to provide a description of the change with a '''commit message''' which is appended to the '''commit log'''. The process of storing the changes in the VCS database (usually refereed to as the '''repository''' or repo for short) is called '''making a commit'''.
+* Episode 1: http://www.youtube.com/watch?v=K2wBGt-j0fE
+* Episode 2: http://www.youtube.com/watch?v=0BIGxolZQHo
+* Episode 3: http://www.youtube.com/watch?v=ojVzmIp6Xv0
+* Episode 4: http://www.youtube.com/watch?v=pv25aLwYpEU
+
+
+A VCS works by recording a history of changes. What does that mean?
+
+Every time a change is completed, such as fixing a bug in a project, the developer decides a logical "save point" has been reached and stores all the file changes that make up the fix in the VCS database.
+The term often used for a group or changes that belong together like this is a '''changeset'''. As well as changing lines of code in source files, there might be changes to configuration files, documentation, graphic files and other types of resources.
+Along with the changes to the files the developer will be prompted by the VCS to provide a description of the change with a '''commit message''' which is appended to the '''commit log'''. The process of storing the changes in the VCS database (usually refereed to as the '''repository''' or repo for short) is called '''making a commit'''.
 
 The hard work in making a commit is done by the VCS, all the developer does is issue the commit command and provide the commit message. The VCS software calculates which files have changed since the last commit and what has changed. It then stores these changes, plus the commit message, the date, time, name of the developer (committer), commit message and other information in the repository.
 
 
 Version Control is also sometimes refereed to as [http://en.wikipedia.org/wiki/Revision_control Revision Control]
 
-==Why use it==
+==Why Use Version Control==
 There are three core things a VCS helps do
 #Answer the following questions: "What changes were made in the past?", "Why were they made?" and "Who made them?" (via commit history and commit comments)
 #:Individual developers find this information useful as part of their daily an it also helps organisations with their compliance and audit management
 #Undo a change made in error and "roll back" to a previous version
 #Recreate the system as it was at some point in the past
 
-==Tools available==
+==Version Control Tools==
 * Distributed vs. Centralised
-*:Modern VCS work on a distributed model (DVCS). This means that every member of the project team keeps a complete local copy of all the changes. The previous model, still widely used with tools like Subversion, is centralised. There is only one central database with all the changes and team members only have a copy of the change they are currently working on.
+* Modern VCS work on a distributed model (DVCS). This means that every member of the project team keeps a complete local copy of all the changes. The previous model, still widely used with tools like Subversion, is centralised. There is only one central database with all the changes and team members only have a copy of the change they are currently working on.
 * Open Source and Commercial Tools
 * What the tools do
 ** Commit history
 ** Diff listing
 ** Integrate with other tools (e.g. Ticket Systems, built Systems, project management etc)
 
-=An example using Git=
+=An Example Using Git=
 
-Git is vey popular DVCS originally developed to maintain the GNU/Linux kernel source code (the operating system that usually runs on the Raspberry Pi). It is now used by many very large open
-source projects and a lot of commercial development teams. Git is very flexible and has a reputation of being hard to use, but we are only going to concentrate on the ten or so commands you need to
+Git is a popular DVCS originally developed to maintain the Linux kernel source code (the operating system that usually runs on the Raspberry Pi). It is now used by many very large open
+source projects and many commercial development teams. Git is very flexible and has a reputation of being hard to use, but we are only going to concentrate on the ten or so commands you need to
 be useful day to day.
 
 There are many excellent tutorials for Git on the Internet. See the External References section below.
@@ -74,9 +86,9 @@ You should of course substitude your own name and email address in the correct p
 
 The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory
 
-  cd snakes
-  git init
+  git init snakes
   Initialized empty Git repository in /home/alec/snakes/.git/
+  cd snakes
 
 Notice that the VC tool has created a hidden directory called <code>.git</code>. In Linux all file and directory (folder) names that start with a "." are normally hidden
 
@@ -100,8 +112,8 @@ In Git all commands are typed after the word git (e.g. <code>code init</code> or
   #	while.py
   nothing added to commit but untracked files present (use "git add" to track)
 
-We can ignore most of the detail for now. What important is that Git:
-# Warns us that there some files that are not being controlled by the VCS
+We can ignore most of the details for now. What is important is that Git:
+# Informs us that there are several files that are not being controlled by the VCS
 # Lists the files and directories with their status. We will see this change as we progress further in the example.
 
 * Committing a file
@@ -111,7 +123,7 @@ We can ignore most of the detail for now. What important is that Git:
 * Showing the history
 * Branches
 
-= Working with others=
+=Working with others=
 
 * Remote repos
 * Merging
@@ -121,3 +133,4 @@ We can ignore most of the detail for now. What important is that Git:
 
 * [http://progit.org/ Pro Git], an online and published book
 * [http://youtu.be/ZDR433b0HJY Introduction to Git] video with Scott Chacon of GitHub
+* [http://git-scm.com/videos] Git Basics videos, including an overview of what version control can do.
