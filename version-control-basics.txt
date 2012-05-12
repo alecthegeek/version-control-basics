@@ -6,14 +6,16 @@
 =Outcomes=
 
 # Able to describe the benefits of using version control
+## Describe problems that can occur when groups of people work together on computer files over time
+## Understand basic VC terminology -- commit, commit hisory, change, branch, merge, commit message
 # Can use Git for version control of new and existing projects, including working in a group
 ## Create a local repository (repo)
-## Commit a change
+## Commit a change or modification
 ## Create a branch
 ## Show the history
-## Show change differences
-## Perform a local merge
-## Push and pull changes to a remote repo
+## Show change differences using diff
+## Perform a merge
+## Push and fetch changes to and from a remote repo (optional use of pull command)
 
 =Introduction=
 ==What is Version Control and how do Version Control Systems work?==
@@ -46,7 +48,7 @@ There are additional problems as well:
 There are three core things a VCS helps do
 #Answer the following questions: "What changes were made in the past?", "Why were they made?" and "Who made them?" (via commit history and commit comments)
 #:Individual developers find this information useful as part of their daily an it also helps organisations with their compliance and audit management
-#Undo a half complete change made in error and "roll back" to a previous version
+#Undo a half complete or incorrect change made in error and "roll back" to a previous version
 #Recreate the system as it was at some point in the past
 
 ==Tools available==
@@ -113,7 +115,7 @@ In Git all commands are typed after the word git (e.g. <code>code init</code> or
   nothing added to commit but untracked files present (use "git add" to track)
 
 We can ignore most of the detail for now. What important is that Git:
-# Warns us that there some files that are not being controlled by the VCS
+# Warns us that some files are not being controlled (untracked) by the VCS
 # Lists the files and directories with their status. We will see this change as we progress further in the example.
 
 * Committing a file
@@ -130,6 +132,15 @@ We can ignore most of the detail for now. What important is that Git:
 * Patches
 
 =External References=
+
+
+-Several videos that introduce the basic ideas of version control can be found at http://git-scm.com/videos or on YouTube at:
+
+
+-* Episode 1: http://www.youtube.com/watch?v=K2wBGt-j0fE
+-* Episode 2: http://www.youtube.com/watch?v=0BIGxolZQHo
+-* Episode 3: http://www.youtube.com/watch?v=ojVzmIp6Xv0
+-* Episode 4: http://www.youtube.com/watch?v=pv25aLwYpEU
 
 * [http://progit.org/ Pro Git], an online and published book
 * [http://youtu.be/ZDR433b0HJY Introduction to Git] video with Scott Chacon of GitHub
