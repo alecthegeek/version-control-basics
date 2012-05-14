@@ -13,7 +13,7 @@ The examples in this course have been tested #TODO on Debian Linux
 
 1. Able to describe the benefits of using version control
 	1. Describe problems that can occur when groups of people work together on computer files over time
-	1. Understand basic VC terminology -- commit, commit hisory, change, branch, merge, commit message
+	1. Understand basic VC terminology -- commit, commit history, change, branch, merge, commit message
 1. Can use Git for version control of new and existing projects, including working in a group
 	1. Create a local repository (repo)
 	1. Commit a change or modification
@@ -32,16 +32,16 @@ The way that a VCS works by recording a history of changes. What does that mean?
 Every time a change is completed (for example fixing a bug in a project) the developer decides a logical ''save''
 point has been reached and will store all the file changes that make up the fix in the VCS database.
 
-The term often used for a group or changes that belong together like this is a ''changeset''.
+The term often used for a group or changes that belong together like this is a __changeset__.
 As well as changing lines of code in source files there might be changes to
 configuration files, documentation, graphic files and so on.
 
 Along with the changes to the files the developer will be prompted by the VCS  to provide a
-description of the change with a ''commit message'' which is appended to the ''commit log''.
+description of the change with a __commit message__ which is appended to the __commit log__.
 
 The process of storing the changes in the VCS database
-(usually refereed to as the ''repository'' or repo for short)
-is called '''making a commit'''.
+(usually refereed to as the __repository__ or repo for short)
+is called __making a commit___.
 
 The hard work in making a commit is done by the VCS,
 all the developer does is issue the commit command and provide the commit message.
@@ -54,8 +54,8 @@ Version Control is also sometimes refereed to as [http://en.wikipedia.org/wiki/R
 
 ##Why is Version Control is so important
 
-Imagine a software project. It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc) and dozens of people working on the project making
-different types of changes. There are severael problems that will happen:
+Imagine a software project. It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.) and dozens of people working on the project making
+different types of changes. There are several problems that will happen:
 
 1. Two people might be editing the same file at once and changes can be overwritten
 1. After the project has been running for some time it's very hard to understand how the project has evolved and what changes have been made.
@@ -79,11 +79,11 @@ There are three core things a VCS helps do
 *  What the tools do
 	* Commit history
 	* Diff listing
-	* Integrate with other tools (e.g. Ticket Systems, built Systems, project management etc)
+	* Integrate with other tools (e.g. Ticket Systems, built Systems, project management etc.)
 
 #An example using Git
 
-Git is vey popular DVCS originally developed to maintain the GNU/Linux kernel source code (the operating system that usually runs on the Raspberry Pi). It is now used by many very large open
+Git is very popular DVCS originally developed to maintain the GNU/Linux kernel source code (the operating system that usually runs on the Raspberry Pi). It is now used by many very large open
 source projects and a lot of commercial development teams. Git is very flexible and has a reputation of being hard to use, but we are only going to concentrate on the ten or so commands you need to
 be useful day to day.
 
@@ -110,7 +110,7 @@ You can start the terminal from the LXDE GUI by #TODO..... Initially this exampl
 		git config --global user.name "My Name"
 		git config --global user.email "myname@mycollege.ed.uk"
 
-You should of course substitude your own name and email address in the correct places. Git records that information is a use configuration file called .gitconfig in your home directory
+You should of course substitute your own name and email address in the correct places. Git records that information is a use configuration file called .gitconfig in your home directory
 
 ### Starting a new project by creating a repo
 
@@ -160,7 +160,7 @@ We can ignore most of the detail for now. What important is that Git:
 *  Merging
 *  Patches
 
-#External References
+# External References
 
 
 Several videos that introduce the basic ideas of version control can be found at http://git-scm.com/videos or on YouTube at:
@@ -173,3 +173,39 @@ Several videos that introduce the basic ideas of version control can be found at
 
 *  [http://progit.org/ Pro Git], an online and published book
 *  [http://youtu.be/ZDR433b0HJY Introduction to Git] video with Scott Chacon of GitHub
+
+# Appendix A: Notes for Teachers and group faciltators
+
+
+Git is a useful platform for students to work together. Additional if their programming work needs to be accessed then it
+provides a useful mechanism for students and teams to submit their work.
+
+Students can collaborate using four different models:
+
+1. Using a third party service such as GitHub, Gitorious or BitBucket. Examples are given below for GitHub
+1. Via a private server provided by the school. This is beyond the scope of this document
+1. Students can exchange work using a peer to peer model. This requires a local area for the students to exchange work
+1. Students can exchange using Git patches on USB drives (a __sneakernet__). This is most technology simple solution but
+is more complicated for students and is beyond the scope of this document
+
+## Using a third party web hosting service. GitHub
+
+(GitHub)[GitHub.com] provide specific git hosting service for schools. see https://github.com/edu for details.
+
+1. Create a a GitHub organisation for your school or organisation
+1. Let GitHub know the details of your account using the form at https://github.com/edu. This will allow your students
+to have private repos. Normally all free accounts are public and the code they contain in freely available.
+1. Your students should create their own account on GitHub (see Appendix B)
+1. You then add your students to the appropriate GitHub organisation
+
+# Appendix B: Notes for self study students
+
+
+Students are recommended to use a remote hosting account fo their code. It develops good technique and provides a useful back up
+
+There are a variety of free services available (see appendix A for some suggestions) and these notes are written
+specifically for GitHub. Instructions are at http://help.github.com/linux-set-up-git/, on a Raspberry Pi some of
+steps appear a little different
+
+1. Generate a shh key to use with GitHub by running the following command at a terminal prompt
+		ssh-keygen
