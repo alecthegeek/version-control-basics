@@ -100,15 +100,17 @@ You can start the terminal from the LXDE GUI by #TODO..... Initially this exampl
 
 1. Test the installation with the command
 
-  git --version
+	git --version
 
 1. you should see something like
 
 	git version 1.7.10
 
 1. Tell Git who you are (this is very important information and it recorded in every change in you make or commit)
-		git config --global user.name "My Name"
-		git config --global user.email "myname@mycollege.ed.uk"
+
+	git config --global user.name "My Name"
+
+	git config --global user.email "myname@mycollege.ed.uk"
 
 You should of course substitute your own name and email address in the correct places. Git records that information is a use configuration file called .gitconfig in your home directory
 
@@ -120,7 +122,7 @@ The next thing we need to do it create an empty Git database, called a repo (sho
 		git init
 		Initialized empty Git repository in /home/alec/snakes/.git/
 
-Notice that the VC tool has created a hidden directory called <code>.git</code>. In Linux all file and directory (folder) names that start with a "." are normally hidden
+Notice that the VC tool has created a hidden directory called <code>.git</code>. In Linux all file and directory (folder) names that start with a "<code>.</code>" are normally hidden
 
 Next we issue a status command.
 
@@ -144,15 +146,133 @@ In Git all commands are typed after the word git (e.g. <code>code init</code> or
 		nothing added to commit but untracked files present (use "git add" to track)
 
 We can ignore most of the detail for now. What important is that Git:
+
 1. Warns us that some files are not being controlled (untracked) by the VCS
 1. Lists the files and directories with their status. We will see this change as we progress further in the example.
 
-*  Committing a file
-*  Making a change
-*  Showing the diff
-*  Committing the change
-*  Showing the history
-*  Branches
+### Add the project files to version control
+
+Before changes are added to the repo database we have to decide what will be in the commit. There might be a many changes
+in the files we are working on, but our changset is actually only a small number of changes.
+
+Git has a novel solution to this called the index. Before a file can be committed to the repo it is first
+added to the index. As well as adding files to the index, files can be moved or deleted. Once all the parts of the
+commit are complete a commit command is issued. The following examples are simple so for the time being you
+should just excpect that before a commit is done changes are added to the index as the following example shows.
+
+		git add .
+
+This command does not product any output by default so don't be concerned if you get no messages. If you get a message
+simaliar to <code>warning: CRLF will be replaced by LF ...</code> then this is nornmal as well (some version of
+the Snakes project are provided in Windows format text files).
+
+
+if we run the <code>git status</code> command now we get different output
+
+		# On branch master
+		#
+		# Initial commit
+		#
+		# Changes to be committed:
+		#   (use "git rm --cached <file>..." to unstage)
+		#
+		#	new file:   game/game0.py
+		#	new file:   game/game1.py
+		#	new file:   game/game2.py
+		#	new file:   game/game3.py
+		#	new file:   game/game4.py
+		#	new file:   game/snake.py
+		#	new file:   helloworld.py
+		#	new file:   if.py
+		#	new file:   maths.py
+		#	new file:   variables.py
+		#	new file:   while.py
+		#
+
+This time each file that will be committed is listed, not just the directory, and the status has changed
+from <code>untracked</code> to <code>new file</code>.
+
+Now that the file contents have been added to the index we can commit these changes as our first commit
+
+		git commit -m "Initial Commit"
+
+Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
+did
+
+		master (root-commit) cff14c5] Initial Commit
+		 11 files changed, 693 insertions(+)
+		 create mode 100755 game/game0.py
+		.......___and so on___
+
+
+Some intresting commands we can now run
+
+		git status
+
+		# On branch master
+		nothing to commit (working directory clean)
+
+
+Another command worth running is <code>git log</code>, whch is currently very brief as we have only have one commit. Mine 
+looks like ths
+
+		commit 9b941110ffadf261fff069c0aa9ca6042e10422b
+		Author: Alec Clews <alecclews@gmail.com>
+		Date:   Mon May 14 20:47:43 2012 +1000
+
+		    Initial Commit
+
+
+The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.
+
+We now have our project under version control.
+
+### Making a change
+
+
+Now lets make a change. The first step is to create a work area in wich to make the change. In Git
+(and many other VC tools) this dedicated workarea is called a __branch__. When you first create a repo
+the defauly branch that is created is called __master__, but it's important to know that there is nothing special
+about master branch, it can be treated in exactly the same way as any branches you create yourself.
+
+If you look at the output from the status command above you can see that we are currently using the master branch
+in our working area.
+
+What Change do I want to make? When I play the verion of snakes I have the rocks are represented by "Y" which
+I want to change to "R". The line in I need to change is in the file snake.py (lines 50 and 52 in my version).
+
+ 
+
+Let's create a branch to work on.
+
+		git branch make_rocks_R
+
+No message means the command was succesful (note that spaces are not allowed in the branch name)
+
+You can get a lit of all the branches with the <code>git branch</code> command
+
+		  make_rocks_R
+		* master
+
+The asterix shows the current branch.
+
+To make the <code>make_rocks_R</code> the current branch use the checkout command
+
+		git checkout make_rocks_R
+		Switched to branch 'make_rocks_R'
+
+Now <code>git branch</code> displays
+
+		* make_rocks_R
+		  master
+
+
+
++  Making a change
++  Showing the diff
++  Committing the change
++  Showing the history
++  Branches
 
 # Working with others
 
