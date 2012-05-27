@@ -1,12 +1,17 @@
 # Overview
 
-
 This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
 The examples in this course have been tested #TODO on Debian Linux
 
+## STATUS: EARLY DRAFT!!
+
+
+This document is still under development. Please help if you can at https://github.com/alecthegeek/version-control-basics
+
+
 ##Justification
 
-1. Version Control (VC) is an important skill for developers and a prerequisite for developing quality software
+1. Version Control (VC) is an important practice for developers and a prerequisite for developing quality software
 1. Distributed Version Control Systems (DVCS) provide a useful platform for students to work together on educational projects
 
 ##Outcomes
@@ -21,7 +26,16 @@ The examples in this course have been tested #TODO on Debian Linux
 	1. Show the history
 	1. Show change differences using diff
 	1. Perform a merge
-	1. Push and fetch changes to and from a remote repo (For simplicty the git pull command is not taught)
+	1. Push and fetch changes to and from a remote repo (For simplicity the git pull command is not taught)
+
+## Suggested Approach
+
+This topic should be introduced early on in the programming course and the practices it introduces applied continually as the rest of the course progresses.
+Students should have the following pre-requisite skills:
+
+1. Use a test editor (open a file, find a line, search for text, make a simple change, save a file)
+1. Understand file and directories
+1. Exposure to using the command line interface 
 
 #Introduction
 ##What is Version Control and how do Version Control Systems work
@@ -73,7 +87,7 @@ There are three core things a VCS helps do:
 1. Undo a half complete or incorrect change made in error and "roll back" to a previous version
 1. Recreate a "snapshot" of the project as it was at some point in the past
 
-You may find the following additional reading useful in ontroducing core concepts: http://tom.preston-werner.com/2009/05/19/the-git-parable.html
+You may find the following additional reading useful in introducing core concepts: http://tom.preston-werner.com/2009/05/19/the-git-parable.html
 
 ##Tools available
 * Distributed vs. Centralised
@@ -124,8 +138,9 @@ Git records that information in a user configuration file called <code>.gitconfi
 Linux and Mac OS X users should also run the command
 
 		git config --global core.autocrlf input
+
 (MS Windows uers should issue the command <code>git config --global core.autocrlf true</code>).
-See http://help.github.com/line-endings/ for details.
+See http://help.github.com/line-endings/ for further details.
 
 ### Starting a new project by creating a repo
 
@@ -173,12 +188,12 @@ in the files we are working on, but our changset is actually only a small number
 Git has a novel solution to this called the index. Before a file change can be committed to the repo it is first
 added to the index. As well as adding files to the index, files can be moved or deleted. Once all the parts of the
 commit are complete a commit command is issued. The following examples are simple and for the time being you
-should just excpect that before a commit is done changes are added to the index as the following example shows.
+should just expect that before a commit is done changes are added to the index as the following example shows.
 
 		git add .
 
 This command does not product any output by default so don't be concerned if you get no messages. If you get a message
-simaliar to <code>warning: CRLF will be replaced by LF ...</code> then this is nornmal as well (some versions of
+similar to <code>warning: CRLF will be replaced by LF ...</code> then this is normal as well (some versions of
 the Snakes project are provided in Windows format text files).
 
 if we run the <code>git status</code> command now we get different output
@@ -219,7 +234,7 @@ did
 		.......___and so on___
 
 
-Some intresting commands we can now run
+Some interesting commands we can now run
 
 		git status
 
@@ -228,7 +243,7 @@ Some intresting commands we can now run
 
 
 Another command worth running is <code>git log</code>, whch is currently very brief as we have only have one commit. Mine 
-looks like ths
+looks like this
 
 		commit 9b941110ffadf261fff069c0aa9ca6042e10422b
 		Author: Alec Clews <alecclews@gmail.com>
@@ -244,9 +259,9 @@ We now have our project under version control.
 ### Making a change
 
 
-Now lets make a change. The first step is to create a work area in wich to make the change. In Git
-(and many other VC tools) this dedicated workarea is called a __branch__. When you first create a repo
-the defauly branch that is created is called __master__, but it's important to know that there is nothing special
+Now lets make a change. The first step is to create a work area in which to make the change. In Git
+(and many other VC tools) this dedicated work area is called a __branch__. When you first create a repo
+the default branch that is created is called __master__, but it's important to know that there is nothing special
 about master branch, it can be treated in exactly the same way as any branches you create yourself.
 
 If you look at the output from the status command above you can see that we are currently using the master branch
@@ -261,14 +276,14 @@ Let's create a branch to work on.
 
 		git branch make_rocks_R
 
-No message means the command was succesful (note that spaces are not allowed in the branch name)
+No message means the command was successful (note that spaces are not allowed in the branch name)
 
 You can get a lit of all the branches with the <code>git branch</code> command
 
 		  make_rocks_R
 		* master
 
-The asterix shows the current branch.
+The asterisk shows the current branch.
 
 To make the <code>make_rocks_R</code> the current branch use the checkout command
 
@@ -291,7 +306,7 @@ make; a comment on line 50; and the actual code on line 52. Save the changes and
 
 +  Showing the diff
 
-So let's see what has changed. Git can privide a nice listing
+So let's see what has changed. Git can provide a nice listing
 +  Committing the change
 +  Showing the history
 +  Branches
