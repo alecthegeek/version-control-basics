@@ -3,10 +3,14 @@
 <p>This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
 The examples in this course have been tested #TODO on Debian Linux</p>
 
+<h2 id="status:earlydraft">STATUS: EARLY DRAFT!!</h2>
+
+<p>This document is still under development. Please help if you can at https://github.com/alecthegeek/version-control-basics</p>
+
 <h2 id="justification">Justification</h2>
 
 <ol>
-<li>Version Control (VC) is an important skill for developers and a prerequisite for developing quality software</li>
+<li>Version Control (VC) is an important practice for developers and a prerequisite for developing quality software</li>
 <li>Distributed Version Control Systems (DVCS) provide a useful platform for students to work together on educational projects</li>
 </ol>
 
@@ -28,8 +32,19 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 <li>Show the history</li>
 <li>Show change differences using diff</li>
 <li>Perform a merge</li>
-<li>Push and fetch changes to and from a remote repo (For simplicty the git pull command is not taught)</li>
+<li>Push and fetch changes to and from a remote repo (For simplicity the git pull command is not taught)</li>
 </ol></li>
+</ol>
+
+<h2 id="suggestedapproach">Suggested Approach</h2>
+
+<p>This topic should be introduced early on in the programming course and the practices it introduces applied continually as the rest of the course progresses.
+Students should have the following pre-requisite skills:</p>
+
+<ol>
+<li>Use a test editor (open a file, find a line, search for text, make a simple change, save a file)</li>
+<li>Understand file and directories</li>
+<li>Exposure to using the command line interface</li>
 </ol>
 
 <h1 id="introduction">Introduction</h1>
@@ -90,7 +105,7 @@ it also helps organisations with their compliance and audit management</li>
 <li>Recreate a &#8220;snapshot&#8221; of the project as it was at some point in the past</li>
 </ol>
 
-<p>You may find the following additional reading useful in ontroducing core concepts: http://tom.preston-werner.com/2009/05/19/the-git-parable.html</p>
+<p>You may find the following additional reading useful in introducing core concepts: http://tom.preston-werner.com/2009/05/19/the-git-parable.html</p>
 
 <h2 id="toolsavailable">Tools available</h2>
 
@@ -159,7 +174,7 @@ Git records that information in a user configuration file called <code>.gitconfi
 </code></pre>
 
 <p>(MS Windows uers should issue the command <code>git config &#8211;global core.autocrlf true</code>).
-See http://help.github.com/line-endings/ for details.</p>
+See http://help.github.com/line-endings/ for further details.</p>
 
 <h3 id="startinganewprojectbycreatingarepo">Starting a new project by creating a repo</h3>
 
@@ -212,13 +227,13 @@ in the files we are working on, but our changset is actually only a small number
 <p>Git has a novel solution to this called the index. Before a file change can be committed to the repo it is first
 added to the index. As well as adding files to the index, files can be moved or deleted. Once all the parts of the
 commit are complete a commit command is issued. The following examples are simple and for the time being you
-should just excpect that before a commit is done changes are added to the index as the following example shows.</p>
+should just expect that before a commit is done changes are added to the index as the following example shows.</p>
 
 <pre><code>    git add .
 </code></pre>
 
 <p>This command does not product any output by default so don&#8217;t be concerned if you get no messages. If you get a message
-simaliar to <code>warning: CRLF will be replaced by LF &#8230;</code> then this is nornmal as well (some versions of
+similar to <code>warning: CRLF will be replaced by LF &#8230;</code> then this is normal as well (some versions of
 the Snakes project are provided in Windows format text files).</p>
 
 <p>if we run the <code>git status</code> command now we get different output</p>
@@ -261,7 +276,7 @@ did</p>
     .......___and so on___
 </code></pre>
 
-<p>Some intresting commands we can now run</p>
+<p>Some interesting commands we can now run</p>
 
 <pre><code>    git status
 
@@ -270,7 +285,7 @@ did</p>
 </code></pre>
 
 <p>Another command worth running is <code>git log</code>, whch is currently very brief as we have only have one commit. Mine
-looks like ths</p>
+looks like this</p>
 
 <pre><code>    commit 9b941110ffadf261fff069c0aa9ca6042e10422b
     Author: Alec Clews &lt;alecclews@gmail.com&gt;
@@ -285,9 +300,9 @@ looks like ths</p>
 
 <h3 id="makingachange">Making a change</h3>
 
-<p>Now lets make a change. The first step is to create a work area in wich to make the change. In Git
-(and many other VC tools) this dedicated workarea is called a <strong>branch</strong>. When you first create a repo
-the defauly branch that is created is called <strong>master</strong>, but it&#8217;s important to know that there is nothing special
+<p>Now lets make a change. The first step is to create a work area in which to make the change. In Git
+(and many other VC tools) this dedicated work area is called a <strong>branch</strong>. When you first create a repo
+the default branch that is created is called <strong>master</strong>, but it&#8217;s important to know that there is nothing special
 about master branch, it can be treated in exactly the same way as any branches you create yourself.</p>
 
 <p>If you look at the output from the status command above you can see that we are currently using the master branch
@@ -301,7 +316,7 @@ I want to change to &#8220;R&#8221;. The line in I need to change is in the file
 <pre><code>    git branch make_rocks_R
 </code></pre>
 
-<p>No message means the command was succesful (note that spaces are not allowed in the branch name)</p>
+<p>No message means the command was successful (note that spaces are not allowed in the branch name)</p>
 
 <p>You can get a lit of all the branches with the <code>git branch</code> command</p>
 
@@ -309,7 +324,7 @@ I want to change to &#8220;R&#8221;. The line in I need to change is in the file
     * master
 </code></pre>
 
-<p>The asterix shows the current branch.</p>
+<p>The asterisk shows the current branch.</p>
 
 <p>To make the <code>make_rocks_R</code> the current branch use the checkout command</p>
 
@@ -337,7 +352,7 @@ make; a comment on line 50; and the actual code on line 52. Save the changes and
 <li>Showing the diff</li>
 </ul>
 
-<p>So let&#8217;s see what has changed. Git can privide a nice listing
+<p>So let&#8217;s see what has changed. Git can provide a nice listing
 + Committing the change
 + Showing the history
 + Branches</p>
@@ -397,10 +412,3 @@ N.B. Normally all free accounts are public and the code they contain in freely a
 
 <p>There are a variety of free services available (see appendix A for some suggestions).
 GitHub has easy to follow instructions at http://help.github.com/</p>
-
-<h1 id="license">License</h1>
-
-<p>This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
-To view a copy of this license, read the contents of the file LICENSE distributed with the source of this material,
-visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
-Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.</p>
