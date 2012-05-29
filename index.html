@@ -1,4 +1,4 @@
-<h1 id="overview">Overview</h1>
+<h1 id="overviewandfrontmatter">Overview and Front Matter</h1>
 
 <p>This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
 The examples in this course have been tested #TODO on Debian Linux</p>
@@ -16,6 +16,8 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 
 <h2 id="outcomes">Outcomes</h2>
 
+<p>At the completion of this module students will be:</p>
+
 <ol>
 <li>Able to describe the benefits of using version control
 
@@ -23,7 +25,7 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 <li>Describe problems that can occur when groups of people work together on computer files during a project</li>
 <li>Understand basic VC concepts and terminology &#8211; commit, commit history, change, branch, merge, commit message</li>
 </ol></li>
-<li>Can use Git for version control of new and existing projects, including working in a project group
+<li>Capable, with reference to notes and documentation, of using Git for version control of new and existing projects, including working in a project group
 
 <ol>
 <li>Create a local repository (repo)</li>
@@ -39,12 +41,12 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 <h2 id="suggestedapproach">Suggested Approach</h2>
 
 <p>This topic should be introduced early on in the programming course and the practices it introduces applied continually as the rest of the course progresses.
-Students should have the following pre-requisite skills:</p>
+Before starting this module students should have the following pre-requisite skills:</p>
 
 <ol>
-<li>Use a test editor (open a file, find a line, search for text, make a simple change, save a file)</li>
-<li>Understand file and directories</li>
-<li>Exposure to using the command line interface</li>
+<li>Using a text editor (open a file, find a line, search for text, make a simple change, save a file)</li>
+<li>Understand files and directories</li>
+<li>Some exposure to using the command line interface would be useful</li>
 </ol>
 
 <h1 id="introduction">Introduction</h1>
@@ -67,7 +69,7 @@ description of the change with a <strong>commit message</strong> which is append
 
 <p>The process of storing the changes in the VCS database
 (usually refereed to as the <strong>repository</strong> or repo for short)
-is called <strong>making a commit</strong>_.</p>
+is called <strong>making a commit</strong>.</p>
 
 <p>The hard work in making a commit is done by the VCS,
 all the developer does is issue the commit command and provide the commit message.
@@ -89,7 +91,7 @@ How can we locate a problem that might have been introduced some time ago.
 Just fixing the problem may not be enough, we probably also need to to understand the change that introduced it.</li>
 <li>If two people want to change the same file one will have to wait for the other to finish, this is very inefficient</li>
 <li>If two people people are making (long running) changes to the project it may take some time for the both sets of changes to be compatible with each other.
-If the sane copy if the project is being updated with both sets of changes then the project may not work correctly or even compile</li>
+If the same copy if the project is being updated with both sets of changes then the project may not work correctly or even compile</li>
 </ol>
 
 <p>There are three core things a VCS helps do:</p>
@@ -103,11 +105,13 @@ it also helps organisations with their compliance and audit management</li>
 </ol></li>
 <li>Undo a half complete or incorrect change made in error and &#8220;roll back&#8221; to a previous version</li>
 <li>Recreate a &#8220;snapshot&#8221; of the project as it was at some point in the past</li>
+<li>Allow two streams of changes to be made independently of each other and then integrated at a later date (parrallel development).
+This feature depends on the specific features of the VCS tool you are using</li>
 </ol>
 
-<p>You may find the following additional reading useful in introducing core concepts: http://tom.preston-werner.com/2009/05/19/the-git-parable.html</p>
+<p>You may find the following additional reading useful in introducing important ideas: http://tom.preston-werner.com/2009/05/19/the-git-parable.html</p>
 
-<h2 id="toolsavailable">Tools available</h2>
+<h2 id="typesoftoolsavailable">Types of Tools available</h2>
 
 <ul>
 <li>Distributed vs. Centralised
@@ -116,20 +120,34 @@ it also helps organisations with their compliance and audit management</li>
 <li>Modern VCS work on a distributed model (DVCS). This means that every member of the project team keeps a complete local copy of all the changes. The previous model, still widely used with tools like Subversion, is centralised. There is only one central database with all the changes and team members only have a copy of the change they are currently working on.</li>
 </ul></li>
 <li>Open Source and Commercial Tools</li>
-<li>What the tools do
+</ul>
+
+<p>There are many commercial and open source tools avliable in the market. As well as the core VC operations tools will offer different combinations
+of features, support and integrations. In this module we will be using a tool called Git, a popular open source tools that uses a distribute model
+with excellent support for parrarell development.</p>
 
 <ul>
-<li>Commit history</li>
-<li>Diff listing</li>
-<li>Integrate with other tools (e.g. Ticket Systems, built Systems, project management etc.)</li>
+<li>What the version control tools do?
+
+<ul>
+<li>Provide comphensive historical information about the work done on the project</li>
+<li>Help prevent the lost of information (e.g. edits being overwritten)</li>
+<li>Help the project team be moe efficient by using parrallel development
+(and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)</li>
+<li>Helping individual developers be more efficient with tools such as difference reports</li>
 </ul></li>
 </ul>
 
 <h1 id="anexampleusinggit">An example using Git</h1>
 
-<p>Git (http://git-scm.com/) is very popular DVCS originally developed to maintain the GNU/Linux kernel source code (the operating system that usually runs on the Raspberry Pi). It is now used by many very large open
-source projects and a lot of commercial development teams. Git is very flexible and has a reputation of being hard to use, but we are only going to concentrate on the ten or so commands you need to
-be useful day to day.</p>
+<p>The rest of this module will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
+You should follow along on your own Raspberry Pi using a new test project as explained below.</p>
+
+<p>Git (http://git-scm.com/) is very popular DVCS originally developed to maintain the GNU/Linux kernel source code
+(the operating system that usually runs on the Raspberry Pi).
+It is now used by many very large open source projects and a lot of commercial development teams.
+Git is very flexible and has a reputation of being hard to use,
+but we are only going to concentrate on the ten or so commands you need to be useful day to day.</p>
 
 <p>There are many excellent tutorials for Git on the Internet. See the External References section below.</p>
 
