@@ -3,6 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
+	<title>Version Control Basics</title>
 	<meta name="xhtmlxslt" content="xhtml-toc-h2.xslt"/>
 </head>
 <body>
@@ -22,8 +23,11 @@
 <li><a id="ToC-typesoftoolsavailable" href="#typesoftoolsavailable">Types of Tools available</a></li>
 </ol>
 </li>
-<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-anexampleusinggit" href="#anexampleusinggit">An example using Git</a>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-examplevcsoperationsusinggit" href="#examplevcsoperationsusinggit">Example VCS operations using Git</a>
 <ol>
+<li><a id="ToC-setupup" href="#setupup">Setup up</a></li>
+<li><a id="ToC-startinganewprojectbycreatingarepo" href="#startinganewprojectbycreatingarepo">Starting a new project by creating a repo</a></li>
+<li><a id="ToC-makingachange" href="#makingachange">Making a change</a></li>
 </ol>
 </li>
 <li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-workingwithothers" href="#workingwithothers">Working with others</a>
@@ -40,16 +44,19 @@
 </ol>
 </li>
 <li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixc:notesforselfstudystudents" href="#appendixc:notesforselfstudystudents">Appendix C: Notes for self study students</a></li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixd:installingandusingkdiff3" href="#appendixd:installingandusingkdiff3">Appendix D: Installing and Using Kdiff3</a></li>
 </ol>
+
+<h1 id="versioncontrolbasics">Version Control Basics</h1>
 
 <h2 id="overviewandfrontmatter">Overview and Front Matter<a href="#ToC-overviewandfrontmatter"> ↩</a></h2>
 
 <p>This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
 The examples in this course have been tested #TODO on Debian Linux</p>
 
-<p><em><em>STATUS: EARLY DRAFT!!</em></em></p>
+<p><em>* ####STATUS: EARLY DRAFT!!*</em></p>
 
-<p>This document is still under development. Please help if you can at https://github.com/alecthegeek/version-control-basics</p>
+<p>This document is still under development. Please help if you can at <a href="https://github.com/alecthegeek/version-control-basics">https://github.com/alecthegeek/version-control-basics</a>.</p>
 
 <h3 id="justification">Justification<a href="#ToC-justification"> ↩</a></h3>
 
@@ -63,15 +70,10 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 <p>At the completion of this module students will be:</p>
 
 <ol>
-<li>Able to describe the benefits of using version control
-
-<ol>
+<li>Able to describe the benefits of using version control</li>
 <li>Describe problems that can occur when groups of people work together on computer files during a project</li>
 <li>Understand basic VC concepts and terminology – commit, commit history, change, branch, merge, commit message</li>
-</ol></li>
-<li>Capable, with reference to notes and documentation, of using Git for version control of new and existing projects, including working in a project group
-
-<ol>
+<li>Capable, with reference to notes and documentation, of using Git for version control of new and existing projects, including working in a project group</li>
 <li>Create a local repository (repo)</li>
 <li>Commit a change or modification</li>
 <li>Create a branch</li>
@@ -79,7 +81,6 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 <li>Show change differences using diff</li>
 <li>Perform a merge</li>
 <li>Push and fetch changes to and from a remote repo (For simplicity the git pull command is not taught)</li>
-</ol></li>
 </ol>
 
 <h3 id="suggestedapproach">Suggested Approach<a href="#ToC-suggestedapproach"> ↩</a></h3>
@@ -121,12 +122,14 @@ The VCS software calculates which files have changed since the last commit and w
 It then stores these changes, plus the commit message, the date, time, name of the developer (committer),
 commit message and other information in the repository.</p>
 
-<p>Version Control is also sometimes refereed to as [http://en.wikipedia.org/wiki/Revision_control Revision Control]</p>
+<p>Version Control is also sometimes refereed to as <a href="http://en.wikipedia.org/wiki/Revision_control">Revision Control</a></p>
 
 <h3 id="whyisversioncontrolissoimportant">Why is Version Control is so important<a href="#ToC-whyisversioncontrolissoimportant"> ↩</a></h3>
 
-<p>Imagine a software project. It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.) and dozens of people working on the project making
-different types of changes. There are several problems that will happen:</p>
+<p>Imagine a software project.
+It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.)
+and dozens of people working on the project making different types of changes.
+There are several problems that will happen:</p>
 
 <ol>
 <li>Two people might be editing the same file at once and changes can be overwritten</li>
@@ -141,53 +144,46 @@ If the same copy if the project is being updated with both sets of changes then 
 <p>There are three core things a VCS helps do:</p>
 
 <ol>
-<li>Answer the following questions: “What changes were made in the past?”, “Why were they made?” and “Who made them?” (via commit history and commit comments)
-
-<ol>
+<li>Answer the following questions: “What changes were made in the past?”, “Why were they made?” and “Who made them?” (via commit history and commit comments)</li>
 <li>Individual developers find this information useful as part of their daily workflow and
 it also helps organisations with their compliance and audit management</li>
-</ol></li>
 <li>Undo a half complete or incorrect change made in error and “roll back” to a previous version</li>
 <li>Recreate a “snapshot” of the project as it was at some point in the past</li>
-<li>Allow two streams of changes to be made independently of each other and then integrated at a later date (parrallel development).
+<li>Allow two streams of changes to be made independently of each other and then integrated at a later date (parallel development).
 This feature depends on the specific features of the VCS tool you are using</li>
 </ol>
 
-<p>You may find the following additional reading useful in introducing important ideas: http://tom.preston-werner.com/2009/05/19/the-git-parable.html</p>
+<p>You may find the following additional reading useful in introducing important ideas: <a href="http://tom.preston-werner.com/2009/05/19/the-git-parable.html">http://tom.preston-werner.com/2009/05/19/the-git-parable.html</a></p>
 
 <h3 id="typesoftoolsavailable">Types of Tools available<a href="#ToC-typesoftoolsavailable"> ↩</a></h3>
+<dl>
+<dt>Distributed vs. Centralised</dt>
+<dd>Modern VCS work on a distributed model (DVCS).
+ This means that every member of the project team keeps a complete local copy of all the changes.
+ The previous model, still widely used with tools like Subversion, is centralised.
+ There is only one central database with all the changes and team members only have a copy of the change they are currently working on.</dd>
+</dl>
 
-<ul>
-<li>Distributed vs. Centralised
 
-<ul>
-<li>Modern VCS work on a distributed model (DVCS). This means that every member of the project team keeps a complete local copy of all the changes. The previous model, still widely used with tools like Subversion, is centralised. There is only one central database with all the changes and team members only have a copy of the change they are currently working on.</li>
-</ul></li>
-<li>Open Source and Commercial Tools</li>
-</ul>
+<p>Open Source and Commercial Tools</p>
 
-<p>There are many commercial and open source tools avliable in the market. As well as the core VC operations tools will offer different combinations
-of features, support and integrations. In this module we will be using a tool called Git, a popular open source tools that uses a distribute model
-with excellent support for parrarell development.</p>
+<p>There are many commercial and open source tools available in the market. As well as the core VC operations tools will offer different combinations
+of features, support and integrations. In this module we will be using a VCS called Git, a popular open source tool that uses a distributed model
+with excellent support for parallel development.</p>
 
-<ul>
-<li>What the version control tools do?
+<p>What the version control tools do?
+* Provide comprehensive historical information about the work done on the project
+* Help prevent the lost of information (e.g. edits being overwritten)
+* Help the project team be more efficient by using parallel development
+(and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)
+* Helping individual developers be more efficient with tools such as difference reports</p>
 
-<ul>
-<li>Provide comphensive historical information about the work done on the project</li>
-<li>Help prevent the lost of information (e.g. edits being overwritten)</li>
-<li>Help the project team be moe efficient by using parrallel development
-(and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)</li>
-<li>Helping individual developers be more efficient with tools such as difference reports</li>
-</ul></li>
-</ul>
-
-<h2 id="anexampleusinggit">An example using Git<a href="#ToC-anexampleusinggit"> ↩</a></h2>
+<h2 id="examplevcsoperationsusinggit">Example VCS operations using Git<a href="#ToC-examplevcsoperationsusinggit"> ↩</a></h2>
 
 <p>The rest of this module will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
 You should follow along on your own Raspberry Pi using a new test project as explained below.</p>
 
-<p>Git (http://git-scm.com/) is very popular DVCS originally developed to maintain the GNU/Linux kernel source code
+<p><a href="http://git-scm.com/">Git</a> is very popular DVCS originally developed to maintain the GNU/Linux kernel source code
 (the operating system that usually runs on the Raspberry Pi).
 It is now used by many very large open source projects and a lot of commercial development teams.
 Git is very flexible and has a reputation of being hard to use,
@@ -195,36 +191,29 @@ but we are only going to concentrate on the ten or so commands you need to be us
 
 <p>There are many excellent tutorials for Git on the Internet. See the External References section below.</p>
 
-<p>These examples assume that you are using Debian Linux on a Raspberry Pi and have downloaded the Python Snakes project from the [http://www.raspberrypi.org/game.tar.gz Raspberry Pi website] into a directory called <code>snakes</code>.
+<p>These examples assume that you are using Debian Linux on a Raspberry Pi and
+have downloaded the Python Snakes project from the <a href="http://www.raspberrypi.org/game.tar.gz">Raspberry Pi website</a> into a directory called <code>snakes</code>.
 All the commands are issued from a terminal.
-You can start the terminal from the LXDE GUI by #TODO….. Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.</p>
+You can start the terminal from the LXDE GUI by #TODO…..
+Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.</p>
 
-<h4 id="setupup">Setup up</h4>
+<h3 id="setupup">Setup up<a href="#ToC-setupup"> ↩</a></h3>
 
 <ol>
 <li><p>Make sure you have the correct tools installed by typing the following commands:</p>
 
-<pre><code>sudo apt-get install git git-gui git-gitk
-</code></pre></li>
-</ol>
-
-<p>#TODO: See if kdiff3 works on RasPi and provide instructions for mergetool and difftool setup?</p>
-
-<ol>
+<p>sudo apt-get install git git-gui git-gitk</p></li>
 <li><p>Test the installation with the command</p>
 
-<pre><code>git --version
-</code></pre></li>
+<p>git –version</p></li>
 <li><p>you should see something like</p>
 
-<pre><code>git version 1.7.10
-</code></pre></li>
+<p>git version 1.7.10</p></li>
 <li><p>Tell Git who you are (this is very important information and it recorded in every change in you make or commit)</p>
 
-<pre><code>git config --global user.name "My Name"
+<p>git config –global user.name “My Name”</p>
 
-git config --global user.email "myname@mycollege.ed.uk"
-</code></pre></li>
+<p>git config –global user.email “myname@mycollege.ed.uk”</p></li>
 </ol>
 
 <p>You must of course substitute your own name and email address in the correct places.
@@ -232,19 +221,19 @@ Git records that information in a user configuration file called <code>.gitconfi
 
 <p>Linux and Mac OS X users should also run the command</p>
 
-<pre><code>    git config --global core.autocrlf input
+<pre><code>git config --global core.autocrlf input
 </code></pre>
 
-<p>(MS Windows uers should issue the command <code>git config –global core.autocrlf true</code>).
-See http://help.github.com/line-endings/ for further details.</p>
+<p>(MS Windows users should issue the command <code>git config --global core.autocrlf true</code>).
+See &lt;http://help.github.com/line-endings/? for further details.</p>
 
-<h4 id="startinganewprojectbycreatingarepo">Starting a new project by creating a repo</h4>
+<h3 id="startinganewprojectbycreatingarepo">Starting a new project by creating a repo<a href="#ToC-startinganewprojectbycreatingarepo"> ↩</a></h3>
 
 <p>The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory</p>
 
-<pre><code>    cd snakes
-    git init
-    Initialized empty Git repository in /home/alec/snakes/.git/
+<pre><code>cd snakes
+git init
+Initialized empty Git repository in /home/alec/snakes/.git/
 </code></pre>
 
 <p>Notice that the VC tool has created a hidden directory called <code>.git</code>.
@@ -252,26 +241,26 @@ In Linux all file and directory (folder) names that start with a “<code>.</cod
 
 <p>Next we issue a status command.</p>
 
-<pre><code>    git status
+<pre><code>git status
 </code></pre>
 
 <p>In Git all commands are typed after the word git (e.g. <code>git init</code> or <code>git status</code>).
 The output from the status command is</p>
 
-<pre><code>    # On branch master
-    # 
-    # Initial commit
+<pre><code># On branch master
+# 
+# Initial commit
 
-    # Untracked files:
-    #   (use "git add &lt;file&gt;..." to include in what will be committed)
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
 
-    #   game/
-    #   helloworld.py
-    #   if.py
-    #   maths.py
-    #   variables.py
-    #   while.py
-    nothing added to commit but untracked files present (use "git add" to track)
+#   game/
+#   helloworld.py
+#   if.py
+#   maths.py
+#   variables.py
+#   while.py
+nothing added to commit but untracked files present (use "git add" to track)
 </code></pre>
 
 <p>We can ignore most of the detail for now. What important is that Git:</p>
@@ -291,34 +280,34 @@ added to the index. As well as adding files to the index, files can be moved or 
 commit are complete a commit command is issued. The following examples are simple and for the time being you
 should just expect that before a commit is done changes are added to the index as the following example shows.</p>
 
-<pre><code>    git add .
+<pre><code>git add .
 </code></pre>
 
 <p>This command does not product any output by default so don’t be concerned if you get no messages. If you get a message
-similar to <code>warning: CRLF will be replaced by LF …</code> then this is normal as well (some versions of
+similar to <code>warning: CRLF will be replaced by LF ...</code> then this is normal as well (some versions of
 the Snakes project are provided in Windows format text files).</p>
 
 <p>if we run the <code>git status</code> command now we get different output</p>
 
-<pre><code>    # On branch master
-    #
-    # Initial commit
-    #
-    # Changes to be committed:
-    #   (use "git rm --cached &lt;file&gt;..." to unstage)
-    #
-    #   new file:   game/game0.py
-    #   new file:   game/game1.py
-    #   new file:   game/game2.py
-    #   new file:   game/game3.py
-    #   new file:   game/game4.py
-    #   new file:   game/snake.py
-    #   new file:   helloworld.py
-    #   new file:   if.py
-    #   new file:   maths.py
-    #   new file:   variables.py
-    #   new file:   while.py
-    #
+<pre><code># On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached &lt;file&gt;..." to unstage)
+#
+#   new file:   game/game0.py
+#   new file:   game/game1.py
+#   new file:   game/game2.py
+#   new file:   game/game3.py
+#   new file:   game/game4.py
+#   new file:   game/snake.py
+#   new file:   helloworld.py
+#   new file:   if.py
+#   new file:   maths.py
+#   new file:   variables.py
+#   new file:   while.py
+#
 </code></pre>
 
 <p>This time each file that will be committed is listed, not just the directory, and the status has changed
@@ -326,41 +315,41 @@ from <code>untracked</code> to <code>new file</code>.</p>
 
 <p>Now that the file contents have been added to the index we can commit these changes as our first commit</p>
 
-<pre><code>    git commit -m "Initial Commit"
+<pre><code>git commit -m "Initial Commit"
 </code></pre>
 
 <p>Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
 did</p>
 
-<pre><code>    master (root-commit) cff14c5] Initial Commit
-     11 files changed, 693 insertions(+)
-     create mode 100755 game/game0.py
-    .......___and so on___
+<pre><code>master (root-commit) cff14c5] Initial Commit
+ 11 files changed, 693 insertions(+)
+ create mode 100755 game/game0.py
+.......___and so on___
 </code></pre>
 
 <p>Some interesting commands we can now run</p>
 
-<pre><code>    git status
+<pre><code>git status
 
-    # On branch master
-    nothing to commit (working directory clean)
+# On branch master
+nothing to commit (working directory clean)
 </code></pre>
 
 <p>Another command worth running is <code>git log</code>, whch is currently very brief as we have only have one commit. Mine
 looks like this</p>
 
-<pre><code>    commit 9b941110ffadf261fff069c0aa9ca6042e10422b
-    Author: Alec Clews &lt;alecclews@gmail.com&gt;
-    Date:   Mon May 14 20:47:43 2012 +1000
+<pre><code>commit 9b941110ffadf261fff069c0aa9ca6042e10422b
+Author: Alec Clews &lt;alecclews@gmail.com&gt;
+Date:   Mon May 14 20:47:43 2012 +1000
 
-        Initial Commit
+    Initial Commit
 </code></pre>
 
 <p>The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.</p>
 
 <p>We now have our project under version control.</p>
 
-<h4 id="makingachange">Making a change</h4>
+<h3 id="makingachange">Making a change<a href="#ToC-makingachange"> ↩</a></h3>
 
 <p>Now lets make a change. The first step is to create a work area in which to make the change. In Git
 (and many other VC tools) this dedicated work area is called a <strong>branch</strong>. When you first create a repo
@@ -370,34 +359,34 @@ about master branch, it can be treated in exactly the same way as any branches y
 <p>If you look at the output from the status command above you can see that we are currently using the master branch
 in our working area.</p>
 
-<p>What Change do I want to make? When I play the verion of snakes I have the rocks are represented by “Y” which
+<p>What Change do I want to make? When I play the version of snakes I have the rocks are represented by “Y” which
 I want to change to “R”. The line in I need to change is in the file snake.py (lines 50 and 52 in my version).</p>
 
 <p>Let’s create a branch to work on.</p>
 
-<pre><code>    git branch make_rocks_R
+<pre><code>git branch make_rocks_R
 </code></pre>
 
 <p>No message means the command was successful (note that spaces are not allowed in the branch name)</p>
 
 <p>You can get a lit of all the branches with the <code>git branch</code> command</p>
 
-<pre><code>      make_rocks_R
-    * master
+<pre><code>  make_rocks_R
+* master
 </code></pre>
 
 <p>The asterisk shows the current branch.</p>
 
 <p>To make the <code>make_rocks_R</code> the current branch use the checkout command</p>
 
-<pre><code>    git checkout make_rocks_R
-    Switched to branch 'make_rocks_R'
+<pre><code>git checkout make_rocks_R
+Switched to branch 'make_rocks_R'
 </code></pre>
 
 <p>Now <code>git branch</code> displays</p>
 
-<pre><code>    * make_rocks_R
-      master
+<pre><code>* make_rocks_R
+  master
 </code></pre>
 
 <p>At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
@@ -408,16 +397,50 @@ Use the command <code>python game/snake.py</code></p>
 </ul>
 
 <p>Edit the file <code>game/snake.py</code> using your favourite text editor. In the version of snakes I had there are two changes to
-make; a comment on line 50; and the actual code on line 52. Save the changes and test the game by playing it again.</p>
+make; a comment on line 50; and the actual code on line 52. Save the changes and test the game by playing it again.
+The rocks should now look like “R” instead of “Y”.</p>
 
 <ul>
 <li>Showing the diff</li>
 </ul>
 
-<p>So let’s see what has changed. Git can provide a nice listing
-+ Committing the change
-+ Showing the history
-+ Branches</p>
+<p>So let’s see what has changed. Git can provide a nice listing. The simplest way is by using the command <code>git diff</code>,
+try that know and you should see a report similar to this</p>
+
+<p>diff –git a/game/snake.py b/game/snake.py
+index cef8d07..7e65efe 100755
+— a/game/snake.py
++++ b/game/snake.py
+@@ –47,9 +47,9 @@ def add_block(scr, width, height):
+ empty = False</p>
+
+<pre><code>   if empty:
+</code></pre>
+
+<ul>
+<li><h1 id="ifitisreplaceitwithayandreturn">if it is, replace it with a “Y” and return</h1></li>
+<li><h1 id="ifitisreplaceitwitharandreturn">if it is, replace it with a “R” and return</h1></li>
+<li><p>scr.addch(y, x, ord(“Y”), curses.color_pair(2))</p></li>
+<li><p>scr.addch(y, x, ord(“R”), curses.color_pair(2))
+ return</p></li>
+</ul>
+
+<p>def snake(scr):</p>
+
+<p>This report can be a little confusing the first time you see it.
+However if you look carefully you can see lines marked with <code>+</code> and <code>-</code>,
+these are the lines that have been changed.
+If we have made changes to more than one file then each set of file differences would be listed.
+This type of information are often referred to as a <strong>diff report</strong> or <strong>diff output</strong></p>
+
+<p>You can get a more user friendly display of these differences by using a graphical compare tool.
+Refer to the appendixes for information on how to install and use the Kdiff3 graphical tool.</p>
+
+<ul>
+<li>Committing the change</li>
+<li>Showing the history</li>
+<li>Branches</li>
+</ul>
 
 <h2 id="workingwithothers">Working with others<a href="#ToC-workingwithothers"> ↩</a></h2>
 
@@ -431,15 +454,15 @@ make; a comment on line 50; and the actual code on line 52. Save the changes and
 
 <h2 id="appendixa:externalreferences">Appendix A: External References<a href="#ToC-appendixa:externalreferences"> ↩</a></h2>
 
-<p>Several videos that introduce the basic ideas of version control can be found at http://git-scm.com/videos or on YouTube at:</p>
+<p>Several videos that introduce the basic ideas of version control can be found at <a href="http://git-scm.com/videos">http://git-scm.com/videos</a> or on YouTube at:</p>
 
 <ul>
-<li><p>Episode 1: http://www.youtube.com/watch?v=K2wBGt-j0fE</p></li>
-<li><p>Episode 2: http://www.youtube.com/watch?v=0BIGxolZQHo</p></li>
-<li><p>Episode 3: http://www.youtube.com/watch?v=ojVzmIp6Xv0</p></li>
-<li><p>Episode 4: http://www.youtube.com/watch?v=pv25aLwYpEU</p></li>
-<li><p>[http://progit.org/ Pro Git], an online and published book</p></li>
-<li><p>[http://youtu.be/ZDR433b0HJY Introduction to Git] video with Scott Chacon of GitHub</p></li>
+<li><p><a href="http://www.youtube.com/watch?v=K2wBGt-j0fE">Episode 1</a></p></li>
+<li><p><a href="http://www.youtube.com/watch?v=0BIGxolZQHo">Episode 2</a></p></li>
+<li><p><a href="http://www.youtube.com/watch?v=ojVzmIp6Xv0">Episode 3</a></p></li>
+<li><p><a href="http://www.youtube.com/watch?v=pv25aLwYpEU">Episode 4</a></p></li>
+<li><p><a href="http://progit.org/">Pro Git</a>, an online and published book</p></li>
+<li><p><a href="http://youtu.be/ZDR433b0HJY">Introduction to Git</a>, video with Scott Chacon of GitHub</p></li>
 </ul>
 
 <h2 id="appendixb:notesforteachersandgroupfaciltators">Appendix B: Notes for Teachers and group faciltators<a href="#ToC-appendixb:notesforteachersandgroupfaciltators"> ↩</a></h2>
@@ -459,23 +482,27 @@ is more complicated for students and is beyond the scope of this document</li>
 
 <h3 id="usingathirdpartywebhostingservice.github">Using a third party web hosting service. GitHub<a href="#ToC-usingathirdpartywebhostingservice.github"> ↩</a></h3>
 
-<p>(GitHub)[GitHub.com] provide specific git hosting service for schools. see https://github.com/edu for details.</p>
+<p>(GitHub)[GitHub.com] provide specific git hosting service for schools. see <a href="https://github.com/edu">https://github.com/edu</a> for details.</p>
 
 <ol>
 <li>Create a a GitHub organisation for your school or organisation</li>
-<li>Let GitHub know the details of your account using the form at https://github.com/edu.
+<li>Let GitHub know the details of your account using the form at <a href="https://github.com/edu">https://github.com/edu</a>.
 This will allow your students to have private repos.
 N.B. Normally all free accounts are public and the code they contain in freely available.</li>
-<li>Your students should create their own account on GitHub (see Appendix B). Students can follow the instructions at http://help.github.com/</li>
+<li>Your students should create their own account on GitHub (see Appendix B). Students can follow the instructions at <a href="http://help.github.com/">http://help.github.com/</a></li>
 <li>You then add your students to the appropriate GitHub organisation</li>
 </ol>
 
 <h2 id="appendixc:notesforselfstudystudents">Appendix C: Notes for self study students<a href="#ToC-appendixc:notesforselfstudystudents"> ↩</a></h2>
 
-<p>Students are recommended to use a remote hosting account fo their code. It develops good technique and provides a useful back up</p>
+<p>Students are recommended to use a remote hosting account for their code. It develops good technique and provides a useful back up</p>
 
 <p>There are a variety of free services available (see appendix A for some suggestions).
-GitHub has easy to follow instructions at http://help.github.com/</p>
+GitHub has easy to follow instructions at <a href="http://help.github.com/">http://help.github.com/</a></p>
+
+<h2 id="appendixd:installingandusingkdiff3">Appendix D: Installing and Using Kdiff3<a href="#ToC-appendixd:installingandusingkdiff3"> ↩</a></h2>
+
+<p>#TODO: See if kdiff3 works on RasPi and provide instructions for mergetool and difftool setup?</p>
 
 </body>
 </html>
