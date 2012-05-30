@@ -1,20 +1,64 @@
-<h1 id="overviewandfrontmatter">Overview and Front Matter</h1>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd">
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="xhtmlxslt" content="xhtml-toc-h2.xslt"/>
+</head>
+<body>
+<h2>Table of Contents</h2>
+<ol>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-overviewandfrontmatter" href="#overviewandfrontmatter">Overview and Front Matter</a>
+<ol>
+<li><a id="ToC-justification" href="#justification">Justification</a></li>
+<li><a id="ToC-outcomes" href="#outcomes">Outcomes</a></li>
+<li><a id="ToC-suggestedapproach" href="#suggestedapproach">Suggested Approach</a></li>
+</ol>
+</li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-introduction" href="#introduction">Introduction</a>
+<ol>
+<li><a id="ToC-whatisversioncontrolandhowdoversioncontrolsystemswork" href="#whatisversioncontrolandhowdoversioncontrolsystemswork">What is Version Control and how do Version Control Systems work</a></li>
+<li><a id="ToC-whyisversioncontrolissoimportant" href="#whyisversioncontrolissoimportant">Why is Version Control is so important</a></li>
+<li><a id="ToC-typesoftoolsavailable" href="#typesoftoolsavailable">Types of Tools available</a></li>
+</ol>
+</li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-anexampleusinggit" href="#anexampleusinggit">An example using Git</a>
+<ol>
+</ol>
+</li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-workingwithothers" href="#workingwithothers">Working with others</a>
+<ol>
+</ol>
+</li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixa:externalreferences" href="#appendixa:externalreferences">Appendix A: External References</a>
+<ol>
+</ol>
+</li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixb:notesforteachersandgroupfaciltators" href="#appendixb:notesforteachersandgroupfaciltators">Appendix B: Notes for Teachers and group faciltators</a>
+<ol>
+<li><a id="ToC-usingathirdpartywebhostingservice.github" href="#usingathirdpartywebhostingservice.github">Using a third party web hosting service. GitHub</a></li>
+</ol>
+</li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixc:notesforselfstudystudents" href="#appendixc:notesforselfstudystudents">Appendix C: Notes for self study students</a></li>
+</ol>
+
+<h2 id="overviewandfrontmatter">Overview and Front Matter<a href="#ToC-overviewandfrontmatter"> ↩</a></h2>
 
 <p>This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
 The examples in this course have been tested #TODO on Debian Linux</p>
 
-<h2 id="status:earlydraft">STATUS: EARLY DRAFT!!</h2>
+<p><em><em>STATUS: EARLY DRAFT!!</em></em></p>
 
 <p>This document is still under development. Please help if you can at https://github.com/alecthegeek/version-control-basics</p>
 
-<h2 id="justification">Justification</h2>
+<h3 id="justification">Justification<a href="#ToC-justification"> ↩</a></h3>
 
 <ol>
 <li>Version Control (VC) is an important practice for developers and a prerequisite for developing quality software</li>
 <li>Distributed Version Control Systems (DVCS) provide a useful platform for students to work together on educational projects</li>
 </ol>
 
-<h2 id="outcomes">Outcomes</h2>
+<h3 id="outcomes">Outcomes<a href="#ToC-outcomes"> ↩</a></h3>
 
 <p>At the completion of this module students will be:</p>
 
@@ -23,7 +67,7 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 
 <ol>
 <li>Describe problems that can occur when groups of people work together on computer files during a project</li>
-<li>Understand basic VC concepts and terminology &#8211; commit, commit history, change, branch, merge, commit message</li>
+<li>Understand basic VC concepts and terminology – commit, commit history, change, branch, merge, commit message</li>
 </ol></li>
 <li>Capable, with reference to notes and documentation, of using Git for version control of new and existing projects, including working in a project group
 
@@ -38,7 +82,7 @@ The examples in this course have been tested #TODO on Debian Linux</p>
 </ol></li>
 </ol>
 
-<h2 id="suggestedapproach">Suggested Approach</h2>
+<h3 id="suggestedapproach">Suggested Approach<a href="#ToC-suggestedapproach"> ↩</a></h3>
 
 <p>This topic should be introduced early on in the programming course and the practices it introduces applied continually as the rest of the course progresses.
 Before starting this module students should have the following pre-requisite skills:</p>
@@ -49,15 +93,15 @@ Before starting this module students should have the following pre-requisite ski
 <li>Some exposure to using the command line interface would be useful</li>
 </ol>
 
-<h1 id="introduction">Introduction</h1>
+<h2 id="introduction">Introduction<a href="#ToC-introduction"> ↩</a></h2>
 
-<h2 id="whatisversioncontrolandhowdoversioncontrolsystemswork">What is Version Control and how do Version Control Systems work</h2>
+<h3 id="whatisversioncontrolandhowdoversioncontrolsystemswork">What is Version Control and how do Version Control Systems work<a href="#ToC-whatisversioncontrolandhowdoversioncontrolsystemswork"> ↩</a></h3>
 
 <p>Version Control (VC) is a common practice used to track all the changes that occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.</p>
 
 <p>The way that a VCS works by recording a history of changes. What does that mean?</p>
 
-<p>Every time a change is completed (for example fixing a bug in a project) the developer decides a logical &#8216;&#8216;save&#8217;&#8217;
+<p>Every time a change is completed (for example fixing a bug in a project) the developer decides a logical ‘‘save’’
 point has been reached and will store all the file changes that make up the fix in the VCS database.</p>
 
 <p>The term often used for a group or changes that belong together like this is a <strong>changeset</strong>.
@@ -79,14 +123,14 @@ commit message and other information in the repository.</p>
 
 <p>Version Control is also sometimes refereed to as [http://en.wikipedia.org/wiki/Revision_control Revision Control]</p>
 
-<h2 id="whyisversioncontrolissoimportant">Why is Version Control is so important</h2>
+<h3 id="whyisversioncontrolissoimportant">Why is Version Control is so important<a href="#ToC-whyisversioncontrolissoimportant"> ↩</a></h3>
 
 <p>Imagine a software project. It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.) and dozens of people working on the project making
 different types of changes. There are several problems that will happen:</p>
 
 <ol>
 <li>Two people might be editing the same file at once and changes can be overwritten</li>
-<li>After the project has been running for some time it&#8217;s very hard to understand how the project has evolved and what changes have been made.
+<li>After the project has been running for some time it’s very hard to understand how the project has evolved and what changes have been made.
 How can we locate a problem that might have been introduced some time ago.
 Just fixing the problem may not be enough, we probably also need to to understand the change that introduced it.</li>
 <li>If two people want to change the same file one will have to wait for the other to finish, this is very inefficient</li>
@@ -97,21 +141,21 @@ If the same copy if the project is being updated with both sets of changes then 
 <p>There are three core things a VCS helps do:</p>
 
 <ol>
-<li>Answer the following questions: &#8220;What changes were made in the past?&#8221;, &#8220;Why were they made?&#8221; and &#8220;Who made them?&#8221; (via commit history and commit comments)
+<li>Answer the following questions: “What changes were made in the past?”, “Why were they made?” and “Who made them?” (via commit history and commit comments)
 
 <ol>
 <li>Individual developers find this information useful as part of their daily workflow and
 it also helps organisations with their compliance and audit management</li>
 </ol></li>
-<li>Undo a half complete or incorrect change made in error and &#8220;roll back&#8221; to a previous version</li>
-<li>Recreate a &#8220;snapshot&#8221; of the project as it was at some point in the past</li>
+<li>Undo a half complete or incorrect change made in error and “roll back” to a previous version</li>
+<li>Recreate a “snapshot” of the project as it was at some point in the past</li>
 <li>Allow two streams of changes to be made independently of each other and then integrated at a later date (parrallel development).
 This feature depends on the specific features of the VCS tool you are using</li>
 </ol>
 
 <p>You may find the following additional reading useful in introducing important ideas: http://tom.preston-werner.com/2009/05/19/the-git-parable.html</p>
 
-<h2 id="typesoftoolsavailable">Types of Tools available</h2>
+<h3 id="typesoftoolsavailable">Types of Tools available<a href="#ToC-typesoftoolsavailable"> ↩</a></h3>
 
 <ul>
 <li>Distributed vs. Centralised
@@ -138,7 +182,7 @@ with excellent support for parrarell development.</p>
 </ul></li>
 </ul>
 
-<h1 id="anexampleusinggit">An example using Git</h1>
+<h2 id="anexampleusinggit">An example using Git<a href="#ToC-anexampleusinggit"> ↩</a></h2>
 
 <p>The rest of this module will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
 You should follow along on your own Raspberry Pi using a new test project as explained below.</p>
@@ -153,9 +197,9 @@ but we are only going to concentrate on the ten or so commands you need to be us
 
 <p>These examples assume that you are using Debian Linux on a Raspberry Pi and have downloaded the Python Snakes project from the [http://www.raspberrypi.org/game.tar.gz Raspberry Pi website] into a directory called <code>snakes</code>.
 All the commands are issued from a terminal.
-You can start the terminal from the LXDE GUI by #TODO&#8230;.. Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.</p>
+You can start the terminal from the LXDE GUI by #TODO….. Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.</p>
 
-<h3 id="setupup">Setup up</h3>
+<h4 id="setupup">Setup up</h4>
 
 <ol>
 <li><p>Make sure you have the correct tools installed by typing the following commands:</p>
@@ -177,9 +221,9 @@ You can start the terminal from the LXDE GUI by #TODO&#8230;.. Initially this ex
 </code></pre></li>
 <li><p>Tell Git who you are (this is very important information and it recorded in every change in you make or commit)</p>
 
-<pre><code>git config --global user.name &quot;My Name&quot;
+<pre><code>git config --global user.name "My Name"
 
-git config --global user.email &quot;myname@mycollege.ed.uk&quot;
+git config --global user.email "myname@mycollege.ed.uk"
 </code></pre></li>
 </ol>
 
@@ -191,10 +235,10 @@ Git records that information in a user configuration file called <code>.gitconfi
 <pre><code>    git config --global core.autocrlf input
 </code></pre>
 
-<p>(MS Windows uers should issue the command <code>git config &#8211;global core.autocrlf true</code>).
+<p>(MS Windows uers should issue the command <code>git config –global core.autocrlf true</code>).
 See http://help.github.com/line-endings/ for further details.</p>
 
-<h3 id="startinganewprojectbycreatingarepo">Starting a new project by creating a repo</h3>
+<h4 id="startinganewprojectbycreatingarepo">Starting a new project by creating a repo</h4>
 
 <p>The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory</p>
 
@@ -204,7 +248,7 @@ See http://help.github.com/line-endings/ for further details.</p>
 </code></pre>
 
 <p>Notice that the VC tool has created a hidden directory called <code>.git</code>.
-In Linux all file and directory (folder) names that start with a &#8220;<code>.</code>&#8221; are normally hidden, but you can see them with the command <code>ls -A</code>.</p>
+In Linux all file and directory (folder) names that start with a “<code>.</code>” are normally hidden, but you can see them with the command <code>ls -A</code>.</p>
 
 <p>Next we issue a status command.</p>
 
@@ -219,7 +263,7 @@ The output from the status command is</p>
     # Initial commit
 
     # Untracked files:
-    #   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+    #   (use "git add &lt;file&gt;..." to include in what will be committed)
 
     #   game/
     #   helloworld.py
@@ -227,7 +271,7 @@ The output from the status command is</p>
     #   maths.py
     #   variables.py
     #   while.py
-    nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+    nothing added to commit but untracked files present (use "git add" to track)
 </code></pre>
 
 <p>We can ignore most of the detail for now. What important is that Git:</p>
@@ -237,7 +281,7 @@ The output from the status command is</p>
 <li>Lists the files and directories with their status. We will see this change as we progress further in the example.</li>
 </ol>
 
-<h3 id="addtheprojectfilestoversioncontrol">Add the project files to version control</h3>
+<h4 id="addtheprojectfilestoversioncontrol">Add the project files to version control</h4>
 
 <p>Before changes are added to the repo database we have to decide what will be in the commit. There might be a many changes
 in the files we are working on, but our changset is actually only a small number of changes.</p>
@@ -250,8 +294,8 @@ should just expect that before a commit is done changes are added to the index a
 <pre><code>    git add .
 </code></pre>
 
-<p>This command does not product any output by default so don&#8217;t be concerned if you get no messages. If you get a message
-similar to <code>warning: CRLF will be replaced by LF &#8230;</code> then this is normal as well (some versions of
+<p>This command does not product any output by default so don’t be concerned if you get no messages. If you get a message
+similar to <code>warning: CRLF will be replaced by LF …</code> then this is normal as well (some versions of
 the Snakes project are provided in Windows format text files).</p>
 
 <p>if we run the <code>git status</code> command now we get different output</p>
@@ -261,7 +305,7 @@ the Snakes project are provided in Windows format text files).</p>
     # Initial commit
     #
     # Changes to be committed:
-    #   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+    #   (use "git rm --cached &lt;file&gt;..." to unstage)
     #
     #   new file:   game/game0.py
     #   new file:   game/game1.py
@@ -282,7 +326,7 @@ from <code>untracked</code> to <code>new file</code>.</p>
 
 <p>Now that the file contents have been added to the index we can commit these changes as our first commit</p>
 
-<pre><code>    git commit -m &quot;Initial Commit&quot;
+<pre><code>    git commit -m "Initial Commit"
 </code></pre>
 
 <p>Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
@@ -316,20 +360,20 @@ looks like this</p>
 
 <p>We now have our project under version control.</p>
 
-<h3 id="makingachange">Making a change</h3>
+<h4 id="makingachange">Making a change</h4>
 
 <p>Now lets make a change. The first step is to create a work area in which to make the change. In Git
 (and many other VC tools) this dedicated work area is called a <strong>branch</strong>. When you first create a repo
-the default branch that is created is called <strong>master</strong>, but it&#8217;s important to know that there is nothing special
+the default branch that is created is called <strong>master</strong>, but it’s important to know that there is nothing special
 about master branch, it can be treated in exactly the same way as any branches you create yourself.</p>
 
 <p>If you look at the output from the status command above you can see that we are currently using the master branch
 in our working area.</p>
 
-<p>What Change do I want to make? When I play the verion of snakes I have the rocks are represented by &#8220;Y&#8221; which
-I want to change to &#8220;R&#8221;. The line in I need to change is in the file snake.py (lines 50 and 52 in my version).</p>
+<p>What Change do I want to make? When I play the verion of snakes I have the rocks are represented by “Y” which
+I want to change to “R”. The line in I need to change is in the file snake.py (lines 50 and 52 in my version).</p>
 
-<p>Let&#8217;s create a branch to work on.</p>
+<p>Let’s create a branch to work on.</p>
 
 <pre><code>    git branch make_rocks_R
 </code></pre>
@@ -370,12 +414,12 @@ make; a comment on line 50; and the actual code on line 52. Save the changes and
 <li>Showing the diff</li>
 </ul>
 
-<p>So let&#8217;s see what has changed. Git can provide a nice listing
+<p>So let’s see what has changed. Git can provide a nice listing
 + Committing the change
 + Showing the history
 + Branches</p>
 
-<h1 id="workingwithothers">Working with others</h1>
+<h2 id="workingwithothers">Working with others<a href="#ToC-workingwithothers"> ↩</a></h2>
 
 <ul>
 <li>Remote repos</li>
@@ -383,7 +427,9 @@ make; a comment on line 50; and the actual code on line 52. Save the changes and
 <li>Patches</li>
 </ul>
 
-<h1 id="externalreferences">External References</h1>
+<h1 id="appendices">Appendices</h1>
+
+<h2 id="appendixa:externalreferences">Appendix A: External References<a href="#ToC-appendixa:externalreferences"> ↩</a></h2>
 
 <p>Several videos that introduce the basic ideas of version control can be found at http://git-scm.com/videos or on YouTube at:</p>
 
@@ -396,7 +442,7 @@ make; a comment on line 50; and the actual code on line 52. Save the changes and
 <li><p>[http://youtu.be/ZDR433b0HJY Introduction to Git] video with Scott Chacon of GitHub</p></li>
 </ul>
 
-<h1 id="appendixa:notesforteachersandgroupfaciltators">Appendix A: Notes for Teachers and group faciltators</h1>
+<h2 id="appendixb:notesforteachersandgroupfaciltators">Appendix B: Notes for Teachers and group faciltators<a href="#ToC-appendixb:notesforteachersandgroupfaciltators"> ↩</a></h2>
 
 <p>Git is a useful platform for students to work together. Additional if their programming work needs to be accessed then it
 provides a useful mechanism for students and teams to submit their work.</p>
@@ -411,7 +457,7 @@ provides a useful mechanism for students and teams to submit their work.</p>
 is more complicated for students and is beyond the scope of this document</li>
 </ol>
 
-<h2 id="usingathirdpartywebhostingservice.github">Using a third party web hosting service. GitHub</h2>
+<h3 id="usingathirdpartywebhostingservice.github">Using a third party web hosting service. GitHub<a href="#ToC-usingathirdpartywebhostingservice.github"> ↩</a></h3>
 
 <p>(GitHub)[GitHub.com] provide specific git hosting service for schools. see https://github.com/edu for details.</p>
 
@@ -424,9 +470,12 @@ N.B. Normally all free accounts are public and the code they contain in freely a
 <li>You then add your students to the appropriate GitHub organisation</li>
 </ol>
 
-<h1 id="appendixb:notesforselfstudystudents">Appendix B: Notes for self study students</h1>
+<h2 id="appendixc:notesforselfstudystudents">Appendix C: Notes for self study students<a href="#ToC-appendixc:notesforselfstudystudents"> ↩</a></h2>
 
 <p>Students are recommended to use a remote hosting account fo their code. It develops good technique and provides a useful back up</p>
 
 <p>There are a variety of free services available (see appendix A for some suggestions).
 GitHub has easy to follow instructions at http://help.github.com/</p>
+
+</body>
+</html>
