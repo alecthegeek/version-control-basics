@@ -15,7 +15,8 @@ clean:
 
 index.html : version-control-basics.mmd
 	cd "$(mmdxsltbase)"  && ./mmd-xslt ${realpath $<}
-	# multimarkdown -t$(subst .,,$(suffix $@))  $<  -o $@
+	mv $(<:.mmd=.html)  $@
 
-%.html %.pdf: %.mmd 
-	multimarkdown -t$(subst .,,$(suffix $@))  $<  -o $@
+%.html: %.mmd 
+	cd "$(mmdxsltbase)"  && ./mmd-xslt ${realpath $<}
+# 	multimarkdown -t$(subst .,,$(suffix $@))  $<  -o $@
