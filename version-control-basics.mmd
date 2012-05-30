@@ -1,20 +1,22 @@
-# Overview and Front Matter
+XHTML XSLT: xhtml-toc-h2.xslt
+
+## Overview and Front Matter
 
 This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
 The examples in this course have been tested #TODO on Debian Linux
 
-## STATUS: EARLY DRAFT!!
+_*STATUS: EARLY DRAFT!!*_
 
 
 This document is still under development. Please help if you can at https://github.com/alecthegeek/version-control-basics
 
 
-##Justification
+###Justification
 
 1. Version Control (VC) is an important practice for developers and a prerequisite for developing quality software
 1. Distributed Version Control Systems (DVCS) provide a useful platform for students to work together on educational projects
 
-##Outcomes
+###Outcomes
 
 At the completion of this module students will be:
 
@@ -30,7 +32,7 @@ At the completion of this module students will be:
 	1. Perform a merge
 	1. Push and fetch changes to and from a remote repo (For simplicity the git pull command is not taught)
 
-## Suggested Approach
+### Suggested Approach
 
 This topic should be introduced early on in the programming course and the practices it introduces applied continually as the rest of the course progresses.
 Before starting this module students should have the following pre-requisite skills:
@@ -39,8 +41,8 @@ Before starting this module students should have the following pre-requisite ski
 1. Understand files and directories
 1. Some exposure to using the command line interface would be useful
 
-#Introduction
-##What is Version Control and how do Version Control Systems work
+##Introduction
+###What is Version Control and how do Version Control Systems work
 Version Control (VC) is a common practice used to track all the changes that occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.
 
 The way that a VCS works by recording a history of changes. What does that mean?
@@ -68,7 +70,7 @@ commit message and other information in the repository.
 
 Version Control is also sometimes refereed to as [http://en.wikipedia.org/wiki/Revision_control Revision Control]
 
-##Why is Version Control is so important
+###Why is Version Control is so important
 
 Imagine a software project. It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.) and dozens of people working on the project making
 different types of changes. There are several problems that will happen:
@@ -93,7 +95,7 @@ This feature depends on the specific features of the VCS tool you are using
 
 You may find the following additional reading useful in introducing important ideas: http://tom.preston-werner.com/2009/05/19/the-git-parable.html
 
-##Types of Tools available
+###Types of Tools available
 * Distributed vs. Centralised
 	* Modern VCS work on a distributed model (DVCS). This means that every member of the project team keeps a complete local copy of all the changes. The previous model, still widely used with tools like Subversion, is centralised. There is only one central database with all the changes and team members only have a copy of the change they are currently working on.
 *  Open Source and Commercial Tools
@@ -109,7 +111,7 @@ with excellent support for parrarell development.
 (and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)
 	* Helping individual developers be more efficient with tools such as difference reports
 
-#An example using Git
+##An example using Git
 
 The rest of this module will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
 You should follow along on your own Raspberry Pi using a new test project as explained below.
@@ -126,7 +128,7 @@ These examples assume that you are using Debian Linux on a Raspberry Pi and have
 All the commands are issued from a terminal.
 You can start the terminal from the LXDE GUI by #TODO..... Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.
 
-###  Setup up
+####  Setup up
 1. Make sure you have the correct tools installed by typing the following commands:
 
 		sudo apt-get install git git-gui git-gitk
@@ -158,7 +160,7 @@ Linux and Mac OS X users should also run the command
 (MS Windows uers should issue the command <code>git config --global core.autocrlf true</code>).
 See http://help.github.com/line-endings/ for further details.
 
-### Starting a new project by creating a repo
+#### Starting a new project by creating a repo
 
 The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory
 
@@ -196,7 +198,7 @@ We can ignore most of the detail for now. What important is that Git:
 1. Warns us that some files are not being controlled (untracked) by the VCS
 1. Lists the files and directories with their status. We will see this change as we progress further in the example.
 
-### Add the project files to version control
+#### Add the project files to version control
 
 Before changes are added to the repo database we have to decide what will be in the commit. There might be a many changes
 in the files we are working on, but our changset is actually only a small number of changes.
@@ -272,7 +274,7 @@ The meaning of the Author, Date and comment field should be obvious. The commit 
 
 We now have our project under version control.
 
-### Making a change
+#### Making a change
 
 
 Now lets make a change. The first step is to create a work area in which to make the change. In Git
@@ -327,13 +329,13 @@ So let's see what has changed. Git can provide a nice listing
 +  Showing the history
 +  Branches
 
-# Working with others
+## Working with others
 
 *  Remote repos
 *  Merging
 *  Patches
 
-# External References
+## External References
 
 
 Several videos that introduce the basic ideas of version control can be found at http://git-scm.com/videos or on YouTube at:
@@ -347,7 +349,7 @@ Several videos that introduce the basic ideas of version control can be found at
 *  [http://progit.org/ Pro Git], an online and published book
 *  [http://youtu.be/ZDR433b0HJY Introduction to Git] video with Scott Chacon of GitHub
 
-# Appendix A: Notes for Teachers and group faciltators
+## Appendix A: Notes for Teachers and group faciltators
 
 
 Git is a useful platform for students to work together. Additional if their programming work needs to be accessed then it
@@ -361,7 +363,7 @@ Students can collaborate using four different models:
 1. Students can exchange using Git patches on USB drives (a __sneakernet__). This is most technology simple solution but
 is more complicated for students and is beyond the scope of this document
 
-## Using a third party web hosting service. GitHub
+### Using a third party web hosting service. GitHub
 
 (GitHub)[GitHub.com] provide specific git hosting service for schools. see https://github.com/edu for details.
 
@@ -372,7 +374,7 @@ N.B. Normally all free accounts are public and the code they contain in freely a
 1. Your students should create their own account on GitHub (see Appendix B). Students can follow the instructions at http://help.github.com/
 1. You then add your students to the appropriate GitHub organisation
 
-# Appendix B: Notes for self study students
+## Appendix B: Notes for self study students
 
 Students are recommended to use a remote hosting account fo their code. It develops good technique and provides a useful back up
 

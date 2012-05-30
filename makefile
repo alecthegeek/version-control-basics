@@ -4,14 +4,18 @@
 
 .PHONY: clean all
 
-all: version-control-basics.html
+
+mmdxsltbase=$(HOME)/Library/Application Support/MultiMarkdown/bin
+
+all: index.html
 
 clean:
-	-rm *.html *.pdf
+	-rm *.html *.pdf *.tex
 
 
-index.html : version-control-basics.mmd 
-	mmd -t$(subst .,,$(suffix $@)) < $<  > $@
+index.html : version-control-basics.mmd
+	cd "$(mmdxsltbase)"  && ./mmd-xslt ${realpath $<}
+	# multimarkdown -t$(subst .,,$(suffix $@))  $<  -o $@
 
 %.html %.pdf: %.mmd 
-	mmd -t$(subst .,,$(suffix $@)) < $<  > $@
+	multimarkdown -t$(subst .,,$(suffix $@))  $<  -o $@
