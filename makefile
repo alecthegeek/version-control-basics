@@ -12,7 +12,6 @@ all: index.html
 clean:
 	-rm *.html *.pdf *.tex
 
-
 index.html : version-control-basics.mmd
 	cd "$(mmdxsltbase)"  && ./mmd-xslt ${realpath $<}
 	mv $(<:.mmd=.html)  $@
