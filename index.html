@@ -44,7 +44,8 @@
 </ol>
 </li>
 <li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixc:notesforselfstudystudents" href="#appendixc:notesforselfstudystudents">Appendix C: Notes for self study students</a></li>
-<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixd:installingandusingkdiff3" href="#appendixd:installingandusingkdiff3">Appendix D: Installing and Using Kdiff3</a></li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixd:usingthegitgraphicaltoolsgitguiandgitk" href="#appendixd:usingthegitgraphicaltoolsgitguiandgitk">Appendix D: Using the Git Graphical Tools <code>git gui</code> and <code>gitk</code></a></li>
+<li xmlns:m="http://www.w3.org/1998/Math/MathML"><a id="ToC-appendixe:installingandusingkdiff3" href="#appendixe:installingandusingkdiff3">Appendix E: Installing and Using Kdiff3</a></li>
 </ol>
 
 <h1 id="versioncontrolbasics">Version Control Basics</h1>
@@ -52,7 +53,7 @@
 <h2 id="overviewandfrontmatter">Overview and Front Matter<a href="#ToC-overviewandfrontmatter"> ↩</a></h2>
 
 <p>This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
-The examples in this course have been tested #TODO on Debian Linux</p>
+The examples in this course have been tested on Debian Linux.</p>
 
 <p><em>* ####STATUS: EARLY DRAFT!!*</em></p>
 
@@ -159,9 +160,9 @@ This feature depends on the specific features of the VCS tool you are using</li>
 <dl>
 <dt>Distributed vs. Centralised</dt>
 <dd>Modern VCS work on a distributed model (DVCS).
- This means that every member of the project team keeps a complete local copy of all the changes.
- The previous model, still widely used with tools like Subversion, is centralised.
- There is only one central database with all the changes and team members only have a copy of the change they are currently working on.</dd>
+This means that every member of the project team keeps a complete local copy of all the changes.
+The previous model, still widely used with tools like Subversion, is centralised.
+There is only one central database with all the changes and team members only have a copy of the change they are currently working on.</dd>
 </dl>
 
 
@@ -192,23 +193,34 @@ but we are only going to concentrate on the ten or so commands you need to be us
 <p>There are many excellent tutorials for Git on the Internet. See the External References section below.</p>
 
 <p>These examples assume that you are using Debian Linux on a Raspberry Pi and
-have downloaded the Python Snakes project from the <a href="http://www.raspberrypi.org/game.tar.gz">Raspberry Pi website</a> into a directory called <code>snakes</code>.
-All the commands are issued from a terminal.
-You can start the terminal from the LXDE GUI by #TODO…..
-Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.</p>
+have downloaded the Python Snakes project from the <a href="http://www.raspberrypi.org/game.tar.gz">Raspberry Pi website</a> into a directory called <code>snakes</code>.</p>
+
+<p>Assuming you have downloaded a file called <code>game.tar.gz</code> into your home directory run the following commands
+mkdir snakes
+cd snakes
+tar -xzf ../game.tar.gz</p>
+
+<p>All the commands are issued from a terminal.
+You can start the terminal in the LXDE GUI from the program menu by selecting “Accessories” and then “LXTerminal”.
+Alternativly you can just not run the <code>startx</code> command when you log in.</p>
+
+<p>Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal session.</p>
 
 <h3 id="setupup">Setup up<a href="#ToC-setupup"> ↩</a></h3>
 
 <ol>
 <li><p>Make sure you have the correct tools installed by typing the following commands:</p>
 
-<p>sudo apt-get install git git-gui git-gitk</p></li>
+<p>sudo apt-get install git git-gui gitk git-doc</p></li>
 <li><p>Test the installation with the command</p>
 
 <p>git –version</p></li>
-<li><p>you should see something like</p>
+<li><p>you should see something like</p></li>
+</ol>
 
-<p>git version 1.7.10</p></li>
+<p>git version 1.7.10</p>
+
+<ol>
 <li><p>Tell Git who you are (this is very important information and it recorded in every change in you make or commit)</p>
 
 <p>git config –global user.name “My Name”</p>
@@ -233,7 +245,7 @@ See &lt;http://help.github.com/line-endings/? for further details.</p>
 
 <pre><code>cd snakes
 git init
-Initialized empty Git repository in /home/alec/snakes/.git/
+Initialized empty Git repository in /home/pi/snakes/.git/
 </code></pre>
 
 <p>Notice that the VC tool has created a hidden directory called <code>.git</code>.
@@ -315,34 +327,32 @@ from <code>untracked</code> to <code>new file</code>.</p>
 
 <p>Now that the file contents have been added to the index we can commit these changes as our first commit</p>
 
-<pre><code>git commit -m "Initial Commit"
-</code></pre>
+<p>git commit -m “Initial Commit”</p>
 
 <p>Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
 did</p>
 
-<pre><code>master (root-commit) cff14c5] Initial Commit
+<p>master (root-commit) cff14c5] Initial Commit
  11 files changed, 693 insertions(+)
  create mode 100755 game/game0.py
-.......___and so on___
-</code></pre>
+…….<strong><em>and so on</em></strong></p>
 
 <p>Some interesting commands we can now run</p>
 
-<pre><code>git status
+<p>git status</p>
 
-# On branch master
-nothing to commit (working directory clean)
-</code></pre>
+<h1 id="onbranchmaster">On branch master</h1>
+
+<p>nothing to commit (working directory clean)</p>
 
 <p>Another command worth running is <code>git log</code>, whch is currently very brief as we have only have one commit. Mine
 looks like this</p>
 
-<pre><code>commit 9b941110ffadf261fff069c0aa9ca6042e10422b
-Author: Alec Clews &lt;alecclews@gmail.com&gt;
-Date:   Mon May 14 20:47:43 2012 +1000
+<p>commit 9b941110ffadf261fff069c0aa9ca6042e10422b
+Author: Alec Clews <a href="mailto:alecclews@gmail.com">alecclews@gmail.com</a>
+Date: Mon May 14 20:47:43 2012 +1000</p>
 
-    Initial Commit
+<pre><code>Initial Commit
 </code></pre>
 
 <p>The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.</p>
@@ -364,30 +374,28 @@ I want to change to “R”. The line in I need to change is in the file snake.p
 
 <p>Let’s create a branch to work on.</p>
 
-<pre><code>git branch make_rocks_R
-</code></pre>
+<p>git branch make_rocks_R</p>
 
 <p>No message means the command was successful (note that spaces are not allowed in the branch name)</p>
 
 <p>You can get a lit of all the branches with the <code>git branch</code> command</p>
 
-<pre><code>  make_rocks_R
-* master
-</code></pre>
+<p>make_rocks_R
+* master</p>
 
 <p>The asterisk shows the current branch.</p>
 
 <p>To make the <code>make_rocks_R</code> the current branch use the checkout command</p>
 
-<pre><code>git checkout make_rocks_R
-Switched to branch 'make_rocks_R'
-</code></pre>
+<p>git checkout make_rocks_R
+Switched to branch ‘make_rocks_R’</p>
 
 <p>Now <code>git branch</code> displays</p>
 
-<pre><code>* make_rocks_R
-  master
-</code></pre>
+<ul>
+<li>make_rocks_R
+ master</li>
+</ul>
 
 <p>At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
 Use the command <code>python game/snake.py</code></p>
@@ -414,15 +422,14 @@ index cef8d07..7e65efe 100755
 @@ –47,9 +47,9 @@ def add_block(scr, width, height):
  empty = False</p>
 
-<pre><code>   if empty:
-</code></pre>
+<p>if empty:
+- # if it is, replace it with a “Y” and return
++ # if it is, replace it with a “R” and return</p>
 
 <ul>
-<li><h1 id="ifitisreplaceitwithayandreturn">if it is, replace it with a “Y” and return</h1></li>
-<li><h1 id="ifitisreplaceitwitharandreturn">if it is, replace it with a “R” and return</h1></li>
-<li><p>scr.addch(y, x, ord(“Y”), curses.color_pair(2))</p></li>
-<li><p>scr.addch(y, x, ord(“R”), curses.color_pair(2))
- return</p></li>
+<li>scr.addch(y, x, ord(“Y”), curses.color_pair(2))</li>
+<li>scr.addch(y, x, ord(“R”), curses.color_pair(2))
+ return</li>
 </ul>
 
 <p>def snake(scr):</p>
@@ -500,9 +507,19 @@ N.B. Normally all free accounts are public and the code they contain in freely a
 <p>There are a variety of free services available (see appendix A for some suggestions).
 GitHub has easy to follow instructions at <a href="http://help.github.com/">http://help.github.com/</a></p>
 
-<h2 id="appendixd:installingandusingkdiff3">Appendix D: Installing and Using Kdiff3<a href="#ToC-appendixd:installingandusingkdiff3"> ↩</a></h2>
+<h2 id="appendixd:usingthegitgraphicaltoolsgitguiandgitk">Appendix D: Using the Git Graphical Tools <code>git gui</code> and <code>gitk</code><a href="#ToC-appendixd:usingthegitgraphicaltoolsgitguiandgitk"> ↩</a></h2>
 
-<p>#TODO: See if kdiff3 works on RasPi and provide instructions for mergetool and difftool setup?</p>
+<pre><code># TODO Add
+</code></pre>
+
+<h2 id="appendixe:installingandusingkdiff3">Appendix E: Installing and Using Kdiff3<a href="#ToC-appendixe:installingandusingkdiff3"> ↩</a></h2>
+
+<p>First install the kdiff3 program</p>
+
+<pre><code>sudo apt-get install kdiff3-qt
+
+# TODO Add
+</code></pre>
 
 </body>
 </html>
