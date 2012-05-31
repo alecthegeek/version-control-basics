@@ -5,7 +5,7 @@ XHTML XSLT: xhtml-toc-h2.xslt
 ## Overview and Front Matter
 
 This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
-The examples in this course have been tested #TODO on Debian Linux
+The examples in this course have been tested on Debian Linux.
 
 _* ####STATUS: EARLY DRAFT!!*_
 
@@ -101,9 +101,9 @@ You may find the following additional reading useful in introducing important id
 
 Distributed vs. Centralised
 :	Modern VCS work on a distributed model (DVCS).
-	This means that every member of the project team keeps a complete local copy of all the changes.
-	The previous model, still widely used with tools like Subversion, is centralised.
-	There is only one central database with all the changes and team members only have a copy of the change they are currently working on.
+This means that every member of the project team keeps a complete local copy of all the changes.
+The previous model, still widely used with tools like Subversion, is centralised.
+There is only one central database with all the changes and team members only have a copy of the change they are currently working on.
 
 Open Source and Commercial Tools
 
@@ -133,14 +133,22 @@ There are many excellent tutorials for Git on the Internet. See the External Ref
 
 These examples assume that you are using Debian Linux on a Raspberry Pi and
 have downloaded the Python Snakes project from the [Raspberry Pi website](http://www.raspberrypi.org/game.tar.gz) into a directory called `snakes`.
+
+Assuming you have downloaded a file called `game.tar.gz` into your home directory run the following commands
+mkdir snakes
+cd snakes
+tar -xzf ../game.tar.gz
+
 All the commands are issued from a terminal.
-You can start the terminal from the LXDE GUI by #TODO.....
-Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal window.
+You can start the terminal in the LXDE GUI from the program menu by selecting "Accessories" and then "LXTerminal".
+Alternativly you can just not run the `startx` command when you log in.
+
+Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal session.
 
 ###  Setup up
 1. Make sure you have the correct tools installed by typing the following commands:
 
-	sudo apt-get install git git-gui git-gitk
+	sudo apt-get install git git-gui gitk git-doc
 
 
 1. Test the installation with the command
@@ -149,7 +157,7 @@ Initially this example assumes that the current directory is your home directory
 
 1. you should see something like
 
-	git version 1.7.10
+git version 1.7.10
 
 1. Tell Git who you are (this is very important information and it recorded in every change in you make or commit)
 
@@ -174,7 +182,7 @@ The next thing we need to do it create an empty Git database, called a repo (sho
 
 	cd snakes
 	git init
-	Initialized empty Git repository in /home/alec/snakes/.git/
+	Initialized empty Git repository in /home/pi/snakes/.git/
 
 Notice that the VC tool has created a hidden directory called `.git`.
 In Linux all file and directory (folder) names that start with a "`.`" are normally hidden, but you can see them with the command `ls -A`.
@@ -249,33 +257,33 @@ from `untracked` to `new file`.
 
 Now that the file contents have been added to the index we can commit these changes as our first commit
 
-	git commit -m "Initial Commit"
+git commit -m "Initial Commit"
 
 Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
 did
 
-	master (root-commit) cff14c5] Initial Commit
-	 11 files changed, 693 insertions(+)
-	 create mode 100755 game/game0.py
-	.......___and so on___
+master (root-commit) cff14c5] Initial Commit
+ 11 files changed, 693 insertions(+)
+ create mode 100755 game/game0.py
+.......___and so on___
 
 
 Some interesting commands we can now run
 
-	git status
+git status
 
-	# On branch master
-	nothing to commit (working directory clean)
+# On branch master
+nothing to commit (working directory clean)
 
 
 Another command worth running is `git log`, whch is currently very brief as we have only have one commit. Mine 
 looks like this
 
-	commit 9b941110ffadf261fff069c0aa9ca6042e10422b
-	Author: Alec Clews <alecclews@gmail.com>
-	Date:   Mon May 14 20:47:43 2012 +1000
+commit 9b941110ffadf261fff069c0aa9ca6042e10422b
+Author: Alec Clews <alecclews@gmail.com>
+Date:   Mon May 14 20:47:43 2012 +1000
 
-	    Initial Commit
+    Initial Commit
 
 
 The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.
@@ -300,26 +308,26 @@ I want to change to "R". The line in I need to change is in the file snake.py (l
 
 Let's create a branch to work on.
 
-	git branch make_rocks_R
+git branch make_rocks_R
 
 No message means the command was successful (note that spaces are not allowed in the branch name)
 
 You can get a lit of all the branches with the `git branch` command
 
-	  make_rocks_R
-	* master
+  make_rocks_R
+* master
 
 The asterisk shows the current branch.
 
 To make the `make_rocks_R` the current branch use the checkout command
 
-	git checkout make_rocks_R
-	Switched to branch 'make_rocks_R'
+git checkout make_rocks_R
+Switched to branch 'make_rocks_R'
 
 Now `git branch` displays
 
-	* make_rocks_R
-	  master
+* make_rocks_R
+  master
 
 
 At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
@@ -341,17 +349,17 @@ index cef8d07..7e65efe 100755
 --- a/game/snake.py
 +++ b/game/snake.py
 @@ -47,9 +47,9 @@ def add_block(scr, width, height):
-	     empty = False
+     empty = False
 
-       if empty:
+if empty:
 -        # if it is, replace it with a "Y" and return
 +        # if it is, replace it with a "R" and return
 
 -        scr.addch(y, x, ord("Y"), curses.color_pair(2))
 +        scr.addch(y, x, ord("R"), curses.color_pair(2))
-	 return
+ return
 
- def snake(scr):
+def snake(scr):
 
 
 This report can be a little confusing the first time you see it.
@@ -426,6 +434,14 @@ Students are recommended to use a remote hosting account for their code. It deve
 There are a variety of free services available (see appendix A for some suggestions).
 GitHub has easy to follow instructions at <http://help.github.com/>
 
-## Appendix D: Installing and Using Kdiff3
+## Appendix D: Using the Git Graphical Tools `git gui` and `gitk`
 
-  #TODO: See if kdiff3 works on RasPi and provide instructions for mergetool and difftool setup?
+	# TODO Add
+
+## Appendix E: Installing and Using Kdiff3
+
+First install the kdiff3 program
+
+	sudo apt-get install kdiff3-qt
+
+	# TODO Add
