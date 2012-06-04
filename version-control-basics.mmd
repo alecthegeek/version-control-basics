@@ -148,66 +148,64 @@ Initially this example assumes that the current directory is your home directory
 ###  Setup up
 1. Make sure you have the correct tools installed by typing the following commands:
 
-	sudo apt-get install git git-gui gitk git-doc
-
+		sudo apt-get install git git-gui gitk git-doc
 
 1. Test the installation with the command
 
-	git --version
+		git --version
 
 1. you should see something like
 
-git version 1.7.10
+		git version 1.7.10
 
 1. Tell Git who you are (this is very important information and it recorded in every change in you make or commit)
 
-	git config --global user.name "My Name"
+		git config --global user.name "My Name"
 
-	git config --global user.email "myname@mycollege.ed.uk"
+		git config --global user.email "myname@mycollege.ed.uk"
 
 
 You must of course substitute your own name and email address in the correct places.
 Git records that information in a user configuration file called `.gitconfig` in your home directory
 
-Linux and Mac OS X users should also run the command
+In case you exchange files with developers working on a Microsoft Windows, which is highly likely) you should also run the command
 
-	git config --global core.autocrlf input
+		git config --global core.autocrlf input
 
-(MS Windows users should issue the command `git config --global core.autocrlf true`).
-See <http://help.github.com/line-endings/? for further details.
+See <https://help.github.com/articles/dealing-with-line-endings#platform-all> for further details.
 
 ### Starting a new project by creating a repo
 
 The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory
 
-	cd snakes
-	git init
-	Initialized empty Git repository in /home/pi/snakes/.git/
+		cd snakes
+		git init
+		Initialized empty Git repository in /home/pi/snakes/.git/
 
 Notice that the VC tool has created a hidden directory called `.git`.
 In Linux all file and directory (folder) names that start with a "`.`" are normally hidden, but you can see them with the command `ls -A`.
 
 Next we issue a status command.
 
-	git status
+		git status
 
 In Git all commands are typed after the word git (e.g. `git init` or `git status`).
 The output from the status command is
 
-	# On branch master
-	# 
-	# Initial commit
+		# On branch master
+		# 
+		# Initial commit
 
-	# Untracked files:
-	#   (use "git add <file>..." to include in what will be committed)
+		# Untracked files:
+		#   (use "git add <file>..." to include in what will be committed)
 
-	#	game/
-	#	helloworld.py
-	#	if.py
-	#	maths.py
-	#	variables.py
-	#	while.py
-	nothing added to commit but untracked files present (use "git add" to track)
+		#	game/
+		#	helloworld.py
+		#	if.py
+		#	maths.py
+		#	variables.py
+		#	while.py
+		nothing added to commit but untracked files present (use "git add" to track)
 
 We can ignore most of the detail for now. What important is that Git:
 
@@ -224,7 +222,7 @@ added to the index. As well as adding files to the index, files can be moved or 
 commit are complete a commit command is issued. The following examples are simple and for the time being you
 should just expect that before a commit is done changes are added to the index as the following example shows.
 
-	git add .
+		git add .
 
 This command does not product any output by default so don't be concerned if you get no messages. If you get a message
 similar to `warning: CRLF will be replaced by LF ...` then this is normal as well (some versions of
@@ -232,58 +230,59 @@ the Snakes project are provided in Windows format text files).
 
 if we run the `git status` command now we get different output
 
-	# On branch master
-	#
-	# Initial commit
-	#
-	# Changes to be committed:
-	#   (use "git rm --cached <file>..." to unstage)
-	#
-	#	new file:   game/game0.py
-	#	new file:   game/game1.py
-	#	new file:   game/game2.py
-	#	new file:   game/game3.py
-	#	new file:   game/game4.py
-	#	new file:   game/snake.py
-	#	new file:   helloworld.py
-	#	new file:   if.py
-	#	new file:   maths.py
-	#	new file:   variables.py
-	#	new file:   while.py
-	#
+		# On branch master
+		#
+		# Initial commit
+		#
+		# Changes to be committed:
+		#   (use "git rm --cached <file>..." to unstage)
+		#
+		#	new file:   game/game0.py
+		#	new file:   game/game1.py
+		#	new file:   game/game2.py
+		#	new file:   game/game3.py
+		#	new file:   game/game4.py
+		#	new file:   game/snake.py
+		#	new file:   helloworld.py
+		#	new file:   if.py
+		#	new file:   maths.py
+		#	new file:   variables.py
+		#	new file:   while.py
+		#
 
 This time each file that will be committed is listed, not just the directory, and the status has changed
 from `untracked` to `new file`.
 
 Now that the file contents have been added to the index we can commit these changes as our first commit
 
-git commit -m "Initial Commit"
+		git commit -m "Initial Commit"
 
 Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
 did
 
-master (root-commit) cff14c5] Initial Commit
- 11 files changed, 693 insertions(+)
- create mode 100755 game/game0.py
-.......___and so on___
+		master (root-commit) cff14c5] Initial Commit
+		 11 files changed, 693 insertions(+)
+		 create mode 100755 game/game0.py
+		.......___and so on___
 
 
 Some interesting commands we can now run
 
-git status
+		git status
 
-# On branch master
-nothing to commit (working directory clean)
+		# On branch master
+		nothing to commit (working directory clean)
 
 
-Another command worth running is `git log`, whch is currently very brief as we have only have one commit. Mine 
+Another command worth running is `git log`, which is currently very brief as we have only have one commit. Mine 
 looks like this
 
-commit 9b941110ffadf261fff069c0aa9ca6042e10422b
-Author: Alec Clews <alecclews@gmail.com>
-Date:   Mon May 14 20:47:43 2012 +1000
+		commit commit 1e0dafdae91097af978a2bb08b7eafdf43678b52
+		Author: Pi Student <acdisp61-pi@yahoo.com>
+		Date:   Mon Jun 4 21:46:17 2012 +1000
 
-    Initial Commit
+
+		    Initial Commit
 
 
 The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.
@@ -308,26 +307,29 @@ I want to change to "R". The line in I need to change is in the file snake.py (l
 
 Let's create a branch to work on.
 
-git branch make_rocks_R
+		git branch make_rocks_R
 
 No message means the command was successful (note that spaces are not allowed in the branch name)
 
 You can get a lit of all the branches with the `git branch` command
 
-  make_rocks_R
-* master
+		  make_rocks_R
+		* master
 
 The asterisk shows the current branch.
 
 To make the `make_rocks_R` the current branch use the checkout command
 
-git checkout make_rocks_R
-Switched to branch 'make_rocks_R'
+		git checkout make_rocks_R
+		Switched to branch 'make_rocks_R'
 
 Now `git branch` displays
 
-* make_rocks_R
-  master
+		* make_rocks_R
+		  master
+
+In technical terms what has happened is that Git has __checked out__ the branch make_rocks_R into our __working directory__.
+The working directory contains that set of files, from specific branch, that we are currently working on.
 
 
 At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
@@ -344,22 +346,22 @@ The rocks should now look like "R" instead of "Y".
 So let's see what has changed. Git can provide a nice listing. The simplest way is by using the command `git diff`,
 try that know and you should see a report similar to this
 
-diff --git a/game/snake.py b/game/snake.py
-index cef8d07..7e65efe 100755
---- a/game/snake.py
-+++ b/game/snake.py
-@@ -47,9 +47,9 @@ def add_block(scr, width, height):
-     empty = False
+		diff --git a/game/snake.py b/game/snake.py
+		index cef8d07..7e65efe 100755
+		--- a/game/snake.py
+		+++ b/game/snake.py
+		@@ -47,9 +47,9 @@ def add_block(scr, width, height):
+		     empty = False
 
-if empty:
--        # if it is, replace it with a "Y" and return
-+        # if it is, replace it with a "R" and return
+		if empty:
+		-        # if it is, replace it with a "Y" and return
+		+        # if it is, replace it with a "R" and return
 
--        scr.addch(y, x, ord("Y"), curses.color_pair(2))
-+        scr.addch(y, x, ord("R"), curses.color_pair(2))
- return
+		-        scr.addch(y, x, ord("Y"), curses.color_pair(2))
+		+        scr.addch(y, x, ord("R"), curses.color_pair(2))
+		 return
 
-def snake(scr):
+		def snake(scr):
 
 
 This report can be a little confusing the first time you see it.
@@ -371,11 +373,71 @@ This type of information are often referred to as a **diff report** or **diff ou
 You can get a more user friendly display of these differences by using a graphical compare tool.
 Refer to the appendixes for information on how to install and use the Kdiff3 graphical tool.
 
-
-
-
 +  Committing the change
+
+Now that we have a change, it's tested and we have verified it using the diff tool it's time to add the change to our
+version control history.
+
+This is two stage process, in a similar way to our first commit.
+	+ Add the changes to the index
+	+ Commit the change to the repo, along with a useful comment
+
+The first part is simple as only one file has changed.
+		git add game/snake/py
+
+You should then verify that the add was successful by running a `git status` command.
+
+This time when we commit we want to add a more complete report (__commit message__) and so first let's make sure
+that our editor is set up in Git. As an example we'll set up `leafpad` as the editor.
+
+		git config --global core.editor "/usr/bin/leafpad"
+
+Now let's make the commit. This time the command is a little simpler `git commit` but something a little more spectacular
+will happen. You editor will pop into life in front of you with information ready for your to write a commit message.
+
+
+You now have two choices:
+
+1.Exit the editor without saving any changes to the commit message
+: The commit is aborted and no changes occur in the repo (but the index is still primed with the change)
+
+2. Enter some text, save it and exit the editor
+: The commit is completed and all changes are recorded in the repo.
+
+	A word about commit messages: The commit messages consists of two parts. Line 1 is the header and should be followed
+	by a blank line. The header is displayed in short log messages. After the blank line comes the message body which contains
+	the details. A detailed set of suggestions can be read at <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
+
+An example of the commit message that might be given for the change we have just made
+
+	    Changed Rocks Y -> R
+    
+	    1) Changed all references to rocks from the char "Y" to "R"
+	    a) A comment
+	    b) A single line of code
+	    2) Tested
+
 +  Showing the history
+
+Now the `git log` shows a sightly more detailed history
+
+		commit 9cedfc266caf9e2aceb82bcccefd7dede98f1410
+		Author: Pi Student <acdisp61-pi@yahoo.com>
+		Date:   Mon Jun 4 22:03:33 2012 +1000
+
+		    Changed Rocks Y -> R
+    
+		    1) Changed all references to rocks from the char "Y" to "R"
+		    a) A comment
+		    b) A single line of code
+		    2) Tested
+
+		commit 1e0dafdae91097af978a2bb08b7eafdf43678b52
+		Author: Pi Student <acdisp61-pi@yahoo.com>
+		Date:   Mon Jun 4 21:46:17 2012 +1000
+
+		    Initial Commit
+
 +  Branches
 
 ## Working with others
