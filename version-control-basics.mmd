@@ -246,7 +246,7 @@ should just expect that before a commit is done changes are added to the index a
 
 		git add .
 
-This command does not product any output by default so don't be concerned if you get no messages. If you get a message
+This command does not produce any output by default so don't be concerned if you get no messages. If you get a message
 similar to `warning: CRLF will be replaced by LF ...` then this is normal as well (some versions of
 the Snakes project are provided in Windows format text files).
 
@@ -322,16 +322,17 @@ about master branch, it can be treated in exactly the same way as any branches y
 If you look at the output from the status command above you can see that we are currently using the master branch
 in our working area.
 
-What Change do I want to make? When I play the version of snakes I have the rocks are represented by "Y" which
-I want to change to "R". The line in I need to change is in the file snake.py (lines 50 and 52 in my version).
-
+What Change do I want to make? When I play the games of snakes the rocks are represented by "Y" which
+I want to change to "R". The line in I need to change is in the file `game/snake.py` (lines 50 and 52 in my version).
 
 
 Let's create a branch to work on.
 
 		git branch make_rocks_R
 
-No message means the command was successful (note that spaces are not allowed in the branch name)
+No message means the command was successful (note that spaces are not allowed in the branch name).
+Creating a branch means that I have a working area in my project (you can think of as a sandbox for a mini project)
+that stops my change from breaking (or impacting) any other work that is going on in the snakes project.
 
 You can get a lit of all the branches with the `git branch` command
 
@@ -352,6 +353,7 @@ Now `git branch` displays
 
 In technical terms what has happened is that Git has __checked out__ the branch make_rocks_R into our __working directory__.
 The working directory contains that set of files, from specific branch, that we are currently working on.
+Any changes I now make are isolated in the branch and don't impact anything else.
 
 
 At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
