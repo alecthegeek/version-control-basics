@@ -218,18 +218,21 @@ but we are only going to concentrate on the ten or so commands you need to be us
 <p>There are many excellent tutorials for Git on the Internet. See the External References section below.</p>
 
 <p>These examples assume that you are using Debian Linux on a Raspberry Pi and
-have downloaded the Python Snakes project from the <a href="http://www.raspberrypi.org/game.tar.gz">Raspberry Pi website</a> into a directory called <code>snakes</code>.</p>
+have downloaded the Python Snakes project from the <a href="http://www.raspberrypi.org/game.tar.gz">Raspberry Pi website</a>
+into a directory called <code>snakes</code>.</p>
 
-<p>Assuming you have downloaded a file called <code>game.tar.gz</code> into your home directory run the following commands
-mkdir snakes
-cd snakes
-tar -xzf ../game.tar.gz</p>
+<p>You can do that, assuming you have downloaded a file called <code>game.tar.gz</code> into your home directory, by running the following commands
+ mkdir snakes
+ cd snakes
+ tar -xzf ../game.tar.gz</p>
 
 <p>All the commands are issued from a terminal.
 You can start the terminal in the LXDE GUI from the program menu by selecting “Accessories” and then “LXTerminal”.
 Alternativly you can just not run the <code>startx</code> command when you log in.</p>
 
 <p>Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal session.</p>
+
+<p>There is a tutorial on how to us the Linux shell (the program you are using a termianl at http://linuxcommand.org/learning_the_shell.php</p>
 
 <h3 id="setupup">Setup up<a href="#ToC-setupup"> ↩</a></h3>
 
@@ -264,40 +267,44 @@ Git records that information in a user configuration file called <code>.gitconfi
 
 <p>See <a href="https://help.github.com/articles/dealing-with-line-endings#platform-all">https://help.github.com/articles/dealing-with-line-endings#platform-all</a> for further details.</p>
 
+<p>More information on setting up Git at http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup.</p>
+
 <h3 id="startinganewprojectbycreatingarepo">Starting a new project by creating a repo<a href="#ToC-startinganewprojectbycreatingarepo"> ↩</a></h3>
 
 <p>The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory</p>
 
 <pre><code>    cd snakes
-    git init
-    Initialized empty Git repository in /home/pi/snakes/.git/
+    ~/snakes $git init
+    Initialized empty Git repository in /Users/alec/snakes/.git/
 </code></pre>
 
 <p>Notice that the VC tool has created a hidden directory called <code>.git</code>.
 In Linux all file and directory (folder) names that start with a “<code>.</code>” are normally hidden, but you can see them with the command <code>ls -A</code>.</p>
 
-<p>Next we issue a status command.</p>
-
-<pre><code>    git status
-</code></pre>
-
-<p>In Git all commands are typed after the word git (e.g. <code>git init</code> or <code>git status</code>).
+<p>Next we issue a status command. Notice that in Git all commands are typed after the word git (e.g. <code>git init</code> or <code>git status</code>).
 The output from the status command is</p>
 
-<pre><code>    # On branch master
-    # 
+<pre><code>    ~/snakes $git status
+    # On branch master
+    #
     # Initial commit
-
-    # Untracked files:
-    #   (use "git add &lt;file&gt;..." to include in what will be committed)
-
-    #   game/
-    #   helloworld.py
-    #   if.py
-    #   maths.py
-    #   variables.py
-    #   while.py
-    nothing added to commit but untracked files present (use "git add" to track)
+    #
+    # Changes to be committed:
+    #   (use "git rm --cached &lt;file&gt;..." to unstage)
+    #
+    #   new file:   1
+    #   new file:   game/game0.py
+    #   new file:   game/game1.py
+    #   new file:   game/game2.py
+    #   new file:   game/game3.py
+    #   new file:   game/game4.py
+    #   new file:   game/snake.py
+    #   new file:   helloworld.py
+    #   new file:   if.py
+    #   new file:   maths.py
+    #   new file:   variables.py
+    #   new file:   while.py
+    #
 </code></pre>
 
 <p>We can ignore most of the detail for now. What important is that Git:</p>
@@ -317,70 +324,67 @@ added to the index. As well as adding files to the index, files can be moved or 
 commit are complete a commit command is issued. The following examples are simple and for the time being you
 should just expect that before a commit is done changes are added to the index as the following example shows.</p>
 
-<pre><code>    git add .
+<pre><code>    ~/snakes $git add .
 </code></pre>
 
-<p>This command does not product any output by default so don’t be concerned if you get no messages. If you get a message
+<p>This command does not produce any output by default so don’t be concerned if you get no messages. If you get a message
 similar to <code>warning: CRLF will be replaced by LF ...</code> then this is normal as well (some versions of
 the Snakes project are provided in Windows format text files).</p>
 
 <p>if we run the <code>git status</code> command now we get different output</p>
 
-<pre><code>    # On branch master
+<pre><code>    ~/snakes $git status
+    # On branch master
     #
     # Initial commit
     #
-    # Changes to be committed:
-    #   (use "git rm --cached &lt;file&gt;..." to unstage)
+    # Untracked files:
+    #   (use "git add &lt;file&gt;..." to include in what will be committed)
     #
-    #   new file:   game/game0.py
-    #   new file:   game/game1.py
-    #   new file:   game/game2.py
-    #   new file:   game/game3.py
-    #   new file:   game/game4.py
-    #   new file:   game/snake.py
-    #   new file:   helloworld.py
-    #   new file:   if.py
-    #   new file:   maths.py
-    #   new file:   variables.py
-    #   new file:   while.py
-    #
+    #   1
+    #   game/
+    #   helloworld.py
+    #   if.py
+    #   maths.py
+    #   variables.py
+    #   while.py
+    nothing added to commit but untracked files present (use "git add" to track)
 </code></pre>
 
 <p>This time each file that will be committed is listed, not just the directory, and the status has changed
 from <code>untracked</code> to <code>new file</code>.</p>
 
-<p>Now that the file contents have been added to the index we can commit these changes as our first commit</p>
-
-<pre><code>    git commit -m "Initial Commit"
-</code></pre>
-
-<p>Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
+<p>Now that the file contents have been added to the index we can commit these changes as our first commit with
+<code>git commit</code> command. Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
 did</p>
 
-<pre><code>    master (root-commit) cff14c5] Initial Commit
-     11 files changed, 693 insertions(+)
-     create mode 100755 game/game0.py
-    .......___and so on___
+<pre><code>    ~/snakes $git commit -m Initial Commit
 </code></pre>
 
-<p>Some interesting commands we can now run</p>
+<p>Some interesting commands we can now run. For instance the output of <code>git status</code> is now</p>
 
-<pre><code>    git status
-
+<pre><code>    ~/snakes $git status
     # On branch master
-    nothing to commit (working directory clean)
+    #
+    # Initial commit
+    #
+    # Untracked files:
+    #   (use "git add &lt;file&gt;..." to include in what will be committed)
+    #
+    #   1
+    #   game/
+    #   helloworld.py
+    #   if.py
+    #   maths.py
+    #   variables.py
+    #   while.py
+    nothing added to commit but untracked files present (use "git add" to track)
 </code></pre>
 
 <p>Another command worth running is <code>git log</code>, which is currently very brief as we have only have one commit. Mine
 looks like this</p>
 
-<pre><code>    commit commit 1e0dafdae91097af978a2bb08b7eafdf43678b52
-    Author: Pi Student &lt;acdisp61-pi@yahoo.com&gt;
-    Date:   Mon Jun 4 21:46:17 2012 +1000
-
-
-        Initial Commit
+<pre><code>    ~/snakes $git log
 </code></pre>
 
 <p>The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.</p>
@@ -397,38 +401,38 @@ about master branch, it can be treated in exactly the same way as any branches y
 <p>If you look at the output from the status command above you can see that we are currently using the master branch
 in our working area.</p>
 
-<p>What Change do I want to make? When I play the version of snakes I have the rocks are represented by “Y” which
-I want to change to “R”. The line in I need to change is in the file snake.py (lines 50 and 52 in my version).</p>
+<p>What Change do I want to make? When I play the games of snakes the rocks are represented by “Y” which
+I want to change to “R”. The line in I need to change is in the file <code>game/snake.py</code> (lines 50 and 52 in my version).</p>
 
 <p>Let’s create a branch to work on.</p>
 
-<pre><code>    git branch make_rocks_R
+<pre><code>    ~/snakes $git branch make_rocks_R
 </code></pre>
 
-<p>No message means the command was successful (note that spaces are not allowed in the branch name)</p>
+<p>No message means the command was successful (note that spaces are not allowed in the branch name).
+Creating a branch means that I have a working area in my project (you can think of as a sandbox for a mini project)
+that stops my change from breaking (or impacting) any other work that is going on in the snakes project.</p>
 
 <p>You can get a lit of all the branches with the <code>git branch</code> command</p>
 
-<pre><code>      make_rocks_R
-    * master
+<pre><code>    ~/snakes $git branch
 </code></pre>
 
 <p>The asterisk shows the current branch.</p>
 
 <p>To make the <code>make_rocks_R</code> the current branch use the checkout command</p>
 
-<pre><code>    git checkout make_rocks_R
-    Switched to branch 'make_rocks_R'
+<pre><code>    ~/snakes $git checkout make_rocks_R
 </code></pre>
 
 <p>Now <code>git branch</code> displays</p>
 
-<pre><code>    * make_rocks_R
-      master
+<pre><code>    ~/snakes $git branch
 </code></pre>
 
 <p>In technical terms what has happened is that Git has <strong>checked out</strong> the branch make_rocks_R into our <strong>working directory</strong>.
-The working directory contains that set of files, from specific branch, that we are currently working on.</p>
+The working directory contains that set of files, from specific branch, that we are currently working on.
+Any changes I now make are isolated in the branch and don’t impact anything else.</p>
 
 <p>At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
 Use the command <code>python game/snake.py</code></p>
@@ -448,22 +452,7 @@ The rocks should now look like “R” instead of “Y”.</p>
 <p>So let’s see what has changed. Git can provide a nice listing. The simplest way is by using the command <code>git diff</code>,
 try that know and you should see a report similar to this</p>
 
-<pre><code>    diff --git a/game/snake.py b/game/snake.py
-    index cef8d07..7e65efe 100755
-    --- a/game/snake.py
-    +++ b/game/snake.py
-    @@ -47,9 +47,9 @@ def add_block(scr, width, height):
-         empty = False
-
-    if empty:
-    -        # if it is, replace it with a "Y" and return
-    +        # if it is, replace it with a "R" and return
-
-    -        scr.addch(y, x, ord("Y"), curses.color_pair(2))
-    +        scr.addch(y, x, ord("R"), curses.color_pair(2))
-     return
-
-    def snake(scr):
+<pre><code>    ~/snakes $git diff
 </code></pre>
 
 <p>This report can be a little confusing the first time you see it.
@@ -549,9 +538,121 @@ the details. A detailed set of suggestions can be read at <a href="http://tbagge
         Initial Commit
 </code></pre>
 
+<p>You might care to look at http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository</p>
+
 <ul>
 <li>Branches</li>
 </ul>
+
+<p>We now have two branches <code>master</code> and <code>make_rocks_R</code>. Let’s make another change on the master branch and then look at the history.</p>
+
+<ol>
+<li>Make sure that we are using the <code>master</code> branch
+ gi checkout master
+ Switched to branch ‘master’</li>
+</ol>
+
+<p>Now let’s edit the file <code>snake.py</code> again. This time I’ve noticed that when setting up colours (with the method call <code>curses.color_pair()</code>)
+the original programmer used a literal constang. It is good practice to use a more meaningful symbolic names
+(like <code>curses.COLOR_RED</code>) instad of literanl value (i.e. ‘1’).</p>
+
+<p>So I’m going to make two changes. The text <code>curses.color_pair(2)</code> will be changed to <code>curses.color_pair(curses.COLOR_GREEN)</code> and
+the text <code>curses.color_pair(1)</code> will be changed to <code>curses.color_pair(curses.COLOR_RED)</code></p>
+
+<p>(documnentation on the curses libraray is at http://docs.python.org/howto/curses.html)</p>
+
+<p>If I run the command <code>git diff</code> I can see the following report</p>
+
+<pre><code>    @@ -49,7 +49,7 @@ def add_block(scr, width, height):
+           if empty:
+             # if it is, replace it with a "Y" and return
+
+    -        scr.addch(y, x, ord("Y"), curses.color_pair(2))
+    +        scr.addch(y, x, ord("Y"), curses.color_pair(curses.COLOR_GREEN))
+         return
+
+     def snake(scr):
+    @@ -145,7 +145,7 @@ def snake(scr):
+
+           # replace the character with a "O"
+
+    -      scr.addch(y, x, ord("O"), curses.color_pair(1))
+    +      scr.addch(y, x, ord("O"), curses.color_pair(curses.COLOR_RED))
+
+           # update the screen
+</code></pre>
+
+<p>Run the prorgam to make sure it still works correctly</p>
+
+<p>Now we can add and commit our changes.</p>
+
+<pre><code>    git add games/snakes.py
+    git ci -m "Use curses lib symbolic names in color_pair() method calls"
+</code></pre>
+
+<p>Now if we run the <code>git log</code> command we only see two commits</p>
+
+<pre><code>    commit d88589183d44d7ed013456ccf7d31a6b47109e59
+    Author: Alec Clews &lt;alecclews@gmail.com&gt;
+    Date:   Sun Jun 17 14:58:13 2012 +1000
+
+                Use curses lib symbolic names in color_pair() method calls
+
+    commit 9b941110ffadf261fff069c0aa9ca6042e10422b
+    Author: Alec Clews &lt;alecclews@gmail.com&gt;
+    Date:   Mon May 14 20:47:43 2012 +1000
+
+        Initial Commit
+</code></pre>
+
+<p>What happended to our other commit where we changed the colour of our rocks?
+The answer is tha it’s on another branch – it’s not part of the history of our current workspace.</p>
+
+<p>Add the option <code>--all</code> to see all the commits across all the branches.</p>
+
+<pre><code>    git log --all
+
+    commit d88589183d44d7ed013456ccf7d31a6b47109e59
+    Author: Alec Clews &lt;alecclews@gmail.com&gt;
+    Date:   Sun Jun 17 14:58:13 2012 +1000
+
+        Use curses lib symbolic names in color_pair() method calls
+
+    commit 3d1c82c7756bc1cbfdfcbe79468d1e11e8bab374
+    Author: Alec Clews &lt;alecclews@gmail.com&gt;
+    Date:   Sun Jun 17 14:47:59 2012 +1000
+
+         Changed Rocks Y -&gt; R
+
+                        1) Changed all references to rocks from the char "Y" to "R"
+                        a) A comment
+                        b) A single line of code
+                        2) Tested
+
+    commit 9b941110ffadf261fff069c0aa9ca6042e10422b
+    Author: Alec Clews &lt;alecclews@gmail.com&gt;
+    Date:   Mon May 14 20:47:43 2012 +1000
+
+        Initial Commit
+</code></pre>
+
+<p>As you can see git commands take extra paramters to change the way the work. A useful way to see the above history using quite a complex log</p>
+
+<pre><code>    git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --date=relative --all
+</code></pre>
+
+<p>It’s quite hard work to type this in, luckly Git has an alias feature to make life a lot simpler. Use the following command</p>
+
+<pre><code>    git config --global alias.lg log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --date=relative --all
+</code></pre>
+
+<p>Now all you need to do it stype <code>git lg</code> as <code>lg</code> has become an alias for the much longer version if <code>log</code> I showed above.
+More information about aliases at https://git.wiki.kernel.org/index.php/Aliases</p>
+
+<p>If you have installed the <code>gitk</code> program (as suggesed above) you can also this information in a graphical program by running <code>gitk --all&amp;</code></p>
+
+<p>All the various reports that git log and gitk refer to our branches. In addition there is a HEAD.
+This is a reference meaning <code>the current stuff checkout into our working copy</code>. The HEAD allways points to the commit that we last checked out.</p>
 
 <h2 id="workingwithothers">Working with others<a href="#ToC-workingwithothers"> ↩</a></h2>
 
@@ -613,8 +714,12 @@ GitHub has easy to follow instructions at <a href="http://help.github.com/">http
 
 <h2 id="appendixd:usingthegitgraphicaltoolsgitguiandgitk">Appendix D: Using the Git Graphical Tools <code>git gui</code> and <code>gitk</code><a href="#ToC-appendixd:usingthegitgraphicaltoolsgitguiandgitk"> ↩</a></h2>
 
-<pre><code># TODO Add
-</code></pre>
+<p>Al of the examples above use the command line interface. However Git does come with two GUI interfaces – <code>git gui</code> and <code>gitk</code>.
+gitk is useful looking at the history of changes in a repository and git gui can be used to peform operations such as <code>add</code>, <code>commit</code>, <code>checkout</code> etc.</p>
+
+<p>Let’s replicate our previous examples using the standard git GUI tools. Create a directory called <code>~/snakes2</code> and unpack the games file into it.</p>
+
+<p>now </p>
 
 <h2 id="appendixe:installingandusingkdiff3">Appendix E: Installing and Using Kdiff3<a href="#ToC-appendixe:installingandusingkdiff3"> ↩</a></h2>
 
