@@ -1,9 +1,10 @@
-#! /usr/bin/env bash
+#! /usr/bin/env bash -xv
 
 
 function formatCommand {
     echo '        ~/snakes $'"$@"
     "$@" |sed -e 's/^/        /' &1>1
+    sleep 3
 }
 
 
