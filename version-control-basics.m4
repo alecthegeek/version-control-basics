@@ -1,63 +1,36 @@
-Title: Version Control Basics
-Author: Alec Clews <alecclews@gmail.com>
+---
+title:
+- type: main
+  text: 'Version Control Basics using Git'
+- type: subtitle
+  text: 'For Raspberry Pi Users'
+author:
+  name: Alec Clews
+rights:  (c) 2014 Alec Clews, CC BY-NC
+...
 
 # Version Control Basics
 
-XHTML XSLT: xhtml-toc-h2.xslt
 
 m4_changequote([[, ]])
-## Overview and Front Matter
-
-This course is part of the material to support students and mentors using the Raspberry Pi educational computer.
-The examples in this course have been tested on Debian Linux.
-
-_* ####STATUS: EARLY DRAFT!!*_
-
-This document is still under development. Please help if you can at <https://github.com/alecthegeek/version-control-basics>.
-
-###Justification
-
-1. Version Control (VC) is an important practice for developers and a prerequisite for developing quality software
-1. Distributed Version Control Systems (DVCS) provide a useful platform for students to work together on educational projects
-
-###Outcomes
-
-At the completion of this module students will be:
-
-1. Able to describe the benefits of using version control
-1. Describe problems that can occur when groups of people work together on computer files during a project
-1. Understand basic VC concepts and terminology -- commit, commit history, change, branch, merge, commit message
-1. Capable, with reference to notes and documentation, of using Git for version control of new and existing projects, including working in a project group
-	1. Create a local repository (repo)
-	1. Commit a change or modification
-	1. Create a branch
-	1. Show the history
-	1. Show change differences using diff
-	1. Perform a merge
-	1. Push and fetch changes to and from a remote repo (For simplicity the git pull command is not taught)
-
-### Suggested Approach
-
-This topic should be introduced early on in the programming course and the practices it introduces applied continually as the rest of the course progresses.
-Before starting this module students should have the following pre-requisite skills:
-
-1. Using a text editor (open a file, find a line, search for text, make a simple change, save a file)
-1. Understand files and directories
-1. Some exposure to using the command line interface would be useful
 
 ##Introduction
 ###What is Version Control and how do Version Control Systems work
-Version Control (VC) is a common practice used to track all the changes that occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.
+
+Version Control (VC) is a common practice used to track all the changes that
+occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.
 
 Think about how you work on a computer.
-You create content, it might be a computer program you are writing, your resume for a job application, a podcast or an essay.
+You create content, it might be a computer program you are modifying, your resume for a job application, a podcast or an essay.
 The process we all follow is often similar. You create a basic draft version and you refine it over time by making lots of different changes.
 You might spell check your text, add in new content, re-structure the whole work and so on.
 After you finish your project (and maybe release the content to a wider audience) the material you created can be used as the basis for a new project.
-A good example, that does not involve computer programing, is managing your personal career resume.
-Once you create a version you are happy with (often called the first version) you can use it to apply for a job.
+A good example is #TODO
+Once you create a version you are happy with (often called the first version) 
 But that is not the end of the story.
+
 As you get more experience your resume should be updated at least once a year, even worse some jobs will need you to restructure your document to emphasise different skills
+
 (we call this creating a branch, an offshot on which we do work that is not currently part of the main trunk -- more on that later).
 How do you keep track of these changes? Remove mistakes, bring old material forward into new versions, merge changes from one branch to another.
 You could think of each job application as a mini project (as well as a resume you will need to record details of phone calls, referees, research notes etc.) and 
