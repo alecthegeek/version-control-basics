@@ -3,5 +3,10 @@
 *.opml
 *.tex
 *.pdf
-./includes/*
-version-control-basics.mmd
+*.mmd
+*.pmd
+*.log
+*.dvi
+*.ist
+*.gl?
+/includes/*
