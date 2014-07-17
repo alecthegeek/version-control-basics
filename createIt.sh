@@ -7,11 +7,13 @@ function formatCommand {
     sleep 3
 }
 
+# TODO Add check if DEV_DIR, BASE_DEMO, USER_NAME and USER_EMAIL are set
+
 
 [[ -d $DEV_DIR/includes ]] || mkdir $DEV_DIR/includes
 
 cd /tmp
-[[ -f game.tar.gz ]] || wget https://www.dropbox.com/sh/2zbaey5o6hqkfl5/AADnyNZMzh7clNb6-vdWBfbna/game.tar.gz
+[[ -f game.tar.gz ]] || wget https://github.com/alecthegeek/version-control-basics/raw/master/game.tar.gz
 [[ -d $BASE_DEMO ]] && rm -rf $BASE_DEMO
 mkdir $BASE_DEMO
 cd $BASE_DEMO
