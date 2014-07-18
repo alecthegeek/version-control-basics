@@ -2,34 +2,32 @@
 
 .SUFFIXES: .html .pdf
 
-.PHONY: clean all includes
+.PHONY: clean all
 
-export USER_EMAIL:=acdsip61-pi@yahoo.com
-export USER_NAME:="Pi Student"
-export BASE_DEMO:=$(HOME)/snakes
-export BRANCH1:=master
-export BRANCH2:=make_rocks_R
+.SECONDARY: version-control-basics.pmd
 
-export DEV_DIR:=$(CURDIR)
+USER_EMAIL:=acdsip61-pi@yahoo.com
+USER_NAME:="Pi Student"
+BASE_DEMO:=$(HOME)/snakes
+BRANCH1:=master
+BRANCH2:=make_rocks_R
 
-# mmdxsltbase=$(HOME)/Library/Application Support/MultiMarkdown/bin
-
-
-all: version-control-basics.pdf version-control-basics.html
+all: version-control-basics.pdf
 
 clean:
 	-rm *.fodt *.html *.opml *.tex *.pdf *.mmd *.pmd *.log *.dvi *.ist *.gl?
-	-rm -rf includes
+	-rm -rf $(BASE_DEMO)
 
-%.pmd: %.m4 includes
-	m4 -I./includes -P $< > $@
+%.pmd: %.m4 utils.m4 $(MAKEFILE)
+	-rm -rf $(BASE_DEMO)
+	mkdir $(BASE_DEMO)
+	tar -xzf game.tar.gz -C $(BASE_DEMO)
+	find $(BASE_DEMO) -type f -exec dos2unix {} \;
+	m4 -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -P $< > $@
 
 %.pdf: %.pmd
 	pandoc -s -S -t latex  $< -o $@
 
 %.html: %.pmd
-	pandoc -s -S -$< -o $@
-
-includes:
-	./createIt.sh
+	pandoc -s -S $< -o $@
 

@@ -1,21 +1,17 @@
 ---
-title:
-- type: main
-  text: 'Version Control Basics using Git'
-- type: subtitle
-  text: 'For Raspberry Pi Users'
-author:
-  name: Alec Clews
-rights:  (c) 2014 Alec Clews, CC BY-NC
+title: 'Version Control Basics using Git'
+author: 'Alec Clews'
 ...
 
 # Version Control Basics
 
-
 m4_changequote([[, ]])
+m4_include([[utils.m4]])
+m4_define([[ps1]], [[`~/snakes $ `]])
 
 ##Introduction
-###What is Version Control and how do Version Control Systems work
+
+###What is Version Control and how do Version Control Systems work?
 
 Version Control (VC) is a common practice used to track all the changes that
 occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.
@@ -106,15 +102,16 @@ There is only one central database with all the changes and team members only ha
 
 Open Source and Commercial Tools
 
-There are many commercial and open source tools available in the market. As well as the core VC operations tools will offer different combinations
+:	There are many commercial and open source tools available in the market. As well as the core VC operations tools will offer different combinations
 of features, support and integrations. In this module we will be using a VCS called Git, a popular open source tool that uses a distributed model
 with excellent support for parallel development.
 
-What the version control tools do?
+## Summary: What do version control tools do?
+
 * Provide comprehensive historical information about the work done on the project
 * Help prevent the lost of information (e.g. edits being overwritten)
 * Help the project team be more efficient by using parallel development
-(and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)
+  (and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)
 * Helping individual developers be more efficient with tools such as difference reports
 
 ##Example VCS operations using Git
@@ -131,40 +128,44 @@ but we are only going to concentrate on the ten or so commands you need to be us
 There are many excellent tutorials for Git on the Internet. See the External References section below.
 
 These examples assume that you are using Debian Linux on a Raspberry Pi and
-have downloaded the Python Snakes project from the [Raspberry Pi website](http://www.raspberrypi.org/game.tar.gz)
+have downloaded the Python Snakes project from the [project website](http://www.raspberrypi.org/game.tar.gz)
 into a directory called `snakes`.
 
-You can do that, assuming you have downloaded a file called `game.tar.gz` into your home directory, by running the following commands
-		mkdir snakes
-		cd snakes
-		tar -xzf ../game.tar.gz
-
-All the commands are issued from a terminal.
+You can do that by running the following commands in your terminal program.
 You can start the terminal in the LXDE GUI from the program menu by selecting "Accessories" and then "LXTerminal".
-Alternativly you can just not run the `startx` command when you log in.
+Alternativly you can just *not* run the `startx` command when you log in.
+```shell
+mkdir snakes
+wget https://github.com/alecthegeek/version-control-basics/raw/master/game.tar.gz
+cd snakes
+tar -xzf ../game.tar.gz
+```
 
-Initially this example assumes that the current directory is your home directory, which is the default when you start a terminal session.
 
-There is a tutorial on how to us the Linux shell (the program you are using a termianl at http://linuxcommand.org/learning_the_shell.php
+Initially this example assumes that the current directory is your `snakes` directory.
 
-###  Setup up
+There is a tutorial on how to us the Linux shell,
+the program you are using insitde the terminal,
+at <http://linuxcommand.org/learning_the_shell.php>.
+
+###  Setup
 1. Make sure you have the correct tools installed by typing the following commands:
 
 		sudo apt-get install git git-gui gitk git-doc
 
-1. Test the installation with the command
+2.  Test the installation with the command
 
 		git --version
 
-1. you should see something like
+    you should see something like
 
 		git version 1.7.10
 
-1. Tell Git who you are (this is very important information and it recorded in every change in you make or commit)
+3. Tell Git who you are (this is very important information and it recorded in every change in you make or commit)
 
 		git config --global user.name "My Name"
 
-		git config --global user.email "myname@mycollege.ed.uk"
+		git config --global user.email "myname@example.com"
 
 
 You must of course substitute your own name and email address in the correct places.
@@ -176,14 +177,14 @@ In case you exchange files with developers working on a Microsoft Windows, which
 
 See <https://help.github.com/articles/dealing-with-line-endings#platform-all> for further details.
 
-More information on setting up Git at http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup.
+More information on setting up Git at <http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>.
 
 ### Starting a new project by creating a repo
 
 The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory
 
-		cd snakes
-m4_include([[init]])
+`~ $ `*cd snakes*\
+m4_run([[git init]])
 
 Notice that the VC tool has created a hidden directory called `.git`.
 In Linux all file and directory (folder) names that start with a "`.`" are normally hidden, but you can see them with the command `ls -A`.
@@ -191,7 +192,7 @@ In Linux all file and directory (folder) names that start with a "`.`" are norma
 Next we issue a status command. Notice that in Git all commands are typed after the word git (e.g. `git init` or `git status`).
 The output from the status command is
 
-m4_include([[status1]])
+m4_run([[git status]])
 
 We can ignore most of the detail for now. What important is that Git:
 
@@ -207,16 +208,17 @@ Git has a novel solution to this called the index. Before a file change can be c
 added to the index. As well as adding files to the index, files can be moved or deleted. Once all the parts of the
 commit are complete a commit command is issued. The following examples are simple and for the time being you
 should just expect that before a commit is done changes are added to the index as the following example shows.
+(Note the  trailing `.` to represent the current directory and its subdirectories)
 
-m4_include([[add1]])
+m4_run([[git add .]])
 
 This command does not produce any output by default so don't be concerned if you get no messages. If you get a message
 similar to `warning: CRLF will be replaced by LF ...` then this is normal as well (some versions of
-the Snakes project are provided in Windows format text files).
+the Snakes project are provided in Windows format text files, you can fix this with the dos2unix utility).
 
-if we run the `git status` command now we get different output
+If we run the `git status` command now we get different output
 
-m4_include([[status2]])
+m4_run([[git status]])
 
 This time each file that will be committed is listed, not just the directory, and the status has changed
 from `untracked` to `new file`.
@@ -225,16 +227,16 @@ Now that the file contents have been added to the index we can commit these chan
 `git commit` command. Git adds the files and related information to our repo and provides a rather verbose set of messages about what it
 did
 
-m4_include([[commit1]])
+m4_run([[git commit -m "Initial Commit"]])
 
 Some interesting commands we can now run. For instance the output of `git status` is now
 
-m4_include([[status3]])
+m4_run([[git status]])
 
 Another command worth running is `git log`, which is currently very brief as we have only have one commit. Mine 
 looks like this
 
-m4_include([[log1]])
+m4_run([[git log]])
 
 The meaning of the Author, Date and comment field should be obvious. The commit field will be explained later.
 
@@ -257,7 +259,7 @@ I want to change to "R". The line in I need to change is in the file `game/snake
 
 Let's create a branch to work on.
 
-m4_include([[addbranch1]])
+m4_run([[git branch ]] branch2)
 
 No message means the command was successful (note that spaces are not allowed in the branch name).
 Creating a branch means that I have a working area in my project (you can think of as a sandbox for a mini project)
@@ -265,27 +267,32 @@ that stops my change from breaking (or impacting) any other work that is going o
 
 You can get a lit of all the branches with the `git branch` command
 
-m4_include([[displaybranch1]])
+m4_run([[git branch]])
 
 The asterisk shows the current branch.
 
-To make the `make_rocks_R` the current branch use the checkout command
+To make the `branch2` the current branch use the checkout command
 
-m4_include([[checkout1b2]])
+m4_run([[git checkout ]]branch2)
 
 Now `git branch` displays
 
-m4_include([[displaybranch2]])
+m4_run([[git branch]])
 
-In technical terms what has happened is that Git has __checked out__ the branch make_rocks_R into our __working directory__.
-The working directory contains that set of files, from specific branch, that we are currently working on.
+In technical terms what has happened is that Git has _checked out_
+the branch `branch2` into our _working directory_.
+The working directory contains that set of files,
+from specific branch, that we are currently working on.
 Any changes I now make are isolated in the branch and don't impact anything else.
 
 
-At this point you make want to play snakes for a couple of minutes so that you will be able to see the difference later.
+At this point you make want to play snakes for a couple of minutes
+so that you will be able to see the difference later of course.
 Use the command `python game/snake.py`
 
 +  Changing the file
+
+m4_esyscmd([[sed -i "" -e 's/"Y"/"R"/g' ]]working_dir[[/game/snake.py]])
 
 Edit the file `game/snake.py` using your favourite text editor. In the version of snakes I had there are two changes to
 make; a comment on line 50; and the actual code on line 52. Save the changes and test the game by playing it again.
@@ -293,11 +300,11 @@ The rocks should now look like "R" instead of "Y".
 
 +  Showing the diff
 
-So let's see what has changed. Git can provide a nice listing. The simplest way is by using the command `git diff`,
+So let's see what has changed. Git can provide a nice listing.
+The simplest way is by using the command `git diff`,
 try that know and you should see a report similar to this
 
-m4_include([[displaydiff1]])
-
+m4_run([[git diff]])
 
 This report can be a little confusing the first time you see it.
 However if you look carefully you can see lines marked with `+` and `-`,
@@ -346,7 +353,7 @@ You now have two choices:
 An example of the commit message that might be given for the change we have just made
 
 	    Changed Rocks Y -> R
-    
+
 	    1) Changed all references to rocks from the char "Y" to "R"
 	    a) A comment
 	    b) A single line of code
@@ -481,10 +488,6 @@ If you have installed the `gitk` program (as suggesed above) you can also this i
 All the various reports that git log and gitk refer to our branches. In addition there is a HEAD.
 This is a reference meaning `the current stuff checkout into our working copy`. The HEAD allways points to the commit that we last checked out.
 
-
-
-
-
 ## Working with others
 
 *  Remote repos
@@ -548,9 +551,7 @@ gitk is useful looking at the history of changes in a repository and git gui can
 
 Let's replicate our previous examples using the standard git GUI tools. Create a directory called `~/snakes2` and unpack the games file into it.
 
-now 
-
-
+Now run the command `git gui`
 
 ## Appendix E: Installing and Using Kdiff3
 
@@ -558,4 +559,7 @@ First install the kdiff3 program
 
 	sudo apt-get install kdiff3-qt
 
-	# TODO Add
+Now, instead of using `git diff` to get a text report of the differences in your change
+you can run `git difftool`to scroll through a side by side list.
+`difftool` supports serveral different GUI style tools to present the differences,
+setting them up is left as an exercise.
