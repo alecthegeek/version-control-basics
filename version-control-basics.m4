@@ -3,39 +3,40 @@ title: 'Version Control Basics using Git'
 author: 'Alec Clews'
 ...
 
-# Version Control Basics
 
 m4_changequote([[, ]])
 m4_include([[utils.m4]])
 m4_define([[ps1]], [[`~/snakes $ `]])
 
-##Introduction
+#Introduction
 
-###What is Version Control and how do Version Control Systems work?
+##What is Version Control and how do Version Control Systems work?
 
 Version Control (VC) is a common practice used to track all the changes that
-occur to the files in a project over time. It needs a Version Control System (VCS) tool to work.
+occur to the files in a project over time.
+It needs a Version Control System (VCS) tool to work.
 
 Think about how you work on a computer.
-You create content, it might be a computer program you are modifying, your resume for a job application, a podcast or an essay.
-The process we all follow is often similar. You create a basic draft version and you refine it over time by making lots of different changes.
-You might spell check your text, add in new content, re-structure the whole work and so on.
-After you finish your project (and maybe release the content to a wider audience) the material you created can be used as the basis for a new project.
-A good example is #TODO
-Once you create a version you are happy with (often called the first version) 
-But that is not the end of the story.
-
-As you get more experience your resume should be updated at least once a year, even worse some jobs will need you to restructure your document to emphasise different skills
-
-(we call this creating a branch, an offshot on which we do work that is not currently part of the main trunk -- more on that later).
-How do you keep track of these changes? Remove mistakes, bring old material forward into new versions, merge changes from one branch to another.
-You could think of each job application as a mini project (as well as a resume you will need to record details of phone calls, referees, research notes etc.) and 
-each job application will use the work you completed in your previous projects. *So how does Version Control help keep track of your work on digital files?*
-We'll explain that in a minute.
-
-Now let's add another layer of complexity.
-Our project might be big enough that we are team working on the project together and we all make changes to the digital files (also called assets).
-That will introduce a lot of potential problems. We'll talk about those, and how a VCS can help in bit.
+You create "stuff", it might be a computer program you are modifying,
+resume for a job application,
+a podcast
+or an essay.
+The process we all follow is usually the same.
+You create a basic version and you improve it over time by making lots of different changes.
+You might test you code,
+spell check your text,
+add in new content,
+re-structure the whole thing
+and so on.
+After you finish your project
+(and maybe release the content to a wider audience)
+the material you created can be used as the basis for a new project.
+A good example is writing computer programs which usually consist of several different files that make up the project.
+Once you create a version you are happy with
+programs often have to be changed  many times to fix bugs or add new features.
+Programs are often worked on and modified by many different people,
+many of home want to add features specific to their needs.
+Things can get confusing very quickly!
 
 Because this module is written for students on the Raspberry Pi the examples we will use from now on will be based on software development projects,
 but remember that you can apply to the principles to any set of computer files.
@@ -59,13 +60,25 @@ is called __making a commit__.
 The hard work in making a commit is done by the VCS,
 all the developer does is issue the commit command and provide the commit message.
 The VCS software calculates which files have changed since the last commit and what has changed.
-It then stores these changes, plus the commit message, the date, time, name of the developer (committer),
-commit message and other information in the repository.
-
+It then stores these changes, plus the commit message, the date, time, name of the developer (committer)
+and other information in the repository.
 
 Version Control is also sometimes refereed to as [Revision Control](http://en.wikipedia.org/wiki/Revision_control )
 
-###Why is Version Control is so important
+Now let's add another layer of complexity.
+Our project might be big enough that we are team working on the project together and we all make changes to the digital files (also called assets).
+That will introduce a lot of potential problems. We'll talk about those, and how a VCS can help.
+
+VCS We call this creating a branch,
+an offshoot on which we do work that is not currently part of the main trunk -- more on that later.
+How do you keep track of these changes? Remove mistakes,
+bring old material forward into new versions, merge changes from one branch to another.
+You could think of each job application as a mini project (as well as a resume you will need to record details of phone calls, referees, research notes etc.) and 
+each job application will use the work you completed in your previous projects. *So how does Version Control help keep track of your work on digital files?*
+We'll explain that in a minute.
+
+
+##Why is Version Control is so important?
 
 Imagine a software project.
 It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.)
@@ -76,15 +89,15 @@ There are several problems that will happen:
 1. After the project has been running for some time it's very hard to understand how the project has evolved and what changes have been made.
 How can we locate a problem that might have been introduced some time ago.
 Just fixing the problem may not be enough, we probably also need to to understand the change that introduced it.
-1. If two people want to change the same file one will have to wait for the other to finish, this is very inefficient
+1. If two people want to change the same file one will have to wait for the other to finish, this is inefficient
 1. If two people people are making (long running) changes to the project it may take some time for the both sets of changes to be compatible with each other.
 If the same copy if the project is being updated with both sets of changes then the project may not work correctly or even compile
 
 There are three core things a VCS helps do:
 
-1. Answer the following questions: "What changes were made in the past?", "Why were they made?" and "Who made them?" (via commit history and commit comments)
+1. Answer the following questions: "What changes were made in the past?", "Why were they made?" and "Who made them?" (via commit history and commit messsage)
 1. Individual developers find this information useful as part of their daily workflow and
-it also helps organisations with their compliance and audit management
+it also helps organisations with their compliance and audit management if needed
 1. Undo a half complete or incorrect change made in error and "roll back" to a previous version
 1. Recreate a "snapshot" of the project as it was at some point in the past
 1. Allow two streams of changes to be made independently of each other and then integrated at a later date (parallel development).
@@ -92,21 +105,25 @@ This feature depends on the specific features of the VCS tool you are using
 
 You may find the following additional reading useful in introducing important ideas: <http://tom.preston-werner.com/2009/05/19/the-git-parable.html>
 
-###Types of Tools available
+##Types of Tools available
 
 Distributed vs. Centralised
 :	Modern VCS work on a distributed model (DVCS).
 This means that every member of the project team keeps a complete local copy of all the changes.
 The previous model, still widely used with tools like Subversion, is centralised.
-There is only one central database with all the changes and team members only have a copy of the change they are currently working on.
+There is only one central database with all the changes and team members only have a copy of the change they are currently working on in their local workspace.
+
+(In version control terminology a local workspace is often called a working copy and it will contain a specific revision of files plus changes)
 
 Open Source and Commercial Tools
 
-:	There are many commercial and open source tools available in the market. As well as the core VC operations tools will offer different combinations
-of features, support and integrations. In this module we will be using a VCS called Git, a popular open source tool that uses a distributed model
-with excellent support for parallel development.
+:	There are many commercial and open source tools available in the market.
 
-## Summary: What do version control tools do?
+As well as the core VC operations tools will offer different combinations of features, support and integrations.
+
+In this article we will be using a VCS called Git, a popular open source tool that uses a distributed model with excellent support for parallel development.
+
+# Summary: What do version control tools do?
 
 * Provide comprehensive historical information about the work done on the project
 * Help prevent the lost of information (e.g. edits being overwritten)
@@ -114,9 +131,9 @@ with excellent support for parallel development.
   (and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)
 * Helping individual developers be more efficient with tools such as difference reports
 
-##Example VCS operations using Git
+#Example VCS operations using Git
 
-The rest of this module will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
+The rest of this article will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
 You should follow along on your own Raspberry Pi using a new test project as explained below.
 
 [Git](http://git-scm.com/) is very popular DVCS originally developed to maintain the GNU/Linux kernel source code
@@ -127,16 +144,16 @@ but we are only going to concentrate on the ten or so commands you need to be us
 
 There are many excellent tutorials for Git on the Internet. See the External References section below.
 
-These examples assume that you are using Debian Linux on a Raspberry Pi and
-have downloaded the Python Snakes project from the [project website](http://www.raspberrypi.org/game.tar.gz)
+These examples assume that you are using Raspian (Debian) Linux on a Raspberry Pi and
+have downloaded the Python Snakes project from <https://www.dropbox.com/s/25lxmg2bkgv4hfr/game.tar.gz>
 into a directory called `snakes`.
 
 You can do that by running the following commands in your terminal program.
 You can start the terminal in the LXDE GUI from the program menu by selecting "Accessories" and then "LXTerminal".
-Alternativly you can just *not* run the `startx` command when you log in.
+Alternatively you can just *not* run the `startx` command when you log in.
 ```shell
 mkdir snakes
-wget https://github.com/alecthegeek/version-control-basics/raw/master/game.tar.gz
+wget https://www.dropbox.com/s/25lxmg2bkgv4hfr/game.tar.gz
 cd snakes
 tar -xzf ../game.tar.gz
 ```
@@ -144,11 +161,11 @@ tar -xzf ../game.tar.gz
 
 Initially this example assumes that the current directory is your `snakes` directory.
 
-There is a tutorial on how to us the Linux shell,
-the program you are using insitde the terminal,
-at <http://linuxcommand.org/learning_the_shell.php>.
+If you are unfamiliar with using commands from the terminal there is a tutorial on how to us the Linux shell,
+the program you are using inside the terminal,
+<http://linuxcommand.org/learning_the_shell.php>.
 
-###  Setup
+## Git Setup
 1. Make sure you have the correct tools installed by typing the following commands:
 
 		sudo apt-get install git git-gui gitk git-doc
@@ -159,9 +176,9 @@ at <http://linuxcommand.org/learning_the_shell.php>.
 
     you should see something like
 
-		git version 1.7.10
+		git version 2.0.4
 
-3. Tell Git who you are (this is very important information and it recorded in every change in you make or commit)
+3. Tell Git who you are (this is very important information and is recorded in every change you make)
 
 		git config --global user.name "My Name"
 
@@ -171,7 +188,7 @@ at <http://linuxcommand.org/learning_the_shell.php>.
 You must of course substitute your own name and email address in the correct places.
 Git records that information in a user configuration file called `.gitconfig` in your home directory
 
-In case you exchange files with developers working on a Microsoft Windows, which is highly likely) you should also run the command
+In case you exchange files with developers working on a Microsoft Windows, (which is highly likely) you should also run the command
 
 		git config --global core.autocrlf input
 
@@ -179,12 +196,14 @@ See <https://help.github.com/articles/dealing-with-line-endings#platform-all> fo
 
 More information on setting up Git at <http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>.
 
-### Starting a new project by creating a repo
+## Starting a new project by creating a repo
 
 The next thing we need to do it create an empty Git database, called a repo (short for repository) inside our snakes directory
 
 `~ $ `*cd snakes*\
 m4_run([[git init]])
+
+m4_esyscmd([[cd]] working_dir; git config user.email  user_email)
 
 Notice that the VC tool has created a hidden directory called `.git`.
 In Linux all file and directory (folder) names that start with a "`.`" are normally hidden, but you can see them with the command `ls -A`.
@@ -199,7 +218,7 @@ We can ignore most of the detail for now. What important is that Git:
 1. Warns us that some files are not being controlled (untracked) by the VCS
 1. Lists the files and directories with their status. We will see this change as we progress further in the example.
 
-#### Add the project files to version control
+### Add the project files to version control
 
 Before changes are added to the repo database we have to decide what will be in the commit. There might be a many changes
 in the files we are working on, but our changset is actually only a small number of changes.
@@ -233,7 +252,9 @@ Some interesting commands we can now run. For instance the output of `git status
 
 m4_run([[git status]])
 
-Another command worth running is `git log`, which is currently very brief as we have only have one commit. Mine 
+This means that the contents of our working working copy are identical to the latest versions stored in our repo.
+
+Another command worth running is `git log`, which is currently very brief as we have only have one commit. Mine
 looks like this
 
 m4_run([[git log]])
@@ -242,7 +263,7 @@ The meaning of the Author, Date and comment field should be obvious. The commit 
 
 We now have our project under version control.
 
-### Making a change
+## Making a change
 
 
 Now lets make a change. The first step is to create a work area in which to make the change. In Git
@@ -286,7 +307,7 @@ from specific branch, that we are currently working on.
 Any changes I now make are isolated in the branch and don't impact anything else.
 
 
-At this point you make want to play snakes for a couple of minutes
+At this point you make want to play snakes for a couple of minutes,
 so that you will be able to see the difference later of course.
 Use the command `python game/snake.py`
 
@@ -320,12 +341,13 @@ Refer to the appendixes for information on how to install and use the Kdiff3 gra
 Now that we have a change, it's tested and we have verified it using the diff tool it's time to add the change to our
 version control history.
 
-This is two stage process, in a similar way to our first commit.
-	+ Add the changes to the index
-	+ Commit the change to the repo, along with a useful comment
+This is two stage process, in a similar way to our first commit.\
+	* Add the changes to the index
+	* Commit the change to the repo, along with a useful comment
 
 The first part is simple as only one file has changed.
-		git add game/snake/py
+
+m4_run([[git add game/snake.py]])
 
 You should then verify that the add was successful by running a `git status` command.
 
@@ -334,174 +356,137 @@ that our editor is set up in Git. As an example we'll set up `leafpad` as the ed
 
 		git config --global core.editor "/usr/bin/leafpad"
 
+N.B. `leafpad` it a GUI editor and you will need to run X-Windows for it to work.
+If you are not using X-Windows or prefer a different editor then use the appropriate program name
+e.g. `/usr/bin/vim`
+
 Now let's make the commit. This time the command is a little simpler `git commit` but something a little more spectacular
 will happen. You editor will pop into life in front of you with information ready for your to write a commit message.
 
-
 You now have two choices:
 
-1.Exit the editor without saving any changes to the commit message
-: The commit is aborted and no changes occur in the repo (but the index is still primed with the change)
+1. Exit the editor without saving any changes to the commit message
+: The commit is aborted and no changes occur in the repo (but the index __still__ contains the change)
 
-2. Enter some text, save it and exit the editor
+2. Enter some text, save it and exit the editor\
 : The commit is completed and all changes are recorded in the repo.
 
 	A word about commit messages: The commit messages consists of two parts. Line 1 is the header and should be followed
 	by a blank line. The header is displayed in short log messages. After the blank line comes the message body which contains
 	the details. A detailed set of suggestions can be read at <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
 
-An example of the commit message that might be given for the change we have just made
+An example of the commit message that might be used for the change we have just made
 
-	    Changed Rocks Y -> R
+m4_define([[m4_cmt_msg]],[[
+Changed Rocks Y -> R
 
-	    1) Changed all references to rocks from the char "Y" to "R"
-	    a) A comment
-	    b) A single line of code
-	    2) Tested
+1. Changed all references to rocks from the char "Y" to "R"
+	a. In a comment
+	b. In a single line of code
+
+2. Tested
+]])
+
+m4_syscmd([[cat <<'EOF'| tee /tmp/cmt_file |]] m4_inline_verbatum_mode
+m4_cmt_msg
+[[EOF]]
+)
+
+so when we run the `git commit` we get the following output
+
+m4_syscmd([[cd]] working_dir;[[git commit -aF /tmp/cmt_file|]]m4_inline_verbatum_mode)
 
 +  Showing the history
 
-Now the `git log` shows a sightly more detailed history
+m4_run([[git log]])
 
-		commit 9cedfc266caf9e2aceb82bcccefd7dede98f1410
-		Author: Pi Student <acdisp61-pi@yahoo.com>
-		Date:   Mon Jun 4 22:03:33 2012 +1000
-
-		    Changed Rocks Y -> R
-    
-		    1) Changed all references to rocks from the char "Y" to "R"
-		    a) A comment
-		    b) A single line of code
-		    2) Tested
-
-		commit 1e0dafdae91097af978a2bb08b7eafdf43678b52
-		Author: Pi Student <acdisp61-pi@yahoo.com>
-		Date:   Mon Jun 4 21:46:17 2012 +1000
-
-		    Initial Commit
-
-You might care to look at http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository
+You might care to look at\
+<http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository>
 
 +  Branches
 
-We now have two branches `master` and `make_rocks_R`. Let's make another change on the master branch and then look at the history.
+We now have two branches `master` and `make_rocks_R`.
+Let's make another change on a new branch and then look at the history.
 
-1. Make sure that we are using the `master` branch
-        gi checkout master
-        Switched to branch 'master'
+1. Make sure that we are using the `master` branch\
+m4_run([[git checkout master]])
 
-Now let's edit the file `snake.py` again. This time I've noticed that when setting up colours (with the method call `curses.color_pair()`)
-the original programmer used a literal constang. It is good practice to use a more meaningful symbolic names
-(like `curses.COLOR_RED`) instad of literanl value (i.e. '1').
+Now let's examine the file `snake.py` again.
+This time I've noticed that when setting up colours
+(with the method call `curses.color_pair()`)
+the original programmer used a literal constant.
+It is good practice to use a more meaningful symbolic names
+(like `curses.COLOR_RED` instead of the literal value '1').
 
-So I'm going to make two changes. The text `curses.color_pair(2)` will be changed to `curses.color_pair(curses.COLOR_GREEN)` and 
+So I'm going to make two changes.
+The text `curses.color_pair(2)` will be changed to `curses.color_pair(curses.COLOR_GREEN)` and
 the text `curses.color_pair(1)` will be changed to `curses.color_pair(curses.COLOR_RED)`
 
-(documnentation on the curses libraray is at http://docs.python.org/howto/curses.html)
+(documentation on the Curses library is at <http://docs.python.org/howto/curses.html>)
 
+m4_run([[git branch use_curses_symbols]])
+m4_run([[git checkout use_curses_symbols]])
 
-If I run the command `git diff` I can see the following report
+m4_esyscmd([[sed -i "" -e 's/color_pair(2)/color_par(curses.COLOR_GREEN)/g' ]]working_dir[[/game/snake.py]])
+m4_esyscmd([[sed -i "" -e 's/color_pair(1)/color_par(curses.COLOR_RED)/g' ]]working_dir[[/game/snake.py]])
 
-        @@ -49,7 +49,7 @@ def add_block(scr, width, height):
-               if empty:
-                 # if it is, replace it with a "Y" and return
-       
-        -        scr.addch(y, x, ord("Y"), curses.color_pair(2))
-        +        scr.addch(y, x, ord("Y"), curses.color_pair(curses.COLOR_GREEN))
-             return
-   
-         def snake(scr):
-        @@ -145,7 +145,7 @@ def snake(scr):
-       
-               # replace the character with a "O"
-       
-        -      scr.addch(y, x, ord("O"), curses.color_pair(1))
-        +      scr.addch(y, x, ord("O"), curses.color_pair(curses.COLOR_RED))
-       
-               # update the screen
-       
+If I run the command `git diff` I can see the following report\
+m4_run([[git diff]])
 
-Run the prorgam to make sure it still works correctly
+Now run the program to make sure it still works correctly
 
 Now we can add and commit our changes.
 
-        git add games/snakes.py
-        git ci -m "Use curses lib symbolic names in color_pair() method calls"
+m4_run([[git add game/snake.py]])
+m4_run([[git commit -m "Use curses lib symbolic names in color_pair() method calls"]])
 
-Now if we run the `git log` command we only see two commits
+Now if we run the `git log` command we only see two commits\
+m4_run([[git log]])
 
-        commit d88589183d44d7ed013456ccf7d31a6b47109e59
-        Author: Alec Clews <alecclews@gmail.com>
-        Date:   Sun Jun 17 14:58:13 2012 +1000
-
-                    Use curses lib symbolic names in color_pair() method calls
-
-        commit 9b941110ffadf261fff069c0aa9ca6042e10422b
-        Author: Alec Clews <alecclews@gmail.com>
-        Date:   Mon May 14 20:47:43 2012 +1000
-
-            Initial Commit
-
-What happended to our other commit where we changed the colour of our rocks?
-The answer is tha it's on another branch -- it's not part of the history of our current workspace.
+What happened to our other commit where we changed the colour of our rocks?
+The answer is that it's on another branch -- it's not part of the history of our current workspace.
 
 Add the option `--all` to see all the commits across all the branches.
 
-        git log --all
+m4_run([[git log --all]])
 
-        commit d88589183d44d7ed013456ccf7d31a6b47109e59
-        Author: Alec Clews <alecclews@gmail.com>
-        Date:   Sun Jun 17 14:58:13 2012 +1000
+As you can see git commands take extra parameters to change the way the work. A useful way to see the above history using quite a complex log
 
-            Use curses lib symbolic names in color_pair() method calls
+	git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s
+		%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
 
-        commit 3d1c82c7756bc1cbfdfcbe79468d1e11e8bab374
-        Author: Alec Clews <alecclews@gmail.com>
-        Date:   Sun Jun 17 14:47:59 2012 +1000
+It's quite hard work to type this in, luckily Git has an alias feature to make life a lot simpler. Use the following command
 
-             Changed Rocks Y -> R
-    
-                            1) Changed all references to rocks from the char "Y" to "R"
-                            a) A comment
-                            b) A single line of code
-                            2) Tested
+	git config --global alias.lg
+		log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s
+		%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
 
-        commit 9b941110ffadf261fff069c0aa9ca6042e10422b
-        Author: Alec Clews <alecclews@gmail.com>
-        Date:   Mon May 14 20:47:43 2012 +1000
+Both these examples need to be entered on a single line of course.
 
-            Initial Commit
+Now all you need to do is type `git lg` as `lg` has become an alias for the much longer version if `log` I showed above.
+More information about aliases at <https://git.wiki.kernel.org/index.php/Aliases>
 
-As you can see git commands take extra paramters to change the way the work. A useful way to see the above history using quite a complex log
-
-        git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
-
-It's quite hard work to type this in, luckly Git has an alias feature to make life a lot simpler. Use the following command
-
-        git config --global alias.lg log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
-
-Now all you need to do it stype `git lg` as `lg` has become an alias for the much longer version if `log` I showed above.
-More information about aliases at https://git.wiki.kernel.org/index.php/Aliases
-
-If you have installed the `gitk` program (as suggesed above) you can also this information in a graphical program by running `gitk --all&`
+If you have installed the `gitk` program (as suggested previously)
+you can also this information in a graphical program by running `gitk --all&`
 
 All the various reports that git log and gitk refer to our branches. In addition there is a HEAD.
-This is a reference meaning `the current stuff checkout into our working copy`. The HEAD allways points to the commit that we last checked out.
+This is a reference meaning `the current stuff checkout into our working copy`. The HEAD always points to the commit that we last checked out.
 
-## Working with others
+#  Merging
+\#TODO
 
-*  Remote repos
-*  Merging
-*  Patches
+# Working with others
+\#TODO
 
+#  Remote repos
+\#TODO
+#  Patches
 
 #Appendices
 
 ## Appendix A: External References
 
-
 Several videos that introduce the basic ideas of version control can be found at <http://git-scm.com/videos> or on YouTube at:
-
 
 * [Episode 1](http://www.youtube.com/watch?v=K2wBGt-j0fE)
 * [Episode 2](http://www.youtube.com/watch?v=0BIGxolZQHo)
@@ -512,7 +497,7 @@ Several videos that introduce the basic ideas of version control can be found at
 *  [Introduction to Git](http://youtu.be/ZDR433b0HJY), video with Scott Chacon of GitHub
 
 
-## Appendix B: Notes for Teachers and group faciltators
+## Appendix B: Notes for Teachers and group facilitators
 
 
 Git is a useful platform for students to work together. Additional if their programming work needs to be accessed then it
@@ -520,7 +505,7 @@ provides a useful mechanism for students and teams to submit their work.
 
 Students can collaborate using four different models:
 
-1. Using a third party service such as GitHub, Gitorious or BitBucket. Examples are given below for GitHub
+1. Using a third party service such as GitHub, Gitorious, Gitlab or BitBucket. Examples are given below for GitHub
 1. Via a private server provided by the school. This is beyond the scope of this document
 1. Students can exchange work using a peer to peer model. This requires a local area for the students to exchange work #todo Add notes on remote
 1. Students can exchange using Git patches on USB drives (a __sneakernet__). This is most technology simple solution but
