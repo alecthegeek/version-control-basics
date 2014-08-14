@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-.SUFFIXES: .html .pdf
+.SUFFIXES: .html .pdf .docbook .docx .pmd
 
 .PHONY: clean all
 
@@ -13,6 +13,7 @@ USER_NAME:="Pi Student"
 BASE_DEMO:=$(HOME)/snakes
 BRANCH1:=master
 BRANCH2:=make_rocks_R
+BRANCH3:=use_curses_symbols
 
 all: version-control-basics.pdf
 
@@ -24,8 +25,7 @@ clean:
 	-rm -rf $(BASE_DEMO)
 	mkdir $(BASE_DEMO)
 	tar -xzf game.tar.gz -C $(BASE_DEMO)
-	find $(BASE_DEMO) -type f -exec dos2unix {} \;
-	m4 -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -P $< > $@
+	m4 -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< > $@
 
 %.pdf: %.pmd
 	pandoc -V documentclass=$(DOCUMENTCLASS) --toc -s -S -t latex  $< -o $@
@@ -36,6 +36,6 @@ clean:
 %.docx: %.pmd
 	pandoc -s -S -t docx $< -o $@
 
-%.dbk: %.pmd
+%.docbook: %.pmd
 	pandoc -s -S -t docbook $< -o $@
 

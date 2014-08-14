@@ -405,11 +405,11 @@ You might care to look at\
 
 +  Branches
 
-We now have two branches `master` and `make_rocks_R`.
+We now have two branches `branch1` and `branch2`.
 Let's make another change on a new branch and then look at the history.
 
-1. Make sure that we are using the `master` branch\
-m4_run([[git checkout master]])
+1. Make sure that we are using the `branch1` branch\
+m4_run([[git checkout]] branch1)
 
 Now let's examine the file `snake.py` again.
 This time I've noticed that when setting up colours
@@ -424,11 +424,13 @@ the text `curses.color_pair(1)` will be changed to `curses.color_pair(curses.COL
 
 (documentation on the Curses library is at <http://docs.python.org/howto/curses.html>)
 
-m4_run([[git branch use_curses_symbols]])
-m4_run([[git checkout use_curses_symbols]])
+m4_run([[git branch  ]] branch3)
+m4_run([[git checkout ]] branch3)
 
-m4_esyscmd([[sed -i "" -e 's/color_pair(2)/color_par(curses.COLOR_GREEN)/g' ]]working_dir[[/game/snake.py]])
-m4_esyscmd([[sed -i "" -e 's/color_pair(1)/color_par(curses.COLOR_RED)/g' ]]working_dir[[/game/snake.py]])
+First of course I created a new branch (from `branch1`, __not__ from `branch2`) called `branch3` and checked it out
+
+m4_esyscmd([[sed -i "" -e 's/color_pair(2)/color_pair(curses.COLOR_GREEN)/g' ]]working_dir[[/game/snake.py]])
+m4_esyscmd([[sed -i "" -e 's/color_pair(1)/color_pair(curses.COLOR_RED)/g' ]]working_dir[[/game/snake.py]])
 
 If I run the command `git diff` I can see the following report\
 m4_run([[git diff]])

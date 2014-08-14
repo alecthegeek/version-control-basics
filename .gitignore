@@ -9,4 +9,4 @@
 *.dvi
 *.ist
 *.gl?
-/includes/*
+*.docx
