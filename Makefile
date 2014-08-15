@@ -6,6 +6,8 @@
 
 .SECONDARY: version-control-basics.pmd
 
+PANDOC_FLAGS:=--number-sections -s -S
+
 DOCUMENTCLASS:=article
 
 USER_EMAIL:=acdsip61-pi@yahoo.com
@@ -28,14 +30,14 @@ clean:
 	m4 -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< > $@
 
 %.pdf: %.pmd
-	pandoc -V documentclass=$(DOCUMENTCLASS) --toc -s -S -t latex  $< -o $@
+	pandoc $(PANDOC_FLAGS) -V documentclass=$(DOCUMENTCLASS) --toc -t latex  $< -o $@
 
 %.html: %.pmd
-	pandoc -s -S $< -o $@
+	pandoc $(PANDOC_FLAGS) $< -o $@
 
 %.docx: %.pmd
-	pandoc -s -S -t docx $< -o $@
+	pandoc $(PANDOC_FLAGS) -t docx $< -o $@
 
 %.docbook: %.pmd
-	pandoc -s -S -t docbook $< -o $@
+	pandoc $(PANDOC_FLAGS) -t docbook $< -o $@
 

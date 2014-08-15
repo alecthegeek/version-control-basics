@@ -1,20 +1,27 @@
+m4_changequote([[, ]])
+m4_include([[utils.m4]])
+m4_define([[ps1]], [[`~/snakes $ `]])
+
+
 ---
 title: 'Version Control Basics using Git'
 author: 'Alec Clews'
 ...
 
 
-m4_changequote([[, ]])
-m4_include([[utils.m4]])
-m4_define([[ps1]], [[`~/snakes $ `]])
+		Version: m4_esyscmd([[git rev-parse HEAD]])
 
 #Introduction
 
 ##What is Version Control and how do Version Control Systems work?
 
 Version Control (VC) is a common practice used to track all the changes that
-occur to the files in a project over time.
+occur to the files in a project[^projects] over time.
 It needs a Version Control System (VCS) tool to work.
+
+[^projects]: In this context a "project" could be any collection of files.
+  For instance as well as my software projects I use Git to manage my
+  personal dot configuration files.
 
 Think about how you work on a computer.
 You create "stuff", it might be a computer program you are modifying,
@@ -38,7 +45,8 @@ Programs are often worked on and modified by many different people,
 many of home want to add features specific to their needs.
 Things can get confusing very quickly!
 
-Because this module is written for students on the Raspberry Pi the examples we will use from now on will be based on software development projects,
+Because this article is written for students on the Raspberry Pi
+the examples we will use from now on will be based on software development projects,
 but remember that you can apply to the principles to any set of computer files.
 
 The way that a VCS works by recording a history of changes. What does that mean?
@@ -123,7 +131,7 @@ As well as the core VC operations tools will offer different combinations of fea
 
 In this article we will be using a VCS called Git, a popular open source tool that uses a distributed model with excellent support for parallel development.
 
-# Summary: What do version control tools do?
+## Summary: What do version control tools do?
 
 * Provide comprehensive historical information about the work done on the project
 * Help prevent the lost of information (e.g. edits being overwritten)
@@ -218,7 +226,7 @@ We can ignore most of the detail for now. What important is that Git:
 1. Warns us that some files are not being controlled (untracked) by the VCS
 1. Lists the files and directories with their status. We will see this change as we progress further in the example.
 
-### Add the project files to version control
+## Add the project files to version control
 
 Before changes are added to the repo database we have to decide what will be in the commit. There might be a many changes
 in the files we are working on, but our changset is actually only a small number of changes.
@@ -371,9 +379,12 @@ You now have two choices:
 2. Enter some text, save it and exit the editor\
 : The commit is completed and all changes are recorded in the repo.
 
-	A word about commit messages: The commit messages consists of two parts. Line 1 is the header and should be followed
-	by a blank line. The header is displayed in short log messages. After the blank line comes the message body which contains
-	the details. A detailed set of suggestions can be read at <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
+	A word about commit messages: The commit messages consists of two parts.
+	Line 1 is the header and should be followed by a blank line.
+	The header is displayed in short log messages.
+	After the blank line comes the message body which contains the details.
+	A detailed set of suggestions can be read at\
+  <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
 
 An example of the commit message that might be used for the change we have just made
 
@@ -422,7 +433,8 @@ So I'm going to make two changes.
 The text `curses.color_pair(2)` will be changed to `curses.color_pair(curses.COLOR_GREEN)` and
 the text `curses.color_pair(1)` will be changed to `curses.color_pair(curses.COLOR_RED)`
 
-(documentation on the Curses library is at <http://docs.python.org/howto/curses.html>)
+(documentation on the Curses library is at\
+<http://docs.python.org/howto/curses.html>)
 
 m4_run([[git branch  ]] branch3)
 m4_run([[git checkout ]] branch3)
