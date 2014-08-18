@@ -1,7 +1,7 @@
 m4_changequote([[, ]])
 m4_include([[utils.m4]])
 m4_define([[ps1]], [[`~/snakes $ `]])
-
+m4_define(m4_filecount,0)
 
 ---
 title: 'Version Control Basics using Git'
@@ -136,7 +136,7 @@ In this article we will be using a VCS called Git, a popular open source tool th
 * Provide comprehensive historical information about the work done on the project
 * Help prevent the lost of information (e.g. edits being overwritten)
 * Help the project team be more efficient by using parallel development
-  (and often integrating with other tools such as: Ticket Systems; built Systems; project management etc.)
+  (and often integrating with other tools such as: ticket systems; build systems; project management etc.)
 * Helping individual developers be more efficient with tools such as difference reports
 
 #Example VCS operations using Git
@@ -405,9 +405,18 @@ m4_cmt_msg
 
 so when we run the `git commit` we get the following output
 
-m4_syscmd([[cd]] working_dir;[[git commit -aF /tmp/cmt_file|]]m4_inline_verbatum_mode)
+m4_syscmd([[cd]] working_dir[[;git commit -aF /tmp/cmt_file|]]m4_inline_verbatum_mode)
 
 +  Showing the history
+
+m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
+m4_define([[m4_filecount]], m4_incr(m4_filecount))
+m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
+
+![A nice picture of the current repo history]([[images/images]]m4_filecount[[.png]])
+
+Notie how in the above picture the arrow points from the child commit to the parent commit.
+This is an important convention.
 
 m4_run([[git log]])
 
@@ -454,6 +463,11 @@ Now we can add and commit our changes.
 m4_run([[git add game/snake.py]])
 m4_run([[git commit -m "Use curses lib symbolic names in color_pair() method calls"]])
 
+m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
+m4_define([[m4_filecount]], m4_incr(m4_filecount))
+m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
+![The current repo history with three branches and one commit on each branch]([[images/images]]m4_filecount[[.png]])
+
 Now if we run the `git log` command we only see two commits\
 m4_run([[git log]])
 
@@ -477,7 +491,7 @@ It's quite hard work to type this in, luckily Git has an alias feature to make l
 
 Both these examples need to be entered on a single line of course.
 
-Now all you need to do is type `git lg` as `lg` has become an alias for the much longer version if `log` I showed above.
+Now all you need to do is type `git lg` as `lg` has become an alias for the much longer version of `log` I showed above.
 More information about aliases at <https://git.wiki.kernel.org/index.php/Aliases>
 
 If you have installed the `gitk` program (as suggested previously)
@@ -485,6 +499,34 @@ you can also this information in a graphical program by running `gitk --all&`
 
 All the various reports that git log and gitk refer to our branches. In addition there is a HEAD.
 This is a reference meaning `the current stuff checkout into our working copy`. The HEAD always points to the commit that we last checked out.
+
+# Commit IDs
+
+I promised I would explain what a commit ID is
+and it's an importany comcept that deserves it's own section.
+
+In many VCS tools it's enough to give each revision a new number such 1, 2, 3 and so on.
+We can also identify branches by using the dotted numbers likes 3.2.5 which would be the
+the 5th revision on the 2nd branch from revision 3.
+
+However in Git we are not sharing a single repo database and there has to be a way of keeping all
+the possible commits on a distributed project unique. Git solves this problem by using a sha1
+string. A sha is computer algorithm, that when presented with a string of bits (computer 1 and 0's),
+will present a different 40 character result even when two strings are different in _any_ way,
+even just one bit.
+
+You can see this effect by running the following experiment
+
+		echo 'Hello World' | git hash-object --stdin
+		m4_syscmd([[echo 'Hello World' | git hash-object --stdin]])
+
+		echo 'Hello World!' | git hash-object --stdin
+		m4_syscmd([[echo 'Hello World' | git hash-object --stdin]])
+
+This is exactly what Git does for each commit, only it uses the contents of the committed
+files (plus the ID of the commits parents) to calculate the new ID (sha1). If two
+commits from two different repos have the same ID they are the same commits and we
+consider them identical.
 
 #  Merging
 \#TODO

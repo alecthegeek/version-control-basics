@@ -8,5 +8,5 @@ Basic Tutorial on a version control.
 
 To build the final document
 
-* Install Make, Pandoc and M4
+* Install Make, Pandoc, M4 and git-big-picture
 * Run make

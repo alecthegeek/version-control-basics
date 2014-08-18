@@ -21,13 +21,16 @@ all: version-control-basics.pdf
 
 clean:
 	-rm *.fodt *.html *.opml *.tex *.pdf *.mmd *.pmd *.log *.dvi *.ist *.gl? *.dbk *.docx
-	-rm -rf $(BASE_DEMO)
+	-rm -rf $(BASE_DEMO) images
 
 %.pmd: %.m4 utils.m4 $(MAKEFILE_LIST)
-	-rm -rf $(BASE_DEMO)
-	mkdir $(BASE_DEMO)
+	-rm -rf $(BASE_DEMO) images ; mkdir $(BASE_DEMO) images
 	tar -xzf game.tar.gz -C $(BASE_DEMO)
+ifdef DEBUG
+	m4 -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $<
+else
 	m4 -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< > $@
+endif
 
 %.pdf: %.pmd
 	pandoc $(PANDOC_FLAGS) -V documentclass=$(DOCUMENTCLASS) --toc -t latex  $< -o $@
