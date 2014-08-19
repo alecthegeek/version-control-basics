@@ -322,7 +322,7 @@ Use the command `python game/snake.py`
 
 +  Changing the file
 
-m4_esyscmd([[sed -i "" -e 's/"Y"/"R"/g' ]]working_dir[[/game/snake.py]])
+m4_esyscmd(m4_sed[[ -i "" -e 's/"Y"/"R"/g' ]]working_dir[[/game/snake.py]])
 
 Edit the file `game/snake.py` using your favourite text editor. In the version of snakes I had there are two changes to
 make; a comment on line 50; and the actual code on line 52. Save the changes and test the game by playing it again.
@@ -451,8 +451,8 @@ m4_run([[git checkout ]] branch3)
 
 First of course I created a new branch (from `branch1`, __not__ from `branch2`) called `branch3` and checked it out
 
-m4_esyscmd([[sed -i "" -e 's/color_pair(2)/color_pair(curses.COLOR_GREEN)/g' ]]working_dir[[/game/snake.py]])
-m4_esyscmd([[sed -i "" -e 's/color_pair(1)/color_pair(curses.COLOR_RED)/g' ]]working_dir[[/game/snake.py]])
+m4_esyscmd(m4_sed[[ -i "" -e 's/color_pair(2)/color_pair(curses.COLOR_GREEN)/g' ]]working_dir[[/game/snake.py]])
+m4_esyscmd(m4_sed[[ -i "" -e 's/color_pair(1)/color_pair(curses.COLOR_RED)/g' ]]working_dir[[/game/snake.py]])
 
 If I run the command `git diff` I can see the following report\
 m4_run([[git diff]])
