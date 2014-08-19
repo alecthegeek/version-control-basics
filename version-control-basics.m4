@@ -212,6 +212,7 @@ The next thing we need to do it create an empty Git database, called a repo (sho
 m4_run([[git init]])
 
 m4_esyscmd([[cd]] working_dir; git config user.email  user_email)
+m4_esyscmd([[cd]] working_dir; git config user.name  user_name)
 
 Notice that the VC tool has created a hidden directory called `.git`.
 In Linux all file and directory (folder) names that start with a "`.`" are normally hidden, but you can see them with the command `ls -A`.
@@ -503,10 +504,11 @@ This is a reference meaning `the current stuff checkout into our working copy`. 
 # Commit IDs
 
 I promised I would explain what a commit ID is
-and it's an importany comcept that deserves it's own section.
+and it's an important concept that deserves it's own section.
 
-In many VCS tools it's enough to give each revision a new number such 1, 2, 3 and so on.
-We can also identify branches by using the dotted numbers likes 3.2.5 which would be the
+In many VCS tools it's enough to give each new commit a revision number
+such 1, 2, 3 and so on.
+We can also identify branches by using dotted numbers, for example `3.2.5` which would be the
 the 5th revision on the 2nd branch from revision 3.
 
 However in Git we are not sharing a single repo database and there has to be a way of keeping all
