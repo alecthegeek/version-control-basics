@@ -523,7 +523,7 @@ You can see this effect by running the following experiment
 		m4_syscmd([[echo 'Hello World' | git hash-object --stdin]])
 
 		echo 'Hello World!' | git hash-object --stdin
-		m4_syscmd([[echo 'Hello World' | git hash-object --stdin]])
+		m4_syscmd([[echo 'Hello World!' | git hash-object --stdin]])
 
 This is exactly what Git does for each commit, only it uses the contents of the committed
 files (plus the ID of the commits parents) to calculate the new ID (sha1). If two
