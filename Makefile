@@ -31,7 +31,7 @@ endif
 all: version-control-basics.pdf
 
 clean:
-	-rm *.fodt *.html *.opml *.tex *.pdf *.mmd *.pmd *.log *.dvi *.ist *.gl? *.dbk *.docx
+	-rm *.fodt *.html *.opml *.tex *.pdf *.md *.mmd *.pmd *.log *.dvi *.ist *.gl? *.dbk *.docx
 	-rm -rf $(BASE_DEMO) images
 
 %.pmd: %.m4 utils.m4 $(MAKEFILE_LIST)
@@ -42,6 +42,9 @@ ifdef DEBUG
 else
 	m4 -D m4_sed=$(SED_CMD) -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< > $@
 endif
+
+%.md: %.pmd
+	pandoc $(PANDOC_FLAGS)  -t markdown_github $< -o $@
 
 %.pdf: %.pmd
 	pandoc $(PANDOC_FLAGS) -V documentclass=$(DOCUMENTCLASS) --toc -t latex  $< -o $@
