@@ -70,20 +70,13 @@ The VCS software calculates which files have changed since the last commit and w
 It then stores these changes, plus the commit message, the date, time, name of the developer (committer)
 and other information in the repository.
 
-Version Control is also sometimes refereed to as [Revision Control](http://en.wikipedia.org/wiki/Revision_control )
+Version Control is also sometimes refereed to as [Revision Control](http://en.wikipedia.org/wiki/Revision_control)[^RevisionControl]
+
+[^RevisionControl]: http://en.wikipedia.org/wiki/Revision_control
 
 Now let's add another layer of complexity.
 Our project might be big enough that we are team working on the project together and we all make changes to the digital files (also called assets).
 That will introduce a lot of potential problems. We'll talk about those, and how a VCS can help.
-
-VCS We call this creating a branch,
-an offshoot on which we do work that is not currently part of the main trunk -- more on that later.
-How do you keep track of these changes? Remove mistakes,
-bring old material forward into new versions, merge changes from one branch to another.
-You could think of each job application as a mini project (as well as a resume you will need to record details of phone calls, referees, research notes etc.) and 
-each job application will use the work you completed in your previous projects. *So how does Version Control help keep track of your work on digital files?*
-We'll explain that in a minute.
-
 
 ##Why is Version Control is so important?
 
@@ -140,7 +133,7 @@ In this article we will be using a VCS called Git, a popular open source tool th
 
 #Example VCS operations using Git
 
-The rest of this article will take an hands on approach by demonstrating the use of Git to manage a simple set of changes.
+The rest of this article will take a hands on approach by demonstrating the use of Git to manage a simple set of changes.
 You should follow along on your own Raspberry Pi using a new test project as explained below.
 
 [Git](http://git-scm.com/) is very popular DVCS originally developed to maintain the GNU/Linux kernel source code
@@ -415,7 +408,7 @@ m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 
 ![A nice picture of the current repo history]([[images/images]]m4_filecount[[.png]])
 
-Notie how in the above picture the arrow points from the child commit to the parent commit.
+Notice how in the above picture the arrow points from the child commit to the parent commit.
 This is an important convention.
 
 m4_run([[git log]])
@@ -572,7 +565,7 @@ is more complicated for students and is beyond the scope of this document
 
 (GitHub)[GitHub.com] provide specific git hosting service for schools. see <https://github.com/edu> for details.
 
-1. Create a a GitHub organisation for your school or organisation
+1. Create a GitHub organisation for your school or organisation
 1. Let GitHub know the details of your account using the form at <https://github.com/edu>.
 This will allow your students to have private repos.
 N.B. Normally all free accounts are public and the code they contain in freely available.
@@ -603,5 +596,5 @@ First install the kdiff3 program
 
 Now, instead of using `git diff` to get a text report of the differences in your change
 you can run `git difftool`to scroll through a side by side list.
-`difftool` supports serveral different GUI style tools to present the differences,
+`difftool` supports several different GUI style tools to present the differences,
 setting them up is left as an exercise.
