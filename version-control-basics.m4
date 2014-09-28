@@ -1,13 +1,12 @@
-m4_changequote([[, ]])
-m4_include([[utils.m4]])
-m4_define([[ps1]], [[`~/snakes $ `]])
-m4_define(m4_filecount,0)
-
 ---
 title: 'Version Control Basics using Git'
 author: 'Alec Clews'
-...
+---
 
+m4_changequote([[, ]])
+m4_include([[utils.m4]])
+m4_define(ps1, [[`~/snakes $ `]])
+m4_define(m4_filecount,0)
 
 		Version: m4_esyscmd([[git rev-parse HEAD]])
 
