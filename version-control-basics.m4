@@ -495,14 +495,18 @@ Now all you need to do is type `git lg` as `lg` has become an alias for the much
 More information about aliases at <https://git.wiki.kernel.org/index.php/Aliases>
 
 If you have installed the `gitk` program (as suggested previously)
-you can also this information in a graphical program by running `gitk --all&`
+you can also display this information in a graphical program by running `gitk --all&`
+(make sure you are running the X Windows GUI manager).
 
-All the various reports that git log and gitk refer to our branches. In addition there is a HEAD.
-This is a reference meaning `the current stuff checkout into our working copy`. The HEAD always points to the commit that we last checked out.
+All the various reports from `git log` and `gitk` refer to our branches by name,
+in addition there is a `HEAD` revision label.
+This is a reference to the last commit we made on a branch,
+so every branch has a `HEAD`,
+but generally we use the term to refer to the last commit current _default_ branch
 
 # Commit IDs
 
-I promised I would explain what a commit ID is
+I mentioned previously I would explain commit IDs
 and it's an important concept that deserves it's own section.
 
 In many VCS tools it's enough to give each new commit a revision number
@@ -510,9 +514,10 @@ such 1, 2, 3 and so on.
 We can also identify branches by using dotted numbers, for example `3.2.5` which would be the
 the 5th revision on the 2nd branch from revision 3.
 
-However in Git we are not sharing a single repo database and there has to be a way of keeping all
-the possible commits on a distributed project unique. Git solves this problem by using a sha1
-string. A sha is computer algorithm, that when presented with a string of bits (computer 1 and 0's),
+However in Git we are not sharing a single repo database and
+there has to be a way of keeping all the possible commits on a distributed project unique.
+Git solves this problem by using a sha1 string instead of a series of dotted numbers.
+A sha is computer algorithm, that when presented with a string of bits (computer 1 and 0's),
 will present a different 40 character result even when two strings are different in _any_ way,
 even just one bit.
 
