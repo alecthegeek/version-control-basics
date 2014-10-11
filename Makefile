@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-.SUFFIXES: .html .pdf .docbook .docx .pmd
+.SUFFIXES: .html .pdf .docbook .docx .pmd .odt
 
 .PHONY: clean all
 
@@ -31,7 +31,7 @@ endif
 all: version-control-basics.pdf
 
 clean:
-	-rm *.fodt *.html *.opml *.tex *.pdf *.md *.mmd *.pmd *.log *.dvi *.ist *.gl? *.dbk *.docx
+	-rm *.fodt *.html *.opml *.tex *.pdf *.md *.mmd *.pmd *.log *.dvi *.ist *.gl? *.dbk *.docx *.odt
 	-rm -rf $(BASE_DEMO) images
 
 %.pmd: %.m4 utils.m4 $(MAKEFILE_LIST)
@@ -55,6 +55,6 @@ endif
 %.docx: %.pmd
 	pandoc $(PANDOC_FLAGS) -t docx $< -o $@
 
-%.docbook: %.pmd
-	pandoc $(PANDOC_FLAGS) -t docbook $< -o $@
+%.odt: %.pmd
+	pandoc $(PANDOC_FLAGS) -t odt $< -o $@
 
