@@ -10,3 +10,9 @@ To build the final document
 
 * Install Make, Pandoc, M4 and git-big-picture
 * Run make
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
+
+Public Repo
+	https://github.com/alecthegeek/version-control-basics

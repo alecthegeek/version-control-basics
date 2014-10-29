@@ -266,11 +266,12 @@ We now have our project under version control.
 
 ## Making a change
 
-
 Now lets make a change. The first step is to create a work area in which to make the change. In Git
 (and many other VC tools) this dedicated work area is called a __branch__. When you first create a repo
 the default branch that is created is called __master__, but it's important to know that there is nothing special
 about master branch, it can be treated in exactly the same way as any branches you create yourself.
+
+m4_run([[git status]])
 
 If you look at the output from the status command above you can see that we are currently using the master branch
 in our working area.
@@ -303,10 +304,9 @@ m4_run([[git branch]])
 
 In technical terms what has happened is that Git has _checked out_
 the branch `branch2` into our _working directory_.
-The working directory contains that set of files,
-from specific branch, that we are currently working on.
+The working directory contains the set of files,
+from a specific branch, that we are currently working on.
 Any changes I now make are isolated in the branch and don't impact anything else.
-
 
 At this point you make want to play snakes for a couple of minutes,
 so that you will be able to see the difference later of course.
@@ -320,9 +320,9 @@ Edit the file `game/snake.py` using your favourite text editor. In the version o
 make; a comment on line 50; and the actual code on line 52. Save the changes and test the game by playing it again.
 The rocks should now look like "R" instead of "Y".
 
-+  Showing the diff
+###  Showing the diff
 
-So let's see what has changed. Git can provide a nice listing.
+So let's see what has changed by using one of Git's diff reports,
 The simplest way is by using the command `git diff`,
 try that know and you should see a report similar to this
 
@@ -337,7 +337,7 @@ This type of information are often referred to as a **diff report** or **diff ou
 You can get a more user friendly display of these differences by using a graphical compare tool.
 Refer to the appendixes for information on how to install and use the Kdiff3 graphical tool.
 
-+  Committing the change
+###  Committing the change
 
 Now that we have a change, it's tested and we have verified it using the diff tool it's time to add the change to our
 version control history.
@@ -409,14 +409,16 @@ m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 ![A nice picture of the current repo history]([[images/images]]m4_filecount[[.png]])
 
 Notice how in the above picture the arrow points from the child commit to the parent commit.
-This is an important convention.
+This is an important convention. Another thing to notice is that the revisions are identified
+by the first few characters of their SHA1, no the whole 40! Git only needs enough
+information to locate each revisions uniquely so the 1st five characters are invariably enough.
 
 m4_run([[git log]])
 
 You might care to look at\
 <http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository>
 
-+  Branches
+###  Using Branches
 
 We now have two branches `branch1` and `branch2`.
 Let's make another change on a new branch and then look at the history.
@@ -528,14 +530,67 @@ commits from two different repos have the same ID they are the same commits and 
 consider them identical.
 
 #  Merging
+
+Let's go back and look at the current structure of our commit tree.
+
+m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
+m4_define([[m4_filecount]], m4_incr(m4_filecount))
+m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
+![The current repo history with three branches and one commit on each branch]([[images/images]]m4_filecount[[.png]])
+
+At some point we need to bring both our changes, which we are now happy with,
+back onto  the `master` branch so that are part of the default code that we
+make new changes on top of that. This process is called _merging_.
+
+The concept is simple enough, but it's important to remember that we have three branches in this example,
+`branch1`, `branch2` and `branch3`. Each branch has only one commit.
+
+The first step is to merge `branch2` into `branch1`. Notice that this operation is not communinative.
+So `branch2` merged into `branch1` is not the same as `branch1` merged into `branch2`.
+
+Make the current branch `branch1`.
+
+m4_run([[git checkout ]]branch1)
+
+Now merge from `branch2` into the current branch.
+
+m4_run([[git merge]] branch2)
+
+Now if we look at the repo graph
+
+m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
+m4_define([[m4_filecount]], m4_incr(m4_filecount))
+m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
+![The repo history after our first merge]([[images/images]]m4_filecount[[.png]])
+
+So this picture is bit more subtle.
+`branch1` now points at a different commit.
+In this particular case it's a special
+merge called a `fast forward` because everything in commit `2b2665f` is a subset of
+`42d0cd8`. All Git had to do was move the `branch1` pointer forward.
+
+Now let's merge in `branch3`
+
+Let's just check we are on the correct branch, `branch1` first
+
+m4_run([[git branch]])
+
+m4_run([[git merge]] branch3)
+
+m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
+m4_define([[m4_filecount]], m4_incr(m4_filecount))
+m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
+![The repo history after our second merge]([[images/images]]m4_filecount[[.png]])
+
+This merge actuall resulted in a new commit. It is _not_ a fast forward.
+
+
+#  Remote repos
 \#TODO
 
 # Working with others
 \#TODO
 
-#  Remote repos
-\#TODO
-#  Patches
 
 #Appendices
 
@@ -603,3 +658,16 @@ Now, instead of using `git diff` to get a text report of the differences in your
 you can run `git difftool`to scroll through a side by side list.
 `difftool` supports several different GUI style tools to present the differences,
 setting them up is left as an exercise.
+
+
+## Appendix F: License
+
+The free use of this material by others is encouraged, provided the original author is given attribution,
+under the following terms.
+
+Copyright Alec Clews <alecclews@gmail.com> 2014
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
+
+The source for this material can be found at https://github.com/alecthegeek/version-control-basics
