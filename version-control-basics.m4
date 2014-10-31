@@ -337,6 +337,39 @@ This type of information are often referred to as a **diff report** or **diff ou
 You can get a more user friendly display of these differences by using a graphical compare tool.
 Refer to the appendixes for information on how to install and use the Kdiff3 graphical tool.
 
+## Commit IDs
+
+I mentioned previously I would explain commit IDs
+and it's an important concept that deserves it's own section.
+As we need to talk about the commit ID soon let's introduce it now.
+
+In many VCS tools it's enough to give each new commit a revision number
+such 1, 2, 3 and so on.
+We can also identify branches by using dotted numbers, for example `3.2.5` which would be the
+the 5th revision on the 2nd branch from revision 3.
+
+However in Git we are not sharing a single repo database and
+there has to be a way of keeping all the possible commits on a distributed project unique.
+Git solves this problem by using a sha1 string instead of a series of dotted numbers.
+A sha is computer algorithm, that when presented with a string of bits (computer 1 and 0's),
+will present a different 40 character result even when two strings are different in _any_ way,
+even just one bit.
+
+You can see this effect by running the following experiment
+
+		echo 'Hello World' | git hash-object --stdin
+		m4_syscmd([[echo 'Hello World' | git hash-object --stdin]])
+
+		echo 'Hello World!' | git hash-object --stdin
+		m4_syscmd([[echo 'Hello World!' | git hash-object --stdin]])
+
+This is exactly what Git does for each commit, only it uses the contents of the committed
+files (plus the ID of the commits parents) to calculate the new ID (sha1). If two
+commits from two different repos have the same ID they are the same commits and we
+consider them identical.
+
+## Making a change continued
+
 ###  Committing the change
 
 Now that we have a change, it's tested and we have verified it using the diff tool it's time to add the change to our
@@ -410,8 +443,9 @@ m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 
 Notice how in the above picture the arrow points from the child commit to the parent commit.
 This is an important convention. Another thing to notice is that the revisions are identified
-by the first few characters of their SHA1, no the whole 40! Git only needs enough
-information to locate each revisions uniquely so the 1st five characters are invariably enough.
+by the first few characters of their SHA1, not the whole 40!
+Git only needs enough
+information to locate each revisions uniquely so the first five characters are invariably enough.
 
 m4_run([[git log]])
 
@@ -498,36 +532,6 @@ in addition there is a `HEAD` revision label.
 This is a reference to the last commit we made on a branch,
 so every branch has a `HEAD`,
 but generally we use the term to refer to the last commit current _default_ branch
-
-# Commit IDs
-
-I mentioned previously I would explain commit IDs
-and it's an important concept that deserves it's own section.
-
-In many VCS tools it's enough to give each new commit a revision number
-such 1, 2, 3 and so on.
-We can also identify branches by using dotted numbers, for example `3.2.5` which would be the
-the 5th revision on the 2nd branch from revision 3.
-
-However in Git we are not sharing a single repo database and
-there has to be a way of keeping all the possible commits on a distributed project unique.
-Git solves this problem by using a sha1 string instead of a series of dotted numbers.
-A sha is computer algorithm, that when presented with a string of bits (computer 1 and 0's),
-will present a different 40 character result even when two strings are different in _any_ way,
-even just one bit.
-
-You can see this effect by running the following experiment
-
-		echo 'Hello World' | git hash-object --stdin
-		m4_syscmd([[echo 'Hello World' | git hash-object --stdin]])
-
-		echo 'Hello World!' | git hash-object --stdin
-		m4_syscmd([[echo 'Hello World!' | git hash-object --stdin]])
-
-This is exactly what Git does for each commit, only it uses the contents of the committed
-files (plus the ID of the commits parents) to calculate the new ID (sha1). If two
-commits from two different repos have the same ID they are the same commits and we
-consider them identical.
 
 #  Merging
 
