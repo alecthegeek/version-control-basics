@@ -9,6 +9,7 @@ m4_define(ps1, [[`~/snakes $ `]])
 m4_define(m4_filecount,0)
 
 		Version: m4_esyscmd([[git rev-parse HEAD]])
+		Generated on: m4_esyscmd([[date -u]])
 
 #Introduction
 
