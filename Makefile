@@ -1,14 +1,10 @@
-.SUFFIXES:
-
-.SUFFIXES: .html .pdf .docbook .docx .pmd .odt
-
-.PHONY: clean all publish_all publish_odt publish_docx publish_html  publish_pdf publish_README
-
-.SECONDARY: version-control-basics.pmd
+PROJECT_NAME:=version-control-basics
 
 PANDOC_FLAGS:=--number-sections -s -S
 
 DOCUMENTCLASS:=article
+
+PUBLISH_LOC:=~/Copy/$(PROJECT_NAME)
 
 USER_EMAIL:=acdsip61-pi@yahoo.com
 USER_NAME:="Pi Student"
@@ -17,20 +13,27 @@ BRANCH1:=master
 BRANCH2:=make_rocks_R
 BRANCH3:=use_curses_symbols
 
-PUBLISH_DIR:=~/Copy/Public/version-control-basics
-
-ifeq ($(_system_name),OSX)
+UNAME_S:=$(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
 	SED_CMD:=gsed
 else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
+ifeq ($(UNAME_S),Linux)
 		SED_CMD:=sed
-	else
-		${error OS Not Supported}
-	endif
+else
+		${error OS $UNAME_S not supported}
+endif
 endif
 
-all: version-control-basics.pdf
+.SUFFIXES:
+
+.SUFFIXES: .html .pdf .docbook .docx .pmd .odt
+
+.PHONY: clean all publish_all publish_odt publish_docx publish_html  publish_pdf publish_README
+.PHONY: clean all publish_all publish_pdf publish_html publish_odt
+
+.SECONDARY: $(PROJECT_NAME).pmd
+
+all: $(PROJECT_NAME).pdf
 
 clean:
 	-rm *.fodt *.html *.opml *.tex *.pdf *.md *.mmd *.pmd *.log *.dvi *.ist *.gl? *.dbk *.docx *.odt
@@ -38,24 +41,24 @@ clean:
 
 publish_all: publish_pdf publish_html publish_odt publish_docx publish_README
 
-publish_pdf: $(PUBLISH_DIR)/version-control-basics.pdf  publish_README
+publish_pdf: $(PUBLISH_LOC)/$(PROJECT_NAME).pdf  publish_README
 
-publish_odt: $(PUBLISH_DIR)/version-control-basics.odt  publish_README
+publish_odt: $(PUBLISH_LOC)/$(PROJECT_NAME).odt  publish_README
 
-publish_docx: $(PUBLISH_DIR)/version-control-basics.docx  publish_README
+publish_docx: $(PUBLISH_LOC)/$(PROJECT_NAME).docx  publish_README
 
-publish_html: $(PUBLISH_DIR)/version-control-basics.html  publish_README
+publish_html: $(PUBLISH_LOC)/$(PROJECT_NAME).html  publish_README
 
-publish_README: $(PUBLISH_DIR)/README
+publish_README: $(PUBLISH_LOC)/README
 
-$(PUBLISH_DIR)/version-control-basics.html: version-control-basics.html images/*
-	-mkdir $(PUBLISH_DIR)
-	cp --parents images/* $< $(PUBLISH_DIR)
+$(PUBLISH_LOC)/$(PROJECT_NAME).html: $(PROJECT_NAME).html images/*
+	-mkdir $(PUBLISH_LOC)
+	cp --parents images/* $< $(PUBLISH_LOC)
 
-$(PUBLISH_DIR)/%: %
-	-mkdir $(PUBLISH_DIR)
-	cp $<  $@
-
+$(PUBLISH_LOC)/%: %
+	-mkdir $(PUBLISH_LOC)
+	cp $< $(PUBLISH_LOC)
+ 						
 %.pmd: %.m4 utils.m4 $(MAKEFILE_LIST)
 	-rm -rf $(BASE_DEMO) images ; mkdir $(BASE_DEMO) images
 	tar -xzf game.tar.gz -C $(BASE_DEMO)
@@ -66,7 +69,7 @@ else
 endif
 
 %.md: %.pmd
-	pandoc $(PANDOC_FLAGS)  -t markdown_github $< -o $@
+	pandoc $(PANDOC_FLAGS) -t markdown_github $< -o $@
 
 %.pdf: %.pmd
 	pandoc $(PANDOC_FLAGS) -V documentclass=$(DOCUMENTCLASS) --toc -t latex  $< -o $@
@@ -74,11 +77,10 @@ endif
 %.html: %.pmd
 	pandoc $(PANDOC_FLAGS) $< -o $@
 
-images/*: version-control-basics.html
+images/*: $(PROJECT_NAME).html
 
 %.docx: %.pmd
 	pandoc $(PANDOC_FLAGS) -t docx $< -o $@
 
 %.odt: %.pmd
 	pandoc $(PANDOC_FLAGS) -t odt $< -o $@
-
