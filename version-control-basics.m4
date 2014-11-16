@@ -5,11 +5,12 @@ author: 'Alec Clews'
 
 m4_changequote([[, ]])
 m4_include([[utils.m4]])
-m4_define(ps1, [[`~/snakes $ `]])
+m4_define(ps1, [[`~/prompt_dir $ `]])
 m4_define(m4_filecount,0)
 
-		Version: m4_esyscmd([[git rev-parse HEAD]])
-		(Zulu time: m4_esyscmd([[date ]])
+    Version: m4_esyscmd(git rev-parse HEAD)
+    Generated: m4_esyscmd(date -u)
+    (Local time: m4_esyscmd(date))
 
 #Introduction
 
@@ -21,7 +22,7 @@ It needs a Version Control System (VCS) tool to work.
 
 [^projects]: In this context a "project" could be any collection of files.
   For instance as well as my software projects I use Git to manage my
-  personal dot configuration files.
+  personag dot configuration files.
 
 Think about how you work on a computer.
 You create "stuff", it might be a computer program you are modifying,
@@ -551,6 +552,8 @@ make new changes on top of that. This process is called _merging_.
 The concept is simple enough, but it's important to remember that we have three branches in this example,
 `branch1`, `branch2` and `branch3`. Each branch has only one commit.
 
+## Fast-forward Merging
+
 The first step is to merge `branch2` into `branch1`. Notice that this operation is not communicative.
 So `branch2` merged into `branch1` is not the same as `branch1` merged into `branch2`.
 
@@ -572,6 +575,8 @@ m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]
 m4_define([[m4_filecount]], m4_incr(m4_filecount))
 m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 ![The repo history after our first merge]([[images/images]]m4_filecount[[.png]])
+
+## Merging with Conflicts
 
 Now let's perform a more complex merge using `branch3`
 
@@ -665,9 +670,11 @@ m4_run(git difftool branch1 branch2)
 
 answer "`y`"and the following screen should pop up.
 
-![Running the `git difftool` command](ScreenShot2.png)
+![Running the `git difftool` command](staticImages/ScreenShot2.png)
 
-# Working with other people's code.
+# Wrap Up
+
+## Working with Other People's Code.
 
 I hope to cover this topic in a lot more detail in future acticles when we use services like GitHub or BitBucket.
 
@@ -676,9 +683,11 @@ This is identical to `git init` in that it creates a new repository. But it then
 the contents of another repository so that you can start working on it locally. For instance
 if you want to get a copy of this article improve run the following command
 
-m4_syscmd(cd /tmp;git clone https://github.com/alecthegeek/version-control-basics.git 2>&1 
+m4_define([[prompt_dir]],tmp)
+m4_define([[working_dir]],/tmp)
+m4_run(git clone https://github.com/alecthegeek/version-control-basics.git)
 
-# Ignoring files
+## Ignoring files
 
 By default, every time the `git status` command is used Git reminds us about _all_ files
 that are not under version control. However in most projects there are files we don't care
@@ -686,9 +695,9 @@ about (e.g. editor temporarary files, object files that get created every time w
 If we create a file `.gitignore in the top project that lists all the files we want to ignore.
 
 *N.B.* You should check the `.gitignore` files into your repo along with the other files. To see an example
-look in the repo clone I gave above.
+look in the repo mentioned above.
 
-# Wrap Up
+## Further reading and help
 
 We have now covered some very basic Git workflow.
 
@@ -699,21 +708,20 @@ We have now covered some very basic Git workflow.
 5. Using merge to bring our changes together
 
 I have had a skip over a few things
-and gloss over the details so please make sure you use other resources to improve your knowledge
+and gloss over the details so please make sure you use these great resources
+to improve your knowledge.
 
+A great jumping off point for git is the web site [http://git-scm.com/](http://git-scm.com/). It contains links to 
+software, videos, documentation and tutorials.
 
-Several videos that introduce the basic ideas of version control can be found at <http://git-scm.com/videos> or on YouTube at:
+Additional material
 
-* [Episode 1](http://www.youtube.com/watch?v=K2wBGt-j0fE)
-* [Episode 2](http://www.youtube.com/watch?v=0BIGxolZQHo)
-* [Episode 3](http://www.youtube.com/watch?v=ojVzmIp6Xv0)
-* [Episode 4](http://www.youtube.com/watch?v=pv25aLwYpEU)
-
-*  [Pro Git](http://progit.org/), an online and published book
+*  [Pro Git](http://progit.org/), an online and published book. Highly recommended.
 *  [Introduction to Git](http://youtu.be/ZDR433b0HJY), video with Scott Chacon of GitHub
 
 
 ----- CUT
+
 #  Remote repos
 \#TODO
 
