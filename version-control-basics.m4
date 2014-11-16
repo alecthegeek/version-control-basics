@@ -9,7 +9,7 @@ m4_define(ps1, [[`~/snakes $ `]])
 m4_define(m4_filecount,0)
 
 		Version: m4_esyscmd([[git rev-parse HEAD]])
-		Generated on: m4_esyscmd([[date -u]])
+		(Zulu time: m4_esyscmd([[date ]])
 
 #Introduction
 
@@ -534,23 +534,24 @@ This is a reference to the last commit we made on a branch,
 so every branch has a `HEAD`,
 but generally we use the term to refer to the last commit current _default_ branch
 
-#  Merging
+# Merging
 
-Let's go back and look at the current structure of our commit tree.
 
-m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
+m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.eps]])
 m4_define([[m4_filecount]], m4_incr(m4_filecount))
 m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 ![The current repo history with three branches and one commit on each branch]([[images/images]]m4_filecount[[.png]])
 
+Let's look again at the current structure of our commit tree.
+
 At some point we need to bring both our changes, which we are now happy with,
-back onto  the `master` branch so that are part of the default code that we
+back onto  the `branch1` branch so that are part of the default code that we
 make new changes on top of that. This process is called _merging_.
 
 The concept is simple enough, but it's important to remember that we have three branches in this example,
 `branch1`, `branch2` and `branch3`. Each branch has only one commit.
 
-The first step is to merge `branch2` into `branch1`. Notice that this operation is not communinative.
+The first step is to merge `branch2` into `branch1`. Notice that this operation is not communicative.
 So `branch2` merged into `branch1` is not the same as `branch1` merged into `branch2`.
 
 Make the current branch `branch1`.
@@ -561,6 +562,10 @@ Now merge from `branch2` into the current branch.
 
 m4_run([[git merge]] branch2)
 
+Notice the phrase `Fast-forward`. This is because `branch1` has no changes of it's own since `branch2` was created.
+In the case all that happend was that the `branch1` pointer was move up the graph until it pointed to the `HEAD` of `branch2`
+In a minute we'll create a merge that _cannot_ be fast forwarded.
+
 Now if we look at the repo graph
 
 m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
@@ -568,13 +573,7 @@ m4_define([[m4_filecount]], m4_incr(m4_filecount))
 m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 ![The repo history after our first merge]([[images/images]]m4_filecount[[.png]])
 
-So this picture is bit more subtle.
-`branch1` now points at a different commit.
-In this particular case it's a special
-merge called a `fast forward` because everything in commit `2b2665f` is a subset of
-`42d0cd8`. All Git had to do was move the `branch1` pointer forward.
-
-Now let's merge in `branch3`
+Now let's perform a more complex merge using `branch3`
 
 Let's just check we are on the correct branch, `branch1` first
 
@@ -582,14 +581,141 @@ m4_run([[git branch]])
 
 m4_run([[git merge]] branch3)
 
+
+Now we are getting a conflict, which means that Git cannot
+automatically bring the two versions because we have
+changed the same line in both branches.
+
+The Git status tells that we have a half complete commit
+with some instructions on what to do next
+
+m4_run([[git status]])
+
+So let's what our conflict looks like
+
+m4_run(git diff)
+
+Again we can ignore most of the this report.
+What is interesting is the text between
+`<<<<<<<`, `=======` and 
+`>>>>>>>`.
+The markers are inserted by Git to
+show the line that is different in each version.
+
+To fix this only need to edit the file `snakes.py` and edit
+the text between the two markers (including the markers)
+to be what we want.
+
+_...edit..._
+
+
+m4_esyscmd(m4_sed[[ --in-place -e '/<<<<<<</i\
+        scr.addch(y, x, ord("R"), curses.color_pair(curses.COLOR_GREEN))
+/<<<<<<</,/>>>>>>>/d']] working_dir[[/game/snake.py]])
+
+m4_run(git diff)
+
+It will probably take a little while to verify that this report shows we have
+completed the change. Once we are happy, and we should also probably do a
+test as well, then we can `add` and `commit` it.
+
+m4_run(git add .)
+m4_run(git commit -m "Merged in Rocks being \"R\"")
+
 m4_syscmd([[cd]] working_dir;[[git big-picture -a -f png -o /tmp/image_file.png]])
 m4_define([[m4_filecount]], m4_incr(m4_filecount))
 m4_syscmd([[cp /tmp/image_file.png images/images]]m4_filecount[[.png]])
 ![The repo history after our second merge]([[images/images]]m4_filecount[[.png]])
 
-This merge actuall resulted in a new commit. It is _not_ a fast forward.
+So `branch1` has now got a _new_ commit (compared to the previous merge where it
+waas able to "resuse" the HEAD commit on another branch i.e. the _fast forward_).
+The new commit contains both sets of changes.
+
+The example merge we just completed required us to edit the merge halfway through.
+Life is usually much simpler as Git can perform the edit for us if the changes
+do not overlap, the commit is then completed in a single `merge` command.
+
+## Rebase
+
+Git also has a `rebase` command which allows us to bring branches together in very
+convenient ways. However we don't really have enough space to discuss that in this 
+article but I will suggest some online resources for you use and I recommend getting
+familiar with all the great things `rebase` can do.
+
+# Graphical helpers
+
+Previously I mentioned the `git gui` program that provides a GUI interface to most of the
+commands we have been using so far (e.g. `init`, `add`, `commit`). Another program 
+that I use a lot is `giyk` which provides a nice list of the all the commits and is
+easier to browse that the `git log` command. Use the `--all` paramater to see _all_ the
+branches in the current repo.
+
+## `Difftool`
+
+As we have already seen, the output from running the `git diff` command is not
+always obvious. Fortunately git provides the `difftool` command to display side by side
+differences in the GUI. A variety of third party tools are supported and I generally use
+`kdiff3` which works across Linux, OS X and Windows.
+
+`sudo apt-get install kdiff3-qt`
+
+Now to see the difference between `branch1` and `branch2` run the command
+
+m4_run(git difftool branch1 branch2)
+
+answer "`y`"and the following screen should pop up.
+
+![Running the `git difftool` command](ScreenShot2.png)
+
+# Working with other peoples code.
+
+I hope to cover this topic in a lot more detail in future acticles when we use services like GitHub or BitBucket.
+
+However before we wrap up it's probably with introducing the `git clone` command.
+This is identical to `git init` in that it creates a new repository. But it then copies
+the contents of another repository so that you can start working on it locally. For instance
+if you want to get a copy of this article improve run the following command
+
+m4_run(rm -rf .git .gitignore *)
+
+m4_run(git clone https://github.com/alecthegeek/version-control-basics.git)
+
+# Ignoring files
+
+By default, every time the `git status` command is used Git reminds us about _all_ files
+that are not under version control. However in most projects there are files we don't care
+about (e.g. editor temporarary files, object files that get created every time we build the project,...).
+If we create a file `.gitignore in the top project that lists all the files we want to ignore.
+
+*N.B.* You should check the `.gitignore` files into your repo along with the other files. To see an example
+look in the repo clone I gave above.
+
+# Wrap Up
+
+We have now covered some very basic Git workflow.
+
+1. Creating a new repo
+2. Adding code to the repo
+3. Making changes and using the index
+4. Creating branches to keep changes separate
+5. Using merge to bring our changes together
+
+I have had a skip over a few things
+and gloss over the details so please make sure you use other resources to improve your knowledge
 
 
+Several videos that introduce the basic ideas of version control can be found at <http://git-scm.com/videos> or on YouTube at:
+
+* [Episode 1](http://www.youtube.com/watch?v=K2wBGt-j0fE)
+* [Episode 2](http://www.youtube.com/watch?v=0BIGxolZQHo)
+* [Episode 3](http://www.youtube.com/watch?v=ojVzmIp6Xv0)
+* [Episode 4](http://www.youtube.com/watch?v=pv25aLwYpEU)
+
+*  [Pro Git](http://progit.org/), an online and published book
+*  [Introduction to Git](http://youtu.be/ZDR433b0HJY), video with Scott Chacon of GitHub
+
+
+----- CUT
 #  Remote repos
 \#TODO
 

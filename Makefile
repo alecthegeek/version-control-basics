@@ -29,9 +29,10 @@ endif
 .SUFFIXES: .html .pdf .docbook .docx .pmd .odt
 
 .PHONY: clean all publish_all publish_odt publish_docx publish_html  publish_pdf publish_README
-.PHONY: clean all publish_all publish_pdf publish_html publish_odt
 
-.SECONDARY: $(PROJECT_NAME).pmd
+ifndef DEBUG
+	.SECONDARY: $(PROJECT_NAME).pmd
+endif
 
 all: $(PROJECT_NAME).pdf
 
@@ -69,9 +70,11 @@ else
 endif
 
 %.md: %.pmd
-	pandoc $(PANDOC_FLAGS) -t markdown_github $< -o $@
+	pandoc $(PANDOC_FLAGS)  $< -o $@
+	# pandoc $(PANDOC_FLAGS) -t markdown_github $< -o $@
 
 %.pdf: %.pmd
+	# echo "\usepackage{float}" > /tmp/header
 	pandoc $(PANDOC_FLAGS) -V documentclass=$(DOCUMENTCLASS) --toc -t latex  $< -o $@
 
 %.html: %.pmd
