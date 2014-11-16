@@ -646,7 +646,7 @@ familiar with all the great things `rebase` can do.
 
 Previously I mentioned the `git gui` program that provides a GUI interface to most of the
 commands we have been using so far (e.g. `init`, `add`, `commit`). Another program 
-that I use a lot is `giyk` which provides a nice list of the all the commits and is
+that I use a lot is `gitk` which provides a nice list of the all the commits and is
 easier to browse that the `git log` command. Use the `--all` paramater to see _all_ the
 branches in the current repo.
 
@@ -667,7 +667,7 @@ answer "`y`"and the following screen should pop up.
 
 ![Running the `git difftool` command](ScreenShot2.png)
 
-# Working with other peoples code.
+# Working with other people's code.
 
 I hope to cover this topic in a lot more detail in future acticles when we use services like GitHub or BitBucket.
 
@@ -676,9 +676,7 @@ This is identical to `git init` in that it creates a new repository. But it then
 the contents of another repository so that you can start working on it locally. For instance
 if you want to get a copy of this article improve run the following command
 
-m4_run(rm -rf .git .gitignore *)
-
-m4_run(git clone https://github.com/alecthegeek/version-control-basics.git)
+m4_syscmd(cd /tmp;git clone https://github.com/alecthegeek/version-control-basics.git 2>&1 
 
 # Ignoring files
 
