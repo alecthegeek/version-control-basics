@@ -3,6 +3,7 @@ title: 'Version Control Basics using Git'
 author: 'Alec Clews'
 ---
 
+
 m4_changequote([[, ]])
 m4_include([[utils.m4]])
 m4_define(ps1, [[`~/prompt_dir $ `]])
@@ -666,9 +667,7 @@ differences in the GUI. A variety of third party tools are supported and I gener
 
 Now to see the difference between `branch1` and `branch2` run the command
 
-m4_run(git difftool branch1 branch2)
-
-answer "`y`"and the following screen should pop up.
+m4_run(git difftool -y branch1 branch2)
 
 ![Running the `git difftool` command](staticImages/ScreenShot2.png)
 
@@ -683,9 +682,16 @@ This is identical to `git init` in that it creates a new repository. But it then
 the contents of another repository so that you can start working on it locally. For instance
 if you want to get a copy of this article improve run the following command
 
+m4_define([[saved_prompt_dir]],prompt_dir)
 m4_define([[prompt_dir]],tmp)
+m4_define([[saved_working_dir]],working_dir)
 m4_define([[working_dir]],/tmp)
+
 m4_run(git clone https://github.com/alecthegeek/version-control-basics.git)
+
+m4_define([[prompt_dir]],saved_prompt_dir)
+m4_define([[working_dir]],saved_working_dir)
+
 
 ## Ignoring files
 
@@ -720,10 +726,151 @@ Additional material
 *  [Introduction to Git](http://youtu.be/ZDR433b0HJY), video with Scott Chacon of GitHub
 
 
------ CUT
+#  Remote Repos
 
-#  Remote repos
-\#TODO
+So far we have covered the basics of managing your day to day work in Git on
+a local Raspberry Pi. There are two important things we can now fix:
+
+* If your SD card goes up in smoke you can recover your work
+* Other people can't use your work and your code can't be accepted into projects
+
+You can fix this with a remote repo.
+A remote is a just another clone (or copy) of your
+git project repo with the following features:
+
+* It is created with the `--bare` option and
+so does __not__ have a working copy (a set of files checked out
+from the repo that you can work on). It only contains the Git version database and meta data.
+* The other important  is that it's located on a network connected remote system and
+that other developers can access it (via the `clone`, `pull` and `push` commands).
+If your own working repo gets
+lost you can also clone the remoe repo and retreive the complete history
+(as far bask as the last changes you pushed).
+
+N.B. In the following examples I'm glossing over a few details and
+only presenting the most popular approach
+
+You can host host your own remote repositories if you wish, including putting them on another Raspberry Pi
+(the subject of another article). However it's easiest to use a third party websites that provide free services,
+plus project support tools such as wikis, issue trackers etc.
+These services vary in what they offer
+so you should investigate which services suite your project.
+The following offer a good starting point:
+
+
+* [https://gitlab.com](GitLab)
+* [https://bitbucket.org](Bitbucket)
+* [https://github.com](GitHub)
+
+GitHub is by far the most popular, but does not offer free of charge private repos.
+
+In the following examples I am going to assume that you are working on a FLOSS project and so are using a public repo.
+I will also be using HTTPS rather than SSH/git to access remote repository as many users may not be 
+familiar with generating keys, plus it also has the benefit hat HTTPS will work across firewalls.
+
+The following examples use GitLab, If there are differences with terminology
+I'll make a note as we go along.
+
+If you want to follow along with the examples please create a free account at GitLab. Once you have logged
+into the web interface select the Add New Project button, which is the large __+__ sign
+in the top right hand corner (highlighted by a red square in the screen shot).
+
+![Add a project](staticImages/GitLab01.png)
+
+Give your project a name, usually the same name as the directory that holds the project on your Raspberry Pi,
+but it can be anything. Make you project Public so that you can share it. After selecting "create" you should
+see a screen similar to the following.
+
+__NB Select the HTTPS tab__
+
+
+![Project details](staticImages/GitLab02.png)
+
+
+As we are going to put pushing  our snakes project to the GitLab cloud
+services I have highlighted the relevant instructions. But first a bit more
+terminology.
+
+
+By convention when were are talking about the repository on
+our Raspberry Pi we call it the 'local' repo. A Git repo can communicate
+with any number of other repositories so that commits (and other meta data)
+can be exchanged. The other repositories (in the cloud, on another workstation,
+on the office server etc) are all referred to as `remote` repos.
+
+Here is an example git command to push my latest commits to my remote
+GitLab repo
+
+    git push https://gitlabhq.com/.....
+
+As you can see we refer to the remote repo using an URL. If you are using ssh or
+another protocol the concept is identical, just the address changes.
+
+However it's very tedious to have to type a long URL every time and so
+integral to Git is the ability to set up a remote alias. This means that
+we can set a simple name, e.g. `origin` and Git will always use the
+correct URL which saves typing and making mistakes.
+
+By convention there is always one remote called `origin` which points to the
+developers remote repo.
+Each developer will have their own personal remote and
+so the URL that the `origin` alias refers to will be different for each
+developer.
+
+As well as `origin` a developer will often have an `upstream` remote, which
+points to the repo from which the developer usually pulls other changes.
+Changes can also be pulled from other repos, but most projects will by
+explicit or implicit agreement, have a common `upstream` where changes
+are integrated. In very large projects (e.g. The Linux kernel) there can
+be a hierarchy of such integration points.
+
+It's very important to realise that Git is a peer to peer system.
+__All__ repositories are equal are there is no special meaning in things like
+remotes, branch names etc. It's purely up to the project members to decide
+how they want to use the tool. The approach we are using here is popular
+and provides a lot of flexibility. However projects are free to choose
+whatever conventions and workflows they feel are appropriate and
+you should follow any existing conventions in your project.
+
+OK -- enough theory, let's do some of this as explained in the GitLab
+instruction I highlighted in red in the last screen shot.
+
+
+m4_run(git remote add origin http://)
+m4_run(git push -u origin branch1)
+
+It's worth looking at the options to the git push command
+in more detail.
+
+  * `-u` Sets up extra information in the repo so that when we `pull changes from our remote the expecated things happen by default
+  * `origin` The address of remote repo
+  * `master` The name of the __local__ branch that we are pushing to remote
+
+If you want the exact definistions of the above (again I've simplified) then read the man page
+`git help push`
+
+Now refresh the GitLab project page you should be able to browse the contents and
+history of the project. Spent some time exploring the browser interface, e.g. you can view differences,
+look at history trees etc.
+
+An important point to notice is that you only have one branch on GitLab - the `master` branch that
+you pushed. Neither `branch2` or `branch3 have been pushed. This is on purpose, we choose which work
+we want to share by pushing specific branchs. In the next section I will discuss how to share work
+with other people and provide more detail on when individual branches should be pushed to the
+public repo. In the meantime lets push some 
+
+m4_run([[git push -u origin]] branch2)
+m4_run([[git push -u ]]origin branch3)
+
+
+## Tracking Branches
+
+
+
+
+
+
+
 
 # Working with others
 \#TODO
