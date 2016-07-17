@@ -6,7 +6,9 @@ Basic Tutorial on a version control.
   1. Teaching core VC ideas and concepts
   2. Using hands on examples
 
-To build the final document
+Download the documents from https://app.box.com/v/version-control-basics
+
+To build the document
 
 * Install Make, Pandoc, M4 and git-big-picture
 * Run make

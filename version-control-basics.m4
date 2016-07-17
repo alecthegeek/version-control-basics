@@ -23,7 +23,7 @@ It needs a Version Control System (VCS) tool to work.
 
 [^projects]: In this context a "project" could be any collection of files.
   For instance as well as my software projects I use Git to manage my
-  personag dot configuration files.
+  personal dot configuration files, for example my `~/.gitconfig` file.
 
 Think about how you work on a computer.
 You create "stuff", it might be a computer program you are modifying,
@@ -179,7 +179,7 @@ the program you are using inside the terminal,
 
     you should see something like
 
-		git version 2.0.4
+		m4_esyscmd([[git --version]])
 
 3. Tell Git who you are (this is very important information and is recorded in every change you make)
 
@@ -405,15 +405,15 @@ You now have two choices:
 1. Exit the editor without saving any changes to the commit message
 : The commit is aborted and no changes occur in the repo (but the index __still__ contains the change)
 
-2. Enter some text, save it and exit the editor\
+2. Enter some text, save it and exit the editor\ 
 : The commit is completed and all changes are recorded in the repo.
 
 	A word about commit messages: The commit messages consists of two parts.
 	Line 1 is the header and should be followed by a blank line.
 	The header is displayed in short log messages.
 	After the blank line comes the message body which contains the details.
-	A detailed set of suggestions can be read at\
-  <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
+	A detailed set of suggestions can be read at 
+        <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
 
 An example of the commit message that might be used for the change we have just made
 
@@ -603,7 +603,7 @@ m4_run(git diff)
 
 Again we can ignore most of the this report.
 What is interesting is the text between
-`<<<<<<<`, `=======` and 
+`<<<<<<<`, `=======` and
 `>>>>>>>`.
 The markers are inserted by Git to
 show the line that is different in each version.
@@ -644,14 +644,14 @@ do not overlap, the commit is then completed in a single `merge` command.
 ## Rebase
 
 Git also has a `rebase` command which allows us to bring branches together in very
-convenient ways. However we don't really have enough space to discuss that in this 
+convenient ways. However we don't really have enough space to discuss that in this
 article but I will suggest some online resources for you use and I recommend getting
 familiar with all the great things `rebase` can do.
 
 # Graphical helpers
 
 Previously I mentioned the `git gui` program that provides a GUI interface to most of the
-commands we have been using so far (e.g. `init`, `add`, `commit`). Another program 
+commands we have been using so far (e.g. `init`, `add`, `commit`). Another program
 that I use a lot is `gitk` which provides a nice list of the all the commits and is
 easier to browse that the `git log` command. Use the `--all` paramater to see _all_ the
 branches in the current repo.
@@ -717,7 +717,7 @@ I have had a skip over a few things
 and gloss over the details so please make sure you use these great resources
 to improve your knowledge.
 
-A great jumping off point for git is the web site [http://git-scm.com/](http://git-scm.com/). It contains links to 
+A great jumping off point for git is the web site [http://git-scm.com/](http://git-scm.com/). It contains links to
 software, videos, documentation and tutorials.
 
 Additional material
@@ -726,7 +726,7 @@ Additional material
 *  [Introduction to Git](http://youtu.be/ZDR433b0HJY), video with Scott Chacon of GitHub
 
 
-#  Remote Repos
+#  Using Remote Repos
 
 So far we have covered the basics of managing your day to day work in Git on
 a local Raspberry Pi. There are two important things we can now fix:
@@ -741,17 +741,20 @@ git project repo with the following features:
 * It is created with the `--bare` option and
 so does __not__ have a working copy (a set of files checked out
 from the repo that you can work on). It only contains the Git version database and meta data.
+
 * The other important  is that it's located on a network connected remote system and
 that other developers can access it (via the `clone`, `pull` and `push` commands).
 If your own working repo gets
-lost you can also clone the remoe repo and retreive the complete history
+lost you can also clone the remote repo and retrieve the complete history
 (as far bask as the last changes you pushed).
 
 N.B. In the following examples I'm glossing over a few details and
 only presenting the most popular approach
 
-You can host host your own remote repositories if you wish, including putting them on another Raspberry Pi
-(the subject of another article). However it's easiest to use a third party websites that provide free services,
+You can host host your own remote repositories if you wish,
+including putting them on another Raspberry Pi
+(the subject of another article I hope).
+However it's easiest to use a third party websites that provide free services,
 plus project support tools such as wikis, issue trackers etc.
 These services vary in what they offer
 so you should investigate which services suite your project.
@@ -765,7 +768,7 @@ The following offer a good starting point:
 GitHub is by far the most popular, but does not offer free of charge private repos.
 
 In the following examples I am going to assume that you are working on a FLOSS project and so are using a public repo.
-I will also be using HTTPS rather than SSH/git to access remote repository as many users may not be 
+I will also be using HTTPS rather than SSH/git to access remote repository as many users may not be
 familiar with generating keys, plus it also has the benefit hat HTTPS will work across firewalls.
 
 The following examples use GitLab, If there are differences with terminology
@@ -857,7 +860,7 @@ An important point to notice is that you only have one branch on GitLab - the `m
 you pushed. Neither `branch2` or `branch3 have been pushed. This is on purpose, we choose which work
 we want to share by pushing specific branchs. In the next section I will discuss how to share work
 with other people and provide more detail on when individual branches should be pushed to the
-public repo. In the meantime lets push some 
+public repo. In the meantime lets push some
 
 m4_run([[git push -u origin]] branch2)
 m4_run([[git push -u ]]origin branch3)
