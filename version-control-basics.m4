@@ -1,6 +1,7 @@
 ---
 title: 'Version Control Basics using Git'
 author: 'Alec Clews'
+email: alecclews@gmail.com
 ---
 
 
@@ -13,9 +14,9 @@ m4_define(m4_filecount,0)
     Generated: m4_esyscmd(date -u)
     (Local time: m4_esyscmd(date))
 
-#Introduction
+# Introduction
 
-##What is Version Control and how do Version Control Systems work?
+## What is Version Control and how do Version Control Systems work?
 
 Version Control (VC) is a common practice used to track all the changes that
 occur to the files in a project[^projects] over time.
@@ -81,7 +82,7 @@ Now let's add another layer of complexity.
 Our project might be big enough that we are team working on the project together and we all make changes to the digital files (also called assets).
 That will introduce a lot of potential problems. We'll talk about those, and how a VCS can help.
 
-##Why is Version Control is so important?
+## Why is Version Control is so important?
 
 Imagine a software project.
 It might have hundreds of files (for example source code, build scripts, graphics, design documents, plans etc.)
@@ -108,7 +109,7 @@ This feature depends on the specific features of the VCS tool you are using
 
 You may find the following additional reading useful in introducing important ideas: <http://tom.preston-werner.com/2009/05/19/the-git-parable.html>
 
-##Types of Tools available
+## Types of Tools available
 
 Distributed vs. Centralised
 :	Modern VCS work on a distributed model (DVCS).
@@ -134,7 +135,7 @@ In this article we will be using a VCS called Git, a popular open source tool th
   (and often integrating with other tools such as: ticket systems; build systems; project management etc.)
 * Helping individual developers be more efficient with tools such as difference reports
 
-#Example VCS operations using Git
+# Example VCS operations using Git
 
 The rest of this article will take a hands on approach by demonstrating the use of Git to manage a simple set of changes.
 You should follow along on your own Raspberry Pi using a new test project as explained below.
@@ -279,8 +280,9 @@ m4_run([[git status]])
 If you look at the output from the status command above you can see that we are currently using the master branch
 in our working area.
 
-What Change do I want to make? When I play the games of snakes the rocks are represented by "Y" which
-I want to change to "R". The line in I need to change is in the file `game/snake.py` (lines 50 and 52 in my version).
+What Change do I want to make?
+When I play the games of snakes the rocks are represented by "Y" which I want to change to "R".
+The line I need to change is in the file `game/snake.py` (lines 50 and 52 in my version).
 
 
 Let's create a branch to work on.
@@ -291,7 +293,7 @@ No message means the command was successful (note that spaces are not allowed in
 Creating a branch means that I have a working area in my project (you can think of as a sandbox for a mini project)
 that stops my change from breaking (or impacting) any other work that is going on in the snakes project.
 
-You can get a lit of all the branches with the `git branch` command
+You can get a list of all the branches with the `git branch` command
 
 m4_run([[git branch]])
 
@@ -405,14 +407,14 @@ You now have two choices:
 1. Exit the editor without saving any changes to the commit message
 : The commit is aborted and no changes occur in the repo (but the index __still__ contains the change)
 
-2. Enter some text, save it and exit the editor\ 
+2. Enter some text, save it and exit the editor
 : The commit is completed and all changes are recorded in the repo.
 
 	A word about commit messages: The commit messages consists of two parts.
 	Line 1 is the header and should be followed by a blank line.
 	The header is displayed in short log messages.
 	After the blank line comes the message body which contains the details.
-	A detailed set of suggestions can be read at 
+	A detailed set of suggestions can be read at
         <http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>
 
 An example of the commit message that might be used for the change we have just made
@@ -867,19 +869,13 @@ m4_run([[git push -u ]]origin branch3)
 
 
 ## Tracking Branches
-
-
-
-
-
-
-
+\#TODO
 
 # Working with others
 \#TODO
 
 
-#Appendices
+# Appendices
 
 ## Appendix A: External References
 

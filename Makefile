@@ -32,8 +32,7 @@ endif
 .PHONY: clean all static_images publish_all publish_odt publish_docx publish_html  publish_pdf publish_README publish_images
 
 ifdef DEBUG
-PANDOC_FLAGS+=--verbose	
-else
+PANDOC_FLAGS+=--verbose
 .SECONDARY: $(PROJECT_NAME).pmd
 endif
 
@@ -70,11 +69,7 @@ $(PUBLISH_LOC)/%: %
 %.pmd: %.m4 utils.m4 staticImages/* $(MAKEFILE_LIST)
 	-rm -rf $(BASE_DEMO) images /tmp/$(PROJECT_NAME) ; mkdir $(BASE_DEMO) images
 	tar -xzf game.tar.gz -C $(BASE_DEMO)
-#ifdef DEBUG
-#	m4 -D m4_sed=$(SED_CMD) -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D prompt_dir=$(PROMPT_DIR) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< | tee $@
-#else
 	m4 -D m4_sed=$(SED_CMD) -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D prompt_dir=$(PROMPT_DIR) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< > $@
-#	endif
 
 %.md: %.pmd
 	pandoc $(PANDOC_FLAGS)  $< -o $@
