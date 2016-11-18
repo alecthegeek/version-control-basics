@@ -12,7 +12,7 @@ m4_define(m4_filecount,0)
 
     Version: m4_esyscmd(git rev-parse HEAD)
     Generated: m4_esyscmd(date -u)
-    (Local time: m4_esyscmd(date))
+    (Local time: m4_esyscmd(date|tr -d '\n'))
 
 # Introduction
 
@@ -95,7 +95,7 @@ How can we locate a problem that might have been introduced some time ago.
 Just fixing the problem may not be enough, we probably also need to to understand the change that introduced it.
 1. If two people want to change the same file one will have to wait for the other to finish, this is inefficient
 1. If two people people are making (long running) changes to the project it may take some time for the both sets of changes to be compatible with each other.
-If the same copy if the project is being updated with both sets of changes then the project may not work correctly or even compile
+If the same copy of the project is being updated with both sets of changes then the project may not work correctly or even compile
 
 There are three core things a VCS helps do:
 
@@ -111,21 +111,20 @@ You may find the following additional reading useful in introducing important id
 
 ## Types of Tools available
 
-Distributed vs. Centralised
+_Distributed vs. Centralised_
 :	Modern VCS work on a distributed model (DVCS).
 This means that every member of the project team keeps a complete local copy of all the changes.
 The previous model, still widely used with tools like Subversion, is centralised.
 There is only one central database with all the changes and team members only have a copy of the change they are currently working on in their local workspace.
 
-(In version control terminology a local workspace is often called a working copy and it will contain a specific revision of files plus changes)
+(In version control terminology a local workspace is often called a *working copy* and it will contain a specific revision of files plus changes)
 
-Open Source and Commercial Tools
-
+_Open Source and Commercial Tools_
 :	There are many commercial and open source tools available in the market.
 
 As well as the core VC operations tools will offer different combinations of features, support and integrations.
 
-In this article we will be using a VCS called Git, a popular open source tool that uses a distributed model with excellent support for parallel development.
+In this article we will be using a VCS called [Git](https://git-scm.com/), a popular open source tool that uses a distributed model with excellent support for parallel development.
 
 ## Summary: What do version control tools do?
 
@@ -257,7 +256,7 @@ Some interesting commands we can now run. For instance the output of `git status
 
 m4_run([[git status]])
 
-This means that the contents of our working working copy are identical to the latest versions stored in our repo.
+This means that the contents of our working copy are identical to the latest versions stored in our repo.
 
 Another command worth running is `git log`, which is currently very brief as we have only have one commit. Mine
 looks like this
@@ -270,8 +269,8 @@ We now have our project under version control.
 
 ## Making a change
 
-Now lets make a change. The first step is to create a work area in which to make the change. In Git
-(and many other VC tools) this dedicated work area is called a __branch__. When you first create a repo
+Now lets make a change. The first step is to create a work space in which to make the change. In Git
+(and many other VC tools) this dedicated work space is called a __branch__. When you first create a repo
 the default branch that is created is called __master__, but it's important to know that there is nothing special
 about master branch, it can be treated in exactly the same way as any branches you create yourself.
 
@@ -289,9 +288,9 @@ Let's create a branch to work on.
 
 m4_run([[git branch ]] branch2)
 
-No message means the command was successful (note that spaces are not allowed in the branch name).
-Creating a branch means that I have a working area in my project (you can think of as a sandbox for a mini project)
-that stops my change from breaking (or impacting) any other work that is going on in the snakes project.
+No message means the command was successful (note that no spaces are allowed in the branch name).
+Creating a branch means that I have a sandbox for my "project"
+that stops my change from breaking (or impacting) any other work that I an doing in the snakes project.
 
 You can get a list of all the branches with the `git branch` command
 
