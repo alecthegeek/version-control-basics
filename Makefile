@@ -71,6 +71,8 @@ $(PUBLISH_LOC)/%: %
 	tar -xzf game.tar.gz -C $(BASE_DEMO)
 	m4 -D m4_sed=$(SED_CMD) -D user_email=$(USER_EMAIL) -D user_name=$(USER_NAME) -D working_dir=$(BASE_DEMO) -D prompt_dir=$(PROMPT_DIR) -D branch1=$(BRANCH1) -D branch2=$(BRANCH2) -D branch3=$(BRANCH3) -P $< > $@
 
+build_all: $(PROJECT_NAME).docx  $(PROJECT_NAME).pdf $(PROJECT_NAME).odt  $(PROJECT_NAME).html
+
 %.md: %.pmd
 	pandoc $(PANDOC_FLAGS)  $< -o $@
 
